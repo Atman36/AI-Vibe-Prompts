@@ -186,3 +186,30 @@ If a CLAUDE.md file exists in the working directory, use it for:
 - Frequently used commands and shortcuts
 - Custom component libraries and patterns
 - Team preferences and conventions
+
+# Success Metrics
+
+## Code Quality
+- **Test Coverage**: ≥ 80% for critical user paths with meaningful tests
+- **Type Safety**: 100% TypeScript coverage with strict mode enabled
+- **Performance**: Lighthouse scores ≥ 90, LCP ≤ 2.5s, CLS ≤ 0.1, INP ≤ 200ms
+- **Accessibility**: WCAG 2.2 AA compliance with automated testing
+
+## Developer Experience
+- **Build Performance**: Development server starts ≤ 5s, hot reload ≤ 1s
+- **Code Organization**: Clear module boundaries, self-documenting interfaces
+- **Error Prevention**: Compile-time catches for common mistakes
+- **Documentation**: Up-to-date technical specs and component documentation
+
+Focus on writing code that gets easier to work with over time, not harder.
+
+---
+
+## 🧭 Delegation Guide
+
+Use specialized prompts for specific scenarios:
+- **Project setup** → `tasks/task-init-project.md`
+- **Project analysis** → `tasks/task-analyze-project.md`  
+- **Design systems** → `tools/tool-design-system-gen.md`
+- **Figma conversion** → `tools/tool-figma-importer.md`
+- **Architecture planning** → `modes/mode-architect.md`

@@ -100,105 +100,103 @@ Reference prompts in your AI assistant chat using the `@` symbol or by copying c
 
 ### 🎯 Task Automation
 
-#### `tasks/task-init-project.mdc`
+#### `tasks/task-init-project.md`
 **Purpose**: Strategic project initialization with complexity management  
 **When to use**: Starting new projects from scratch  
 **Key features**:
-- React/Next.js technology selection with rationale
-- Deep module project structure
-- Error prevention systems (TypeScript strict, validation)
-- Testing strategy with clear interfaces
-- Documentation as part of the architecture
+- React 19 + Next.js 15 + TypeScript modern stack setup
+- Package versions matrix with compatibility rationale
+- Deep module project structure with clear boundaries  
+- CI/CD pipeline configuration with quality gates
+- Comprehensive documentation template generation
+- Error prevention systems with strict TypeScript validation
 
 **Example usage**:
 ```
-@tasks/task-init-project.mdc Create a new e-commerce platform with:
-- User authentication
-- Payment processing
-- Admin dashboard
-- Mobile-responsive design
+@tasks/task-init-project.md Create a new e-commerce platform with:
+- User authentication and role management
+- Payment processing integration
+- Admin dashboard with analytics
+- Mobile-responsive design with offline capabilities
 ```
 
-#### `tasks/task-analyze-project.mdc`
+#### `tasks/task-analyze-project.md`
 **Purpose**: Comprehensive project auditing and optimization  
 **When to use**: Analyzing existing codebases for improvements  
 **Key features**:
-- React 19 + Next.js 15 best practices audit
-- Performance optimization recommendations
-- Design system compliance checking
-- Security vulnerability assessment
-- Technical debt identification
+- React 19 + Next.js 15 best practices compliance audit
+- Performance optimization with Core Web Vitals focus (INP ≤ 200ms)
+- Design system consistency evaluation
+- Future-proofing assessment with technology evolution roadmap
+- Security vulnerability identification and mitigation strategies
 
 **Example usage**:
 ```
-@tasks/task-analyze-project.mdc Audit this web app for:
-- Performance bottlenecks
-- Accessibility issues
-- Component architecture improvements
-- Tailwind CSS + React component patterns
+@tasks/task-analyze-project.md Audit this web app for:
+- Performance bottlenecks and optimization opportunities
+- Design system compliance across components
+- Security vulnerabilities and best practices gaps
+- Migration readiness for React 19 features
 ```
 
-### 🛠️ Development Tools
+### 🛠️ Specialized Tools
 
-#### `tools/tool-design-system-gen.mdc`
-**Purpose**: Generate comprehensive design systems following deep module principles  
-**When to use**: Creating or updating design systems  
+#### `tools/tool-design-system-gen.md`
+**Purpose**: Generate comprehensive design systems with deep module architecture  
+**When to use**: Creating or standardizing design systems  
 **Key features**:
-- Token architecture (primitive → semantic → component)
-- Modern color space with accessibility compliance
-- Component APIs with simple interfaces
-- TypeScript definitions for design tokens
-- Documentation generation
+- Three-layer token architecture (Primitive → Semantic → Component)
+- OKLCH color space with perceptual uniformity and wide gamut support
+- TypeScript definitions for design tokens and component interfaces
+- Accessibility compliance with WCAG 2.2 AA standards built-in
+- Integration with Tailwind CSS v4 and modern CSS features
 
 **Example usage**:
 ```
-@tools/tool-design-system-gen.mdc Create a design system for a healthcare app with:
-- Calming color palette
-- Clear typography hierarchy
-- Accessible form components
-- Medical iconography
+@tools/tool-design-system-gen.md Generate design system for fintech app:
+- OKLCH color palette with professional blue/green theme
+- Typography scale optimized for data-heavy interfaces  
+- Component library with security-focused interaction patterns
 ```
 
-#### `tools/tool-figma-importer.mdc`
-**Purpose**: Transform design tool exports into production-ready components  
-**When to use**: Working with designs from design tools  
+#### `tools/tool-figma-importer.md`
+**Purpose**: Transform Figma exports into production-ready React components  
+**When to use**: Converting design files to code  
 **Key features**:
-- Code cleanup and optimization
-- Component abstraction and reusability
-- Accessibility feature addition
-- Performance optimization
-- Design system integration
+- Six-phase post-processing checklist for comprehensive code transformation
+- Design system integration with automatic token mapping
+- Accessibility implementation with WCAG 2.2 AA compliance
+- Performance optimization with React 19 patterns and lazy loading
+- Quality assurance standards for maintainable component architecture
 
 **Example usage**:
 ```
-@tools/tool-figma-importer.mdc Optimize this design tool component:
-[paste code]
-
-Make it:
-- Accessible and keyboard navigable
-- Responsive across devices
-- Consistent with our design system
+@tools/tool-figma-importer.md Transform this Figma design:
+- Convert landing page layouts to responsive React components
+- Integrate with existing design system tokens
+- Ensure accessibility and performance optimization
+- Add TypeScript interfaces and proper state management
 ```
 
-### 🏗️ Architecture Planning
+### 🏗️ Architecture & Planning
 
-#### `modes/mode-architect.mdc`
-**Purpose**: Strategic architecture planning and system design  
-**When to use**: Planning complex features or system redesigns  
+#### `modes/mode-architect.md`
+**Purpose**: Strategic architecture planning with complexity management  
+**When to use**: Planning complex features or system architecture  
 **Key features**:
-- Complexity management strategies
-- Module boundary definition
-- Technology selection with trade-offs
-- Risk assessment and mitigation
-- Implementation phase planning
+- Token management with context optimization (≤ 80% usage)
+- Structured output template with 8-step planning process
+- Risk assessment and mitigation strategies
+- Technology selection with clear rationale and trade-offs
+- Compliance enforcement with Core Development Principles
 
 **Example usage**:
 ```
-@modes/mode-architect.mdc Design the architecture for a real-time collaboration feature:
-- Multiple users editing simultaneously
-- Conflict resolution
-- Offline support
-- Performance at scale
+@modes/mode-architect.md Plan architecture for real-time collaboration feature:
+- WebSocket integration with React 19 Server Components
+- Conflict resolution algorithms for concurrent editing
+- Offline-first design with sync capabilities
+- Scalable backend with microservices architecture
 ```
 
 ## 💡 Best Practices
@@ -253,6 +251,59 @@ Follow this structured approach using context engineering:
 ```
 
 **Result**: Predictable, high-quality implementation with maintained context and verified outcomes.
+
+## 🧭 Guide Usage
+
+### When to Use Each Prompt Category
+
+| Situation | Use This Prompt | Purpose |
+|-----------|----------------|---------|
+| **Setting up AI assistant** | `system/system-prompt.md` | Establish base rules and philosophy |
+| **Starting new project** | `tasks/task-init-project.md` | Strategic project initialization with modern stack |
+| **Auditing existing project** | `tasks/task-analyze-project.md` | Comprehensive analysis and optimization recommendations |
+| **Creating design system** | `tools/tool-design-system-gen.md` | Generate design tokens and component specifications |
+| **Converting Figma designs** | `tools/tool-figma-importer.md` | Transform design exports into production React |
+| **Planning complex features** | `modes/mode-architect.md` | Strategic architecture and system design |
+
+### Context Engineering Workflow
+
+For advanced AI management, combine system prompts with context modules:
+
+```
+1. Start with system/system-prompt.md (always active)
+2. For complex tasks: @context/task-decompose.md
+3. For information retrieval: @context/rag-template.md  
+4. For long sessions: @context/history-summarizer.md
+5. For workflow management: @context/state-align.md
+```
+
+### Example Usage Patterns
+
+**Project Initialization**:
+```
+@tasks/task-init-project.md Create a SaaS dashboard with:
+- User authentication and role management
+- Real-time notifications
+- Payment processing integration
+- Mobile-responsive design
+```
+
+**Design System Creation**:
+```
+@tools/tool-design-system-gen.md Generate design system for fintech app:
+- OKLCH color palette with dark mode
+- Typography scale for data-heavy interfaces  
+- Component library with accessibility focus
+```
+
+**Architecture Planning**:
+```
+@modes/mode-architect.md Plan architecture for real-time chat feature:
+- WebSocket integration
+- Message persistence
+- File sharing capabilities
+- Mobile app synchronization
+```
 
 ## 🔧 Customization
 
@@ -309,6 +360,27 @@ Fork this repository and modify prompts to match your:
 - **Tailwind CSS**: Utility-first styling, design tokens, OKLCH colors
 - **Cursor AI**: AI-powered development with intelligent code completion
 - **Figma**: Design systems, component specs, design-to-code workflows
+
+## 💡 Best Practices from Community Research
+
+### Safety & Refusal Patterns
+Our prompts incorporate safety principles from leading AI research:
+- **Factual accuracy**: Built-in fact-checking and verification patterns
+- **Bias prevention**: Explicit instructions for inclusive, unbiased responses  
+- **Error boundaries**: Clear guidelines for handling edge cases and limitations
+- **Context awareness**: Structured information boundaries and source attribution
+
+### Advanced Prompting Techniques
+- **Chain-of-Thought**: Step-by-step reasoning for complex architectural decisions
+- **Few-Shot Learning**: Examples and patterns embedded in prompt design
+- **Meta-Language**: Custom command structures for efficient AI interaction
+- **Context Engineering**: Advanced memory management and state alignment
+
+### Professional Tone Guidelines
+- Direct and professional communication - no filler or apologetic language
+- Focus on actionable outcomes rather than theoretical discussions  
+- Concrete examples and code snippets when beneficial
+- Clear delegation to specialized prompts when appropriate
 
 ## 🤝 Contributing
 

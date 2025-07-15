@@ -1,7 +1,7 @@
 ---
 name: Project Analysis Prompt
 description: Prompt for auditing and optimizing projects
-model: grok-4-0709
+model: universal
 version: 1.0.0
 messages:
   - role: system
@@ -180,3 +180,44 @@ messages:
       - **Maintainability**: Clear module boundaries and documentation
 
       Focus on identifying improvements that reduce complexity and cognitive load while maintaining or improving functionality.
+
+      ### Performance Analysis (React 19 Standards)
+      - **Core Web Vitals**: LCP ≤ 2.5s, INP ≤ 200ms (replacing FID), CLS ≤ 0.1
+      - **Bundle analysis**: Code splitting, tree shaking effectiveness
+      - **React optimization**: Server Components utilization, concurrent features usage
+      - **Resource optimization**: Image formats, caching strategies, CDN usage
+
+      ## 5. Future-Proofing Assessment
+
+      ### Technology Stack Evolution
+      ```typescript
+      interface TechStackEvaluation {
+        currentStack: {
+          react: string;          // "19.x"
+          nextjs: string;         // "15.x" 
+          tailwind: string;       // "4.x"
+          typescript: string;     // "5.5+"
+        };
+        migrationPath: {
+          priority: 'high' | 'medium' | 'low';
+          effort: number;         // estimation in hours
+          benefits: 'performance' | 'features' | 'security';
+          risks: string;          // breaking changes assessment
+        };
+      }
+      ```
+
+      ### Scalability Analysis
+      - **Component Architecture**: Evaluate scalability of current component structure
+      - **State Management**: Assess global state patterns and complexity  
+      - **API Integration**: Review data fetching patterns and caching strategies
+      - **Build Pipeline**: Analyze CI/CD efficiency and optimization opportunities
+
+      ### Modern Web Standards Compliance
+      - **INP (Interaction to Next Paint)**: Measure responsiveness to user interactions
+      - **Container Queries**: Assessment of responsive design using modern CSS
+      - **View Transitions API**: Smooth page transitions for better UX
+      - **Service Workers**: PWA capabilities and offline functionality
+      - **Web Components**: Interoperability with other frameworks
+
+      ## 6. Performance Optimization Strategy

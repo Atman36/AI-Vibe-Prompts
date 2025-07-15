@@ -48,17 +48,119 @@ messages:
       # Design System Architecture
 
       ## Token Hierarchy (Deep Modules)
+
+      ### Three-Layer Token Architecture
       ```
-      Foundation Layer (Core Tokens)
-      ├── Primitive Tokens (colors, spacing, typography)
-      │   └── Simple interface: color.primary.500
-      │   └── Complex implementation: OKLCH values, dark mode, accessibility
-      ├── Semantic Tokens (interactive, surface, text)
-      │   └── Simple interface: color.interactive.primary
-      │   └── Complex implementation: context-aware color mapping
-      └── Component Tokens (button, input, card)
-          └── Simple interface: button.primary.background
-          └── Complex implementation: state variants, accessibility, animations
+      Primitive Tokens → Semantic Tokens → Component Tokens
+      ```
+
+      **Primitive Tokens**: Raw values (OKLCH colors, spacing scales, font sizes)
+      ```json
+      {
+        "color": {
+          "primitive": {
+            "blue": {
+              "50": "oklch(0.97 0.02 240)",
+              "500": "oklch(0.55 0.18 240)", 
+              "900": "oklch(0.25 0.20 240)"
+            },
+            "green": {
+              "50": "oklch(0.96 0.03 145)",
+              "500": "oklch(0.65 0.15 145)",
+              "900": "oklch(0.25 0.12 145)"
+            }
+          }
+        },
+        "spacing": {
+          "primitive": {
+            "xs": "0.25rem",   // 4px
+            "sm": "0.5rem",    // 8px  
+            "md": "1rem",      // 16px
+            "lg": "1.5rem",    // 24px
+            "xl": "2rem",      // 32px
+            "2xl": "3rem"      // 48px
+          }
+        }
+      }
+      ```
+
+      **Semantic Tokens**: Context-aware aliases that reference primitive tokens
+      ```json
+      {
+        "color": {
+          "semantic": {
+            "primary": {
+              "default": "{color.primitive.blue.500}",
+              "hover": "{color.primitive.blue.600}",
+              "active": "{color.primitive.blue.700}"
+            },
+            "success": {
+              "default": "{color.primitive.green.500}",
+              "hover": "{color.primitive.green.600}"
+            },
+            "surface": {
+              "background": "{color.primitive.neutral.50}",
+              "foreground": "{color.primitive.neutral.900}"
+            }
+          }
+        }
+      }
+      ```
+
+      **Component Tokens**: Map directly to UI component properties
+      ```json
+      {
+        "component": {
+          "button": {
+            "primary": {
+              "background": "{color.semantic.primary.default}",
+              "text": "{color.primitive.white}",
+              "border": "transparent",
+              "hover": {
+                "background": "{color.semantic.primary.hover}"
+              }
+            }
+          },
+          "card": {
+            "background": "{color.semantic.surface.background}",
+            "border": "{color.primitive.neutral.200}",
+            "shadow": "0 1px 3px oklch(0.15 0.02 224 / 0.1)"
+          }
+        }
+      }
+      ```
+
+      ### OKLCH Color Space Benefits
+      - **Perceptual uniformity**: Equal changes in values produce equal perceptual changes
+      - **Wide gamut support**: Covers more colors than sRGB, future-proof for modern displays
+      - **Intuitive manipulation**: Lightness, chroma, and hue are independent dimensions
+      - **Accessibility**: Easier to calculate contrast ratios and ensure WCAG compliance
+
+      ### Design Token Implementation
+      ```typescript
+      // tokens.ts - TypeScript definitions
+      interface ColorToken {
+        50: string;
+        100: string;
+        200: string;
+        300: string;
+        400: string;
+        500: string;
+        600: string;
+        700: string;
+        800: string;
+        900: string;
+      }
+
+      interface DesignTokens {
+        color: {
+          primitive: Record<string, ColorToken>;
+          semantic: Record<string, any>;
+          component: Record<string, any>;
+        };
+        spacing: Record<string, string>;
+        typography: Record<string, any>;
+      }
       ```
 
       ## Component Design Principles
