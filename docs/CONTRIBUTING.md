@@ -64,7 +64,7 @@ variables:
 Clear role with specific expertise domain
 
 # Core Philosophy: [Main Principle]
-Based on "A Philosophy of Software Design" principles
+Based on proven software engineering principles
 
 # [Main Content Sections]
 ## Implementation strategies
@@ -102,7 +102,7 @@ Measurable goals and outcomes
 Before submitting a PR, ensure your prompt meets these criteria:
 
 ### Content Quality
-- [ ] Follows "A Philosophy of Software Design" principles
+- [ ] Follows proven software engineering principles
 - [ ] Reduces cognitive load for developers
 - [ ] Includes concrete examples and code snippets
 - [ ] Has clear error prevention strategies
@@ -186,7 +186,7 @@ Include example usage and output
 
 Reviewers will evaluate PRs based on:
 
-1. **Philosophical Alignment**: Does it follow "A Philosophy of Software Design" principles?
+1. **Philosophical Alignment**: Does it follow proven software engineering principles?
 2. **Quality**: Is it well-written, clear, and actionable?
 3. **Uniqueness**: Does it provide value not covered by existing prompts?
 4. **Testing**: Has it been properly tested and validated?

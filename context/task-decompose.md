@@ -2,7 +2,7 @@
 
 ## Core Philosophy: Strategic Task Planning
 
-This module implements the "Design Twice" principle from "A Philosophy of Software Design" by first analyzing the task complexity, then creating a strategic decomposition plan.
+This module implements the "Design Twice" principle by first analyzing the task complexity, then creating a strategic decomposition plan.
 
 ### Context Engineering Approach
 - **Cognitive Load Management**: Break complex tasks into 5±2 manageable chunks

@@ -5,83 +5,174 @@
 [![React 19](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 
-A comprehensive **Context Engineering Framework** for AI-assisted development, featuring production-ready prompts optimized for React 19 + Next.js 15 + TypeScript workflows. Built on "A Philosophy of Software Design" principles with advanced context management, RAG integration, and state alignment.
+A comprehensive **Context Engineering Framework** for AI-assisted development, featuring production-ready prompts optimized for React 19 + Next.js 15 + TypeScript workflows. Built with advanced context management, RAG integration, and state alignment for predictable AI-assisted development.
 
 ## 🎯 Philosophy
 
-This collection follows the core principles from "A Philosophy of Software Design":
+This collection follows core software engineering principles for building maintainable AI-assisted development systems:
 
 - **Deep Modules**: Create simple interfaces with powerful implementations
 - **Complexity Management**: Hide implementation details behind clean abstractions  
 - **Strategic Programming**: Invest in good architecture to reduce future complexity
 - **Information Hiding**: Separate what developers need to know from how things work internally
+- **Context Engineering**: Manage AI context and state for predictable, reliable outputs
 
 ## 📜 Table of Contents
 - [🎯 Philosophy](#-philosophy)
 - [📁 Repository Structure](#-repository-structure)
 - [🧠 Context Engineering](#-context-engineering-add-ons)
 - [🚀 Quick Start](#-quick-start)
+- [🤖 AI Agent System](#-ai-agent-system)
 - [📚 Prompt Catalog](#-prompt-catalog)
 - [💡 Best Practices](#-best-practices)
 - [🔧 Customization](#-customization)
+- [📋 Development Workflow](#-development-workflow)
 - [🤝 Contributing](#-contributing)
 
 ## 📁 Repository Structure
 
 ```
 /
+├── core-config.yaml              # 🎯 Central configuration & path management
 ├── system/
-│   └── system-prompt.md           # Base rules with context policy
-├── context/                       # 🧠 Context Engineering Modules
-│   ├── task-decompose.md         # Task breakdown & verification
-│   ├── rag-template.md           # Information retrieval & fact-checking
-│   ├── history-summarizer.md     # Conversation compression
-│   └── state-align.md            # Phase management & tool constraints
+│   └── system-prompt.md          # Base rules with context policy
+├── context/                      # 🧠 Context Engineering Modules
+│   ├── task-decompose.md        # Task breakdown & verification
+│   ├── rag-template.md          # Information retrieval & fact-checking
+│   ├── history-summarizer.md    # Conversation compression
+│   └── state-align.md           # Phase management & tool constraints
+├── modes/                        # 🤖 AI Agent Roles (inspired by BMAD-METHOD)
+│   ├── mode-orchestrator.md     # Multi-agent coordinator & handoff manager
+│   ├── mode-architect.md        # Architecture planning agent
+│   ├── mode-developer.md        # Implementation specialist agent
+│   └── mode-analyst.md          # Quality assurance & optimization agent
 ├── tasks/
-│   ├── task-init-project.md      # Strategic project initialization
-│   └── task-analyze-project.md   # Project auditing and optimization
+│   ├── task-init-project.md     # Strategic project initialization
+│   └── task-analyze-project.md  # Project auditing and optimization
 ├── tools/
 │   ├── tool-design-system-gen.md # Design system generator
-│   └── tool-figma-importer.md    # Figma-to-React converter
-├── modes/
-│   └── mode-architect.md         # Architecture planning mode
+│   └── tool-figma-importer.md   # Figma-to-React converter
+├── checklists/                   # ✅ Quality Control & Handoff Validation
+│   └── handoff-checklist.md     # Agent-to-agent transition quality gates
 ├── docs/
-│   ├── CONTRIBUTING.md           # Contribution guidelines
-│   └── PROMPT_SPEC.md           # Prompt specification standards
-└── _template.prompt.md          # Template for new prompts
+│   ├── WORKFLOW.md              # Development workflow with Mermaid diagrams
+│   ├── CONTRIBUTING.md          # Contribution guidelines
+│   └── PROMPT_SPEC.md          # Prompt specification standards
+└── _template.prompt.md         # Template for new prompts
 ```
 
 ## 🧠 Context Engineering Add-Ons
 
-This repository now includes **context engineering modules** that implement advanced AI management techniques:
+This repository now includes **advanced AI agent coordination** inspired by BMAD-METHOD:
 
+### 🤖 Multi-Agent System
+- **AI Agent Orchestrator**: Central coordinator managing specialized agent roles and handoffs
+- **Specialized Agents**: Architect, Developer, and Analyst agents with distinct capabilities
+- **Structured Handoffs**: Formal knowledge transfer between agents with quality validation
+- **Quality Gates**: Automated validation checkpoints ensuring deliverable quality
+
+### 🧠 Context Engineering Modules
 - **Task Decomposition**: Break complex tasks into verifiable steps with checkpoints
 - **RAG Integration**: Fact-based generation using retrieved documentation
 - **History Compression**: Intelligent conversation summarization for long sessions
 - **State Alignment**: Phase-based workflow management with tool constraints
 
-These modules work together to create more predictable, efficient, and reliable AI interactions while preventing hallucinations and maintaining context coherence.
+### 📋 Quality Control System
+- **Interactive Checklists**: Automated quality validation at each development phase
+- **Handoff Validation**: Ensure context preservation during agent transitions
+- **Performance Monitoring**: Track workflow efficiency and quality metrics
+
+These systems work together to create a **full development lifecycle management** with predictable, efficient, and reliable AI-assisted development.
 
 ## 🚀 Quick Start
 
-### 1. Set Up System Prompt
-1. Open your AI assistant settings
-2. Navigate to the rules or system prompt section
-3. Copy the entire content from `system/system-prompt.md` and paste it
+### Option 1: Agent Orchestrator (Recommended)
+**For full workflow management with specialized agents:**
 
-This establishes the foundation with:
-- Deep module design principles
-- TypeScript strict mode configurations
-- Performance and accessibility standards
-- Error prevention strategies
+1. **Set Up System Prompt**
+   - Copy content from `system/system-prompt.md` to your AI assistant settings
+   - This establishes the foundation with TypeScript, performance, and quality standards
 
-### 2. Use Task-Specific Prompts
-Reference prompts in your AI assistant chat using the `@` symbol or by copying content:
+2. **Initialize Agent Orchestrator**
+   ```
+   @modes/mode-orchestrator.md
+   *status
+   ```
 
+3. **Start Development Workflow**
+   ```
+   *phase planning
+   *architect
+   I need to build a [describe your project]
+   ```
+
+### Option 2: Individual Prompts
+**For specific tasks without full workflow:**
+
+Reference prompts directly using the `@` symbol:
 ```
-@tasks/task-init-project.mdc Create a new SaaS dashboard with authentication
-@tools/tool-design-system-gen.mdc Generate a design system for a fintech app
-@modes/mode-architect.mdc Plan the architecture for a real-time chat feature
+@tasks/task-init-project.md Create a new SaaS dashboard with authentication
+@tools/tool-design-system-gen.md Generate a design system for a fintech app
+@modes/mode-architect.md Plan the architecture for a real-time chat feature
+```
+
+### Option 3: CLI Installation (Coming Soon)
+**Automated setup with CLI tool:**
+```bash
+# Install globally
+npm install -g ai-vibe-prompts
+
+# Initialize in project
+avp-init [target-directory]
+```
+
+### Option 4: Manual Setup
+1. Copy `system/system-prompt.md` to your AI assistant settings
+2. Copy specific prompt content as needed for individual tasks
+
+## 🤖 AI Agent System
+
+### Multi-Agent Workflow
+AI-Vibe-Prompts now includes a sophisticated agent coordination system inspired by BMAD-METHOD:
+
+#### `modes/mode-orchestrator.md` - Master Coordinator
+**Purpose**: Central agent that manages specialist agents and development workflow  
+**Commands**: `*status`, `*phase [name]`, `*handoff [source] [target]`, `*quality-check`  
+**Key features**:
+- Coordinates multiple specialized AI agents
+- Manages development phase transitions  
+- Ensures quality through automated validation
+- Maintains context across agent handoffs
+
+#### `modes/mode-architect.md` - Architecture Specialist
+**Purpose**: Strategic system design and technology planning  
+**Best for**: Complex system architecture, technology selection, integration planning  
+**Handoff to**: Developer Agent with complete architectural specifications
+
+#### `modes/mode-developer.md` - Implementation Specialist  
+**Purpose**: High-quality code implementation with testing  
+**Best for**: Feature development, code optimization, technical implementation  
+**Receives from**: Architect Agent | **Handoff to**: Analyst Agent
+
+#### `modes/mode-analyst.md` - Quality Assurance Specialist
+**Purpose**: Comprehensive project analysis and optimization  
+**Best for**: Code review, performance analysis, security assessment, optimization  
+**Receives from**: Developer Agent
+
+### Workflow Example
+```bash
+# Start with orchestrator
+@modes/mode-orchestrator.md
+*phase planning
+*architect
+
+# After architecture phase
+*quality-check
+*handoff architect developer  
+
+# After implementation phase
+*phase review
+*analyst
 ```
 
 ## 📖 Prompt Catalog
@@ -92,7 +183,7 @@ Reference prompts in your AI assistant chat using the `@` symbol or by copying c
 **Purpose**: Base configuration for all AI interactions  
 **When to use**: Always - set this up first in your AI assistant  
 **Key features**:
-- Deep module design principles from "A Philosophy of Software Design"
+- Deep module design principles for maintainable software architecture
 - TypeScript strict mode with comprehensive error prevention
 - React 19 + Next.js 15 + TypeScript patterns
 - Performance optimization guidelines (Core Web Vitals)
@@ -344,13 +435,13 @@ Fork this repository and modify prompts to match your:
 
 ## 🎓 Learning Resources
 
-### "A Philosophy of Software Design" Concepts Applied
+### Software Engineering Principles Applied
 
-- **Chapter 3 (Working Code Isn't Enough)**: Our system prompt emphasizes strategic programming
-- **Chapter 4 (Modules Should Be Deep)**: Component design follows simple interface, complex implementation
-- **Chapter 5 (Information Hiding)**: Configuration abstraction in project initialization
-- **Chapter 6 (General-Purpose Modules)**: Design system components are built for reuse
-- **Chapter 10 (Define Errors Out of Existence)**: TypeScript strict mode and validation schemas
+- **Strategic Programming**: Our system prompt emphasizes thoughtful architecture decisions
+- **Deep Modules**: Component design follows simple interface, complex implementation patterns
+- **Information Hiding**: Configuration abstraction in project initialization workflows
+- **General-Purpose Design**: Design system components are built for maximum reuse
+- **Error Prevention**: TypeScript strict mode and validation schemas eliminate common mistakes
 
 ### Modern Web Development Stack
 
@@ -360,6 +451,16 @@ Fork this repository and modify prompts to match your:
 - **Tailwind CSS**: Utility-first styling, design tokens, OKLCH colors
 - **Cursor AI**: AI-powered development with intelligent code completion
 - **Figma**: Design systems, component specs, design-to-code workflows
+
+## 📋 Development Workflow
+
+For a complete understanding of the agent-based development workflow, see **[docs/WORKFLOW.md](docs/WORKFLOW.md)** which includes:
+
+- **Mermaid Diagrams**: Visual representation of the development process
+- **Phase Breakdown**: Detailed explanation of Planning → Implementation → Review cycles
+- **Agent Handoff Protocols**: How agents transfer knowledge and maintain context
+- **Quality Gates**: Validation checkpoints ensuring deliverable quality
+- **Usage Examples**: Practical examples of agent coordination commands
 
 ## 💡 Best Practices from Community Research
 

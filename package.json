@@ -1,0 +1,50 @@
+{
+  "name": "ai-vibe-prompts",
+  "version": "2.0.0",
+  "description": "Context Engineering Framework for AI-assisted development with multi-agent coordination",
+  "main": "scripts/avp-init.js",
+  "bin": {
+    "avp-init": "./scripts/avp-init.js"
+  },
+  "scripts": {
+    "init": "node scripts/avp-init.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "ai",
+    "prompts",
+    "context-engineering",
+    "ai-agents",
+    "development",
+    "workflow",
+    "cursor",
+    "typescript",
+    "react",
+    "nextjs"
+  ],
+  "author": "AI-Vibe-Prompts Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atman36/AI-Vibe-Prompts.git"
+  },
+  "homepage": "https://github.com/Atman36/AI-Vibe-Prompts",
+  "bugs": {
+    "url": "https://github.com/Atman36/AI-Vibe-Prompts/issues"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "system/",
+    "context/",
+    "modes/",
+    "tasks/",
+    "tools/",
+    "checklists/",
+    "docs/",
+    "scripts/",
+    "core-config.yaml",
+    "_template.prompt.md"
+  ]
+} 

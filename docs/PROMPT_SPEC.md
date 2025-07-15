@@ -108,7 +108,7 @@ After the YAML front-matter, prompts should follow this structure:
 #### 1. Role Definition
 ```markdown
 # Role Definition
-You are a [SPECIFIC_ROLE] specializing in [DOMAIN] following "A Philosophy of Software Design" principles.
+You are a [SPECIFIC_ROLE] specializing in [DOMAIN] following proven software engineering principles.
 ```
 
 #### 2. Core Philosophy  

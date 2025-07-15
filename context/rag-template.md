@@ -199,4 +199,4 @@ Before generating content, verify:
 **Validated Claims**: {{cross_referenced_facts}}
 ```
 
-This module ensures AI responses are grounded in factual, retrieved information while maintaining the simplicity and reliability principles from "A Philosophy of Software Design".
+This module ensures AI responses are grounded in factual, retrieved information while maintaining simplicity and reliability principles from proven software engineering practices.
