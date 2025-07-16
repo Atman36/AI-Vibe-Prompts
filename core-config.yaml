@@ -1,0 +1,220 @@
+# AI-Vibe-Prompts Core Configuration
+# Enhanced BMAD-METHOD inspired configuration with agent-oriented architecture
+
+# Project Metadata
+name: "AI-Vibe-Prompts"
+version: "2.0.0"
+framework: "Agent-Driven Context Engineering Framework"
+description: "Simplified, production-ready alternative to BMAD-METHOD with clear agent roles"
+
+# Path Configuration
+paths:
+  # Core directories (new agent-oriented structure)
+  agents: "agents/"
+  system: "system/"
+  templates: "templates/"
+  scripts: "scripts/"
+  docs: "docs/"
+  
+  # Agent subdirectories
+  agents_core: "agents/core/"
+  agents_project: "agents/project/"
+  agents_design: "agents/design/"
+  agents_helpers: "agents/helpers/"
+  
+  # System subdirectories
+  system_checklists: "system/checklists/"
+  system_context: "system/"
+  
+  # Project structure (when used in projects)
+  project_docs: "docs/"
+  stories: "docs/stories/"
+  architecture: "docs/architecture/"
+  requirements: "docs/requirements/"
+
+# Context Management (Enhanced BMAD approach)
+context:
+  # Always load these files for enhanced context
+  core_files:
+    - "system/system-prompt.md"
+    - "core-config.yaml"
+    - "system/checklists/handoff-checklist.md"
+  
+  # Load on-demand based on phase
+  phase_files:
+    planning:
+      - "system/task-decompose.md"
+      - "system/rag-template.md"
+      - "agents/core/architect.md"
+    implementation:
+      - "system/state-align.md"
+      - "agents/core/developer.md"
+      - "agents/project/init.md"
+    review:
+      - "system/history-summarizer.md"
+      - "agents/core/analyst.md"
+      - "agents/project/audit.md"
+
+# Agent Configuration (Enhanced with BMAD frontmatter)
+agents:
+  # Core Agents (main workflow)
+  orchestrator:
+    name: "AI Agent Orchestrator"
+    file: "agents/core/orchestrator.md"
+    capabilities: ["coordination", "handoffs", "workflow-management"]
+    phase: "all"
+    invokable_by: ["user", "cli"]
+    frontmatter_template: "system/templates/agent.md"
+  
+  architect:
+    name: "System Architect"
+    file: "agents/core/architect.md"
+    capabilities: ["design", "planning", "architecture"]
+    phase: "planning"
+    invokable_by: ["orchestrator", "user"]
+    dependencies: ["requirements", "analysis"]
+    
+  developer:
+    name: "AI Developer"
+    file: "agents/core/developer.md"
+    capabilities: ["implementation", "coding", "testing"]
+    phase: "implementation"
+    invokable_by: ["orchestrator", "architect"]
+    dependencies: ["architecture", "design-specs"]
+    
+  analyst:
+    name: "Project Analyst"
+    file: "agents/core/analyst.md"
+    capabilities: ["analysis", "optimization", "quality-assurance"]
+    phase: "review"
+    invokable_by: ["orchestrator", "developer"]
+    
+  # Project Agents (lifecycle management)
+  project_init:
+    name: "Project Initializer"
+    file: "agents/project/init.md"
+    capabilities: ["setup", "scaffolding", "technology-selection"]
+    phase: "initialization"
+    
+  project_audit:
+    name: "Project Auditor"
+    file: "agents/project/audit.md"
+    capabilities: ["audit", "modernization", "optimization"]
+    phase: "maintenance"
+
+# Workflow Presets (BMAD-inspired ready scenarios)
+workflow_presets:
+  auth-system:
+    name: "Authentication System Implementation"
+    agents: ["architect", "developer", "analyst"]
+    phases: ["planning", "implementation", "review"]
+    deliverables: ["auth-architecture.md", "auth-implementation/", "security-audit.md"]
+    
+  dashboard-modernization:
+    name: "Legacy Dashboard Modernization"
+    agents: ["analyst", "architect", "developer"]
+    phases: ["audit", "redesign", "migration"]
+    deliverables: ["current-analysis.md", "modern-architecture.md", "migration-plan.md"]
+    
+  component-system:
+    name: "Design System & Component Library"
+    agents: ["design-system", "developer", "analyst"]
+    phases: ["design", "implementation", "documentation"]
+    deliverables: ["design-tokens.md", "component-library/", "usage-guide.md"]
+
+# Quality Control (Enhanced with handoff protocol)
+quality:
+  primary_handoff_protocol: "system/checklists/handoff-checklist.md"
+  
+  checklists:
+    - name: "Agent Handoff Quality"
+      file: "system/checklists/handoff-checklist.md"
+      phase: "all"
+      usage: "agent-transitions"
+    
+    - name: "Architecture Review"
+      file: "system/checklists/architecture-checklist.md"
+      phase: "planning"
+      
+    - name: "Code Quality Review"
+      file: "system/checklists/code-quality-checklist.md"
+      phase: "implementation"
+
+# Handoff System (Enhanced agent-to-agent communication)
+handoffs:
+  architect_to_developer:
+    input: "architectural design document"
+    output: "implementation plan with technical details"
+    checklist: "system/checklists/handoff-checklist.md"
+    validation: "architecture-completeness"
+  
+  developer_to_analyst:
+    input: "implemented code and documentation"
+    output: "quality assessment and optimization recommendations"
+    checklist: "system/checklists/handoff-checklist.md"
+    validation: "implementation-quality"
+
+# CLI Configuration (Enhanced BMAD commands)
+cli:
+  name: "avp"
+  version: "2.0.0"
+  
+  commands:
+    # Core commands
+    init: "Initialize project with AI-Vibe-Prompts"
+    install: "Install prompts in existing project"
+    update: "Update existing installation"
+    
+    # BMAD-inspired commands  
+    explain: "Show role, phase, dependencies of agent"
+    handoff: "Validate agent-to-agent quality transfer"
+    pack: "Install domain-specific agent toolsets"
+    
+    # Workflow commands
+    agents-for: "Find agents by capability or phase"
+    run-workflow: "Execute predefined workflow preset"
+    docs-gen: "Generate agent documentation index"
+    
+    # Quality commands
+    validate: "Run quality validation for current phase"
+    status: "Show current project state and active agents"
+
+# Template Configuration (BMAD-style)
+templates:
+  format: "yaml_frontmatter"
+  required_fields: ["name", "description", "category", "version"]
+  self_contained: true
+  dependency_loading: true
+  
+  # Agent template structure
+  agent_frontmatter:
+    - "name"
+    - "description" 
+    - "capabilities"
+    - "phase"
+    - "dependencies"
+    - "invokable_by"
+    - "handoff_reference"
+
+# Documentation & Automation
+docs:
+  autoindex: true
+  agent_matrix: "docs/AGENT_MATRIX.md"
+  workflow_diagrams: "docs/workflows/"
+  
+# Expansion Pack System (Domain-specific toolsets)
+expansion_packs:
+  frontend:
+    name: "Frontend Development Pack"
+    agents: ["design-system", "figma-converter"]
+    templates: ["shadcn-vite", "next-enterprise"]
+    
+  backend: 
+    name: "Backend Development Pack"
+    agents: ["api-designer", "database-modeler"]
+    templates: ["t3-stack", "express-api"]
+    
+  workflow:
+    name: "Advanced Workflow Pack"
+    agents: ["workflow-composer", "quality-monitor"]
+    presets: ["microservice-migration", "performance-optimization"] 

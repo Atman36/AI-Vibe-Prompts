@@ -4,398 +4,698 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-// ANSI colors for terminal output
-const colors = {
-  reset: '\x1b[0m',
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  magenta: '\x1b[35m',
-  cyan: '\x1b[36m',
-  white: '\x1b[37m',
-  bold: '\x1b[1m'
-};
-
-const log = {
-  info: (msg) => console.log(`${colors.blue}ℹ${colors.reset} ${msg}`),
-  success: (msg) => console.log(`${colors.green}✓${colors.reset} ${msg}`),
-  warn: (msg) => console.log(`${colors.yellow}⚠${colors.reset} ${msg}`),
-  error: (msg) => console.log(`${colors.red}✗${colors.reset} ${msg}`),
-  title: (msg) => console.log(`\n${colors.bold}${colors.cyan}${msg}${colors.reset}`),
-  step: (msg) => console.log(`${colors.magenta}▶${colors.reset} ${msg}`)
-};
-
-const TEMPLATES = {
-  'shadcn-vite': {
-    name: 'Vite + React + shadcn/ui',
-    description: 'Lightweight template for marketing sites and SPAs',
-    repo: 'https://github.com/shadcn/vite-template.git',
-    features: ['Vite', 'React 18', 'Tailwind CSS', 'shadcn/ui', 'TypeScript']
-  },
-  'next-enterprise': {
-    name: 'Next.js Enterprise',
-    description: 'Production-ready Next.js with advanced features',
-    repo: 'https://github.com/Blazity/next-enterprise.git',
-    features: ['Next.js 15', 'TypeScript', 'Turbopack', 'NextAuth', 'Prisma']
-  },
-  't3-stack': {
-    name: 'T3 Stack',
-    description: 'Full-stack TypeScript with tRPC and Prisma',
-    repo: 'https://github.com/t3-oss/create-t3-app.git',
-    features: ['Next.js', 'tRPC', 'Prisma', 'NextAuth', 'TypeScript']
+// Enhanced CLI with BMAD-inspired commands
+class AVPCli {
+  constructor() {
+    this.version = '2.0.0';
+    this.configPath = path.join(process.cwd(), 'core-config.yaml');
+    this.agentsPath = path.join(process.cwd(), 'agents');
   }
-};
 
-function showBanner() {
-  console.log(`
-${colors.cyan}${colors.bold}
- █████╗ ██╗      ██╗   ██╗██╗██████╗ ███████╗
-██╔══██╗██║      ██║   ██║██║██╔══██╗██╔════╝
-███████║██║█████╗██║   ██║██║██████╔╝█████╗  
-██╔══██║██║╚════╝╚██╗ ██╔╝██║██╔══██╗██╔══╝  
-██║  ██║██║       ╚████╔╝ ██║██████╔╝███████╗
-╚═╝  ╚═╝╚═╝        ╚═══╝  ╚═╝╚═════╝ ╚══════╝
-                                              
-    Prompts & Agent System for Modern Web Development
-${colors.reset}
-  `);
-}
+  // Load configuration
+  loadConfig() {
+    try {
+      if (fs.existsSync(this.configPath)) {
+        const yaml = require('js-yaml');
+        const configContent = fs.readFileSync(this.configPath, 'utf8');
+        return yaml.load(configContent);
+      }
+    } catch (error) {
+      console.warn('⚠️  Could not load core-config.yaml, using defaults');
+    }
+    return null;
+  }
 
-function showHelp() {
-  console.log(`
-${colors.bold}Usage:${colors.reset}
-  npx ai-vibe-prompts <command> [options]
+  // Get available agents
+  getAgents() {
+    const agents = {};
+    const config = this.loadConfig();
+    
+    if (config && config.agents) {
+      return config.agents;
+    }
 
-${colors.bold}Commands:${colors.reset}
-  ${colors.green}init [directory]${colors.reset}        Initialize AI-Vibe-Prompts in existing project
-  ${colors.green}create <name> [template]${colors.reset} Create new project with template
-  ${colors.green}list-templates${colors.reset}          Show available project templates
-  ${colors.green}list-agents${colors.reset}             Show available AI agents
-  ${colors.green}help${colors.reset}                    Show this help message
+    // Fallback: scan agents directory
+    if (fs.existsSync(this.agentsPath)) {
+      const categories = fs.readdirSync(this.agentsPath);
+      categories.forEach(category => {
+        const categoryPath = path.join(this.agentsPath, category);
+        if (fs.statSync(categoryPath).isDirectory()) {
+          const agentFiles = fs.readdirSync(categoryPath).filter(f => f.endsWith('.md'));
+          agentFiles.forEach(file => {
+            const agentName = file.replace('.md', '');
+            agents[agentName] = {
+              name: agentName,
+              file: `agents/${category}/${file}`,
+              category: category
+            };
+          });
+        }
+      });
+    }
 
-${colors.bold}Options:${colors.reset}
-  ${colors.yellow}--template, -t${colors.reset}         Specify template (shadcn-vite, next-enterprise, t3-stack)
-  ${colors.yellow}--agents-only${colors.reset}          Install only agents (no project template)
-  ${colors.yellow}--force${colors.reset}                Overwrite existing files
-  ${colors.yellow}--verbose${colors.reset}              Show detailed output
+    return agents;
+  }
 
-${colors.bold}Examples:${colors.reset}
-  ${colors.cyan}npx ai-vibe-prompts init${colors.reset}
-  ${colors.cyan}npx ai-vibe-prompts create my-app --template=t3-stack${colors.reset}
-  ${colors.cyan}npx ai-vibe-prompts create my-dashboard -t next-enterprise${colors.reset}
-  ${colors.cyan}npx ai-vibe-prompts init . --agents-only${colors.reset}
+  // Show CLI help
+  showHelp() {
+    console.log(`
+🚀 AI-Vibe-Prompts CLI v${this.version}
+Enhanced with BMAD-METHOD inspired commands
+
+CORE COMMANDS:
+  init [template]     Initialize project with AI-Vibe-Prompts
+  install            Install prompts in existing project  
+  update             Update existing installation
+
+BMAD-INSPIRED COMMANDS:
+  explain <agent>     Show role, phase, dependencies of agent
+  handoff <source> <target>  Validate agent-to-agent quality transfer
+  pack <name>         Install domain-specific agent toolsets
+  
+WORKFLOW COMMANDS:
+  agents-for <query>  Find agents by capability or phase
+  run-workflow <preset>  Execute predefined workflow preset
+  docs-gen           Generate agent documentation index
+  
+QUALITY COMMANDS:
+  validate           Run quality validation for current phase
+  status             Show current project state and active agents
+  
+EXAMPLES:
+  avp init shadcn-vite          # Initialize with shadcn/ui + Vite template
+  avp explain orchestrator      # Show orchestrator agent details
+  avp agents-for "design"       # Find all design-related agents
+  avp run-workflow auth-system  # Execute authentication workflow
+  avp handoff architect developer  # Validate architecture handoff
+  avp pack frontend             # Install frontend development pack
+  avp validate                  # Run quality checks
+  avp status                    # Show current project status
+
+For more information, visit: https://github.com/Atman36/AI-Vibe-Prompts
 `);
-}
-
-function listTemplates() {
-  log.title('Available Project Templates');
-  
-  Object.entries(TEMPLATES).forEach(([key, template]) => {
-    console.log(`\n${colors.bold}${key}${colors.reset} - ${template.name}`);
-    console.log(`  ${colors.cyan}${template.description}${colors.reset}`);
-    console.log(`  Features: ${template.features.join(', ')}`);
-  });
-  
-  console.log(`\n${colors.yellow}Usage:${colors.reset} npx ai-vibe-prompts create <name> --template=<template-key>`);
-}
-
-function listAgents() {
-  log.title('Available AI Agents');
-  
-  const agents = {
-    'Core Agents': {
-      'orchestrator': 'Central coordinator for multi-agent workflows',
-      'architect': 'System design and architecture planning',
-      'developer': 'Code implementation and testing',
-      'analyst': 'Code quality and performance analysis'
-    },
-    'Project Agents': {
-      'init': 'Project initialization and setup',
-      'audit': 'Comprehensive project auditing'
-    },
-    'Design Agents': {
-      'design-system': 'Design system creation and management',
-      'figma-converter': 'Figma to React component conversion'
-    },
-    'Helper Agents': {
-      'rag-assistant': 'Code analysis and context extraction',
-      'workflow-composer': 'Multi-agent workflow creation',
-      'quality-monitor': 'Quality metrics and monitoring'
-    }
-  };
-  
-  Object.entries(agents).forEach(([category, agentList]) => {
-    console.log(`\n${colors.bold}${colors.magenta}${category}${colors.reset}`);
-    Object.entries(agentList).forEach(([agent, description]) => {
-      console.log(`  ${colors.green}${agent}${colors.reset} - ${description}`);
-    });
-  });
-  
-  console.log(`\n${colors.yellow}Usage:${colors.reset} @agents/<category>/<agent>.md`);
-}
-
-function ensureDirectory(dirPath) {
-  if (!fs.existsSync(dirPath)) {
-    fs.mkdirSync(dirPath, { recursive: true });
-    log.success(`Created directory: ${dirPath}`);
   }
-}
 
-function copyAgents(targetDir, options = {}) {
-  const sourcePath = path.join(__dirname, '..');
-  const agentsSource = path.join(sourcePath, 'agents');
-  const systemSource = path.join(sourcePath, 'system');
-  
-  if (!fs.existsSync(agentsSource)) {
-    log.error('Agents directory not found. Make sure AI-Vibe-Prompts is properly installed.');
-    process.exit(1);
-  }
-  
-  // Copy agents directory
-  const agentsTarget = path.join(targetDir, 'ai-vibe-prompts', 'agents');
-  const systemTarget = path.join(targetDir, 'ai-vibe-prompts', 'system');
-  
-  ensureDirectory(path.dirname(agentsTarget));
-  ensureDirectory(path.dirname(systemTarget));
-  
-  log.step('Copying AI agents...');
-  execSync(`cp -r "${agentsSource}" "${path.dirname(agentsTarget)}"`);
-  log.success('Agents copied successfully');
-  
-  log.step('Copying system configuration...');
-  execSync(`cp -r "${systemSource}" "${path.dirname(systemTarget)}"`);
-  log.success('System configuration copied');
-  
-  // Create package.json script if it doesn't exist
-  const packageJsonPath = path.join(targetDir, 'package.json');
-  if (fs.existsSync(packageJsonPath)) {
-    const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
+  // Initialize project
+  async init(template = 'shadcn-vite') {
+    console.log(`🚀 Initializing project with template: ${template}`);
     
-    if (!packageJson.scripts) {
-      packageJson.scripts = {};
-    }
-    
-    packageJson.scripts.ai = 'echo "Use @agents/<category>/<agent>.md to activate AI agents"';
-    
-    fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-    log.success('Added AI script to package.json');
-  }
-  
-  // Create .ai-vibe-prompts config
-  const configPath = path.join(targetDir, '.ai-vibe-prompts.json');
-  const config = {
-    version: '2.0.0',
-    agentsPath: './ai-vibe-prompts/agents',
-    systemPath: './ai-vibe-prompts/system',
-    installedAt: new Date().toISOString(),
-    agents: {
-      core: ['orchestrator', 'architect', 'developer', 'analyst'],
-      project: ['init', 'audit'],
-      design: ['design-system', 'figma-converter'],
-      helpers: ['rag-assistant', 'workflow-composer', 'quality-monitor']
-    }
-  };
-  
-  fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
-  log.success('Created AI-Vibe-Prompts configuration');
-}
-
-function createProject(name, template, options = {}) {
-  const projectPath = path.resolve(name);
-  
-  if (fs.existsSync(projectPath) && !options.force) {
-    log.error(`Directory ${name} already exists. Use --force to overwrite.`);
-    process.exit(1);
-  }
-  
-  log.title(`Creating project: ${name}`);
-  
-  if (template && TEMPLATES[template]) {
-    log.step(`Using template: ${TEMPLATES[template].name}`);
-    
-    // Create project from template
-    ensureDirectory(projectPath);
-    
-    // For now, create a basic structure
-    // In production, this would clone the actual template repositories
-    log.step('Setting up project structure...');
-    
-    const directories = [
-      'src/components/ui',
-      'src/lib',
-      'src/hooks',
-      'src/types',
-      'src/app',
-      'public'
-    ];
-    
-    directories.forEach(dir => {
-      ensureDirectory(path.join(projectPath, dir));
-    });
-    
-    // Create basic package.json
-    const templateConfig = TEMPLATES[template];
-    const packageJson = {
-      name: name,
-      version: '0.1.0',
-      private: true,
-      description: `Project created with ${templateConfig.name} template`,
-      scripts: {
-        dev: 'next dev',
-        build: 'next build',
-        start: 'next start',
-        lint: 'next lint',
-        ai: 'echo "Use @agents/<category>/<agent>.md to activate AI agents"'
+    const templates = {
+      'shadcn-vite': {
+        name: 'Shadcn/UI + Vite',
+        description: 'Lightweight SPA with shadcn/ui components',
+        stack: ['React 19', 'Vite', 'TypeScript', 'Tailwind CSS', 'shadcn/ui']
       },
-      dependencies: {},
-      devDependencies: {}
+      'next-enterprise': {
+        name: 'Next.js Enterprise',
+        description: 'Full-stack enterprise application',
+        stack: ['Next.js 15', 'React 19', 'TypeScript', 'Prisma', 'NextAuth.js']
+      },
+      't3-stack': {
+        name: 'T3 Stack',
+        description: 'Full-stack TypeScript application',
+        stack: ['Next.js 15', 'tRPC', 'Prisma', 'NextAuth.js', 'Tailwind CSS']
+      }
     };
+
+    const selectedTemplate = templates[template];
+    if (!selectedTemplate) {
+      console.error(`❌ Template "${template}" not found. Available templates:`);
+      Object.entries(templates).forEach(([key, tmpl]) => {
+        console.log(`  ${key}: ${tmpl.description}`);
+      });
+      return;
+    }
+
+    console.log(`\n📋 Template: ${selectedTemplate.name}`);
+    console.log(`📝 Description: ${selectedTemplate.description}`);
+    console.log(`🛠️  Stack: ${selectedTemplate.stack.join(', ')}`);
     
-    fs.writeFileSync(
-      path.join(projectPath, 'package.json'),
-      JSON.stringify(packageJson, null, 2)
-    );
+    // Create project structure
+    this.createProjectStructure(template);
+    console.log('✅ Project initialized successfully!');
+  }
+
+  // Create project structure
+  createProjectStructure(template) {
+    const dirs = [
+      'agents/core',
+      'agents/project', 
+      'agents/design',
+      'agents/helpers',
+      'system/checklists',
+      'templates',
+      'scripts',
+      'docs'
+    ];
+
+    dirs.forEach(dir => {
+      const fullPath = path.join(process.cwd(), dir);
+      if (!fs.existsSync(fullPath)) {
+        fs.mkdirSync(fullPath, { recursive: true });
+        console.log(`📁 Created: ${dir}/`);
+      }
+    });
+
+    // Copy template files
+    this.copyTemplateFiles(template);
+  }
+
+  // Copy template files
+  copyTemplateFiles(template) {
+    // Copy core configuration
+    const sourceConfigPath = path.join(__dirname, '..', 'core-config.yaml');
+    const destConfigPath = path.join(process.cwd(), 'core-config.yaml');
     
-    // Copy template README
-    const templateReadmePath = path.join(__dirname, '..', 'templates', template, 'README.md');
-    if (fs.existsSync(templateReadmePath)) {
-      fs.copyFileSync(templateReadmePath, path.join(projectPath, 'README.md'));
+    if (fs.existsSync(sourceConfigPath)) {
+      fs.copyFileSync(sourceConfigPath, destConfigPath);
+      console.log('📄 Copied: core-config.yaml');
+    }
+
+    // Copy agents
+    const sourceAgentsPath = path.join(__dirname, '..', 'agents');
+    const destAgentsPath = path.join(process.cwd(), 'agents');
+    
+    if (fs.existsSync(sourceAgentsPath)) {
+      this.copyDirectory(sourceAgentsPath, destAgentsPath);
+      console.log('🤖 Copied: agents/');
+    }
+
+    // Copy system files
+    const sourceSystemPath = path.join(__dirname, '..', 'system');
+    const destSystemPath = path.join(process.cwd(), 'system');
+    
+    if (fs.existsSync(sourceSystemPath)) {
+      this.copyDirectory(sourceSystemPath, destSystemPath);
+      console.log('⚙️  Copied: system/');
+    }
+  }
+
+  // Copy directory recursively
+  copyDirectory(src, dest) {
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest, { recursive: true });
+    }
+
+    const files = fs.readdirSync(src);
+    files.forEach(file => {
+      const srcPath = path.join(src, file);
+      const destPath = path.join(dest, file);
+      
+      if (fs.statSync(srcPath).isDirectory()) {
+        this.copyDirectory(srcPath, destPath);
+      } else {
+        fs.copyFileSync(srcPath, destPath);
+      }
+    });
+  }
+
+  // Install in existing project
+  install() {
+    console.log('📦 Installing AI-Vibe-Prompts in existing project...');
+    
+    if (fs.existsSync(this.configPath)) {
+      console.log('⚠️  AI-Vibe-Prompts already installed. Use "update" command instead.');
+      return;
+    }
+
+    this.createProjectStructure('minimal');
+    console.log('✅ AI-Vibe-Prompts installed successfully!');
+  }
+
+  // Update existing installation
+  update() {
+    console.log('🔄 Updating AI-Vibe-Prompts...');
+    
+    if (!fs.existsSync(this.configPath)) {
+      console.log('❌ AI-Vibe-Prompts not found. Use "install" command first.');
+      return;
+    }
+
+    // Backup existing config
+    const backupPath = `${this.configPath}.backup`;
+    fs.copyFileSync(this.configPath, backupPath);
+    console.log(`📋 Backed up config to: ${backupPath}`);
+
+    // Update files
+    this.copyTemplateFiles('update');
+    console.log('✅ AI-Vibe-Prompts updated successfully!');
+  }
+
+  // Explain agent details (BMAD command)
+  explain(agentName) {
+    if (!agentName) {
+      console.log('❌ Please specify an agent name. Usage: avp explain <agent>');
+      return;
+    }
+
+    const agents = this.getAgents();
+    const agent = agents[agentName];
+    
+    if (!agent) {
+      console.log(`❌ Agent "${agentName}" not found. Available agents:`);
+      Object.keys(agents).forEach(name => console.log(`  • ${name}`));
+      return;
+    }
+
+    console.log(`\n🤖 Agent: ${agent.name || agentName}`);
+    console.log(`📁 Category: ${agent.category || 'unknown'}`);
+    console.log(`📄 File: ${agent.file}`);
+    
+    if (agent.capabilities) {
+      console.log(`🛠️  Capabilities: ${agent.capabilities.join(', ')}`);
     }
     
-    log.success(`Project template ${template} created`);
-  } else {
-    // Create basic directory structure
-    ensureDirectory(projectPath);
-    log.step('Creating basic project structure...');
+    if (agent.phase) {
+      console.log(`📈 Phase: ${agent.phase}`);
+    }
+    
+    if (agent.dependencies) {
+      console.log(`🔗 Dependencies: ${agent.dependencies.join(', ')}`);
+    }
+    
+    if (agent.invokable_by) {
+      console.log(`🎯 Invokable by: ${agent.invokable_by.join(', ')}`);
+    }
   }
-  
-  // Copy AI agents
-  copyAgents(projectPath, options);
-  
-  log.title('✨ Project created successfully!');
-  
-  console.log(`
-${colors.bold}Next steps:${colors.reset}
-  1. ${colors.cyan}cd ${name}${colors.reset}
-  2. ${colors.cyan}npm install${colors.reset}
-  3. ${colors.cyan}npm run dev${colors.reset}
 
-${colors.bold}AI Agents Usage:${colors.reset}
-  • ${colors.green}@agents/project/init.md${colors.reset}     - Initialize new project
-  • ${colors.green}@agents/core/architect.md${colors.reset}   - Plan architecture  
-  • ${colors.green}@agents/core/developer.md${colors.reset}   - Implement features
-  • ${colors.green}@agents/helpers/rag-assistant.md${colors.reset} - Analyze codebase
+  // Find agents by capability or phase
+  agentsFor(query) {
+    if (!query) {
+      console.log('❌ Please specify a search query. Usage: avp agents-for <query>');
+      return;
+    }
 
-${colors.bold}Workflows:${colors.reset}
-  • ${colors.yellow}*new-project [description]${colors.reset} - Create new project workflow
-  • ${colors.yellow}*analyze [scope]${colors.reset}           - Analyze existing code
-  • ${colors.yellow}*quality${colors.reset}                  - Run quality assessment
-`);
-}
+    const agents = this.getAgents();
+    const matches = [];
 
-function initializeInExisting(directory, options = {}) {
-  const targetDir = path.resolve(directory || '.');
-  
-  log.title(`Initializing AI-Vibe-Prompts in: ${targetDir}`);
-  
-  if (!fs.existsSync(targetDir)) {
-    log.error(`Directory ${targetDir} does not exist.`);
-    process.exit(1);
-  }
-  
-  // Check if already initialized
-  const configPath = path.join(targetDir, '.ai-vibe-prompts.json');
-  if (fs.existsSync(configPath) && !options.force) {
-    log.warn('AI-Vibe-Prompts already initialized. Use --force to reinitialize.');
-    process.exit(1);
-  }
-  
-  copyAgents(targetDir, options);
-  
-  log.title('✨ AI-Vibe-Prompts initialized successfully!');
-  
-  console.log(`
-${colors.bold}Available agents:${colors.reset}
-  • Core: orchestrator, architect, developer, analyst
-  • Project: init, audit  
-  • Design: design-system, figma-converter
-  • Helpers: rag-assistant, workflow-composer, quality-monitor
+    Object.entries(agents).forEach(([name, agent]) => {
+      const searchText = [
+        name,
+        agent.category,
+        agent.phase,
+        ...(agent.capabilities || [])
+      ].join(' ').toLowerCase();
 
-${colors.bold}Usage:${colors.reset}
-  ${colors.cyan}@agents/<category>/<agent>.md${colors.reset}
-
-${colors.bold}Examples:${colors.reset}
-  ${colors.green}@agents/helpers/rag-assistant.md${colors.reset} - Analyze your codebase
-  ${colors.green}@agents/core/architect.md${colors.reset}        - Plan new features
-  ${colors.green}@agents/core/developer.md${colors.reset}        - Implement features
-`);
-}
-
-function main() {
-  const args = process.argv.slice(2);
-  const command = args[0];
-  
-  const options = {
-    template: args.find(arg => arg.startsWith('--template='))?.split('=')[1] || 
-              args.find(arg => arg.startsWith('-t='))?.split('=')[1] ||
-              (args.includes('--template') || args.includes('-t') ? args[args.findIndex(arg => arg === '--template' || arg === '-t') + 1] : null),
-    force: args.includes('--force'),
-    verbose: args.includes('--verbose'),
-    agentsOnly: args.includes('--agents-only')
-  };
-  
-  showBanner();
-  
-  switch (command) {
-    case 'init':
-      const directory = args[1];
-      initializeInExisting(directory, options);
-      break;
-      
-    case 'create':
-      const projectName = args[1];
-      if (!projectName) {
-        log.error('Project name is required');
-        showHelp();
-        process.exit(1);
+      if (searchText.includes(query.toLowerCase())) {
+        matches.push({ name, ...agent });
       }
-      createProject(projectName, options.template, options);
-      break;
-      
-    case 'list-templates':
-      listTemplates();
-      break;
-      
-    case 'list-agents':
-      listAgents();
-      break;
-      
-    case 'help':
-    case '--help':
-    case '-h':
-      showHelp();
-      break;
-      
-    default:
-      if (!command) {
-        showHelp();
+    });
+
+    if (matches.length === 0) {
+      console.log(`❌ No agents found matching "${query}"`);
+      return;
+    }
+
+    console.log(`\n🔍 Found ${matches.length} agent(s) matching "${query}":\n`);
+    matches.forEach(agent => {
+      console.log(`🤖 ${agent.name}`);
+      console.log(`   📁 Category: ${agent.category}`);
+      if (agent.capabilities) {
+        console.log(`   🛠️  Capabilities: ${agent.capabilities.join(', ')}`);
+      }
+      console.log('');
+    });
+  }
+
+  // Validate handoff between agents
+  handoff(source, target) {
+    if (!source || !target) {
+      console.log('❌ Please specify source and target agents. Usage: avp handoff <source> <target>');
+      return;
+    }
+
+    const agents = this.getAgents();
+    const sourceAgent = agents[source];
+    const targetAgent = agents[target];
+
+    if (!sourceAgent) {
+      console.log(`❌ Source agent "${source}" not found.`);
+      return;
+    }
+
+    if (!targetAgent) {
+      console.log(`❌ Target agent "${target}" not found.`);
+      return;
+    }
+
+    console.log(`\n🔄 Validating handoff: ${source} → ${target}\n`);
+
+    // Check handoff compatibility
+    const config = this.loadConfig();
+    let handoffConfig = null;
+    
+    if (config && config.handoffs) {
+      const handoffKey = `${source}_to_${target}`;
+      handoffConfig = config.handoffs[handoffKey];
+    }
+
+    if (handoffConfig) {
+      console.log('✅ Handoff configuration found:');
+      console.log(`   📥 Input: ${handoffConfig.input}`);
+      console.log(`   📤 Output: ${handoffConfig.output}`);
+      console.log(`   ✔️  Checklist: ${handoffConfig.checklist}`);
+      if (handoffConfig.validation) {
+        console.log(`   🔍 Validation: ${handoffConfig.validation}`);
+      }
+    } else {
+      console.log('⚠️  No specific handoff configuration found.');
+      console.log('📋 Using general handoff checklist: system/checklists/handoff-checklist.md');
+    }
+
+    // Check agent dependencies
+    if (targetAgent.dependencies && targetAgent.dependencies.includes(sourceAgent.name)) {
+      console.log('✅ Target agent lists source as dependency');
+    } else {
+      console.log('⚠️  Target agent does not list source as dependency');
+    }
+
+    console.log('\n📋 Handoff checklist items to verify:');
+    console.log('   □ Source agent deliverables complete');
+    console.log('   □ Quality gates passed');
+    console.log('   □ Documentation updated');
+    console.log('   □ Target agent context sufficient');
+    console.log('   □ No critical information lost');
+  }
+
+  // Run workflow preset
+  runWorkflow(preset) {
+    if (!preset) {
+      console.log('❌ Please specify a workflow preset. Usage: avp run-workflow <preset>');
+      return;
+    }
+
+    const config = this.loadConfig();
+    let workflow = null;
+
+    if (config && config.workflow_presets) {
+      workflow = config.workflow_presets[preset];
+    }
+
+    if (!workflow) {
+      console.log(`❌ Workflow preset "${preset}" not found. Available presets:`);
+      if (config && config.workflow_presets) {
+        Object.keys(config.workflow_presets).forEach(name => {
+          console.log(`  • ${name}`);
+        });
       } else {
-        log.error(`Unknown command: ${command}`);
-        showHelp();
-        process.exit(1);
+        console.log('  No workflow presets found in configuration.');
       }
+      return;
+    }
+
+    console.log(`\n🚀 Running workflow: ${workflow.name}\n`);
+    console.log(`📋 Agents: ${workflow.agents.join(' → ')}`);
+    console.log(`📈 Phases: ${workflow.phases.join(' → ')}`);
+    
+    if (workflow.deliverables) {
+      console.log(`📦 Deliverables: ${workflow.deliverables.join(', ')}`);
+    }
+
+    console.log('\n📝 Workflow execution plan:');
+    workflow.agents.forEach((agent, index) => {
+      const phase = workflow.phases[index] || 'unknown';
+      console.log(`   ${index + 1}. ${agent} (${phase} phase)`);
+    });
+
+    console.log('\n✨ Use the orchestrator to execute this workflow step by step.');
+  }
+
+  // Install expansion pack
+  pack(packName) {
+    if (!packName) {
+      console.log('❌ Please specify a pack name. Usage: avp pack <name>');
+      return;
+    }
+
+    const config = this.loadConfig();
+    let pack = null;
+
+    if (config && config.expansion_packs) {
+      pack = config.expansion_packs[packName];
+    }
+
+    if (!pack) {
+      console.log(`❌ Expansion pack "${packName}" not found. Available packs:`);
+      if (config && config.expansion_packs) {
+        Object.entries(config.expansion_packs).forEach(([name, p]) => {
+          console.log(`  • ${name}: ${p.name}`);
+        });
+      } else {
+        console.log('  No expansion packs found in configuration.');
+      }
+      return;
+    }
+
+    console.log(`\n📦 Installing expansion pack: ${pack.name}\n`);
+    
+    if (pack.agents) {
+      console.log(`🤖 Agents to install: ${pack.agents.join(', ')}`);
+    }
+    
+    if (pack.templates) {
+      console.log(`📄 Templates to install: ${pack.templates.join(', ')}`);
+    }
+
+    console.log('\n⚠️  Expansion pack installation not yet implemented.');
+    console.log('📋 Manual installation: Copy agents and templates from the expansion pack directory.');
+  }
+
+  // Generate documentation
+  docsGen() {
+    console.log('📚 Generating agent documentation...\n');
+
+    const agents = this.getAgents();
+    const categories = {};
+
+    // Group agents by category
+    Object.entries(agents).forEach(([name, agent]) => {
+      const category = agent.category || 'other';
+      if (!categories[category]) {
+        categories[category] = [];
+      }
+      categories[category].push({ name, ...agent });
+    });
+
+    // Generate documentation content
+    let docContent = '# AI-Vibe-Prompts Agent Matrix\n\n';
+    docContent += 'Auto-generated documentation of all available agents.\n\n';
+
+    Object.entries(categories).forEach(([category, categoryAgents]) => {
+      docContent += `## ${category.charAt(0).toUpperCase() + category.slice(1)} Agents\n\n`;
+      
+      categoryAgents.forEach(agent => {
+        docContent += `### ${agent.name}\n`;
+        if (agent.description) {
+          docContent += `${agent.description}\n\n`;
+        }
+        docContent += `- **File**: \`${agent.file}\`\n`;
+        if (agent.capabilities) {
+          docContent += `- **Capabilities**: ${agent.capabilities.join(', ')}\n`;
+        }
+        if (agent.phase) {
+          docContent += `- **Phase**: ${agent.phase}\n`;
+        }
+        docContent += '\n';
+      });
+    });
+
+    // Write documentation file
+    const docsPath = path.join(process.cwd(), 'docs', 'AGENT_MATRIX.md');
+    fs.writeFileSync(docsPath, docContent);
+    
+    console.log(`✅ Documentation generated: docs/AGENT_MATRIX.md`);
+    console.log(`📊 Total agents: ${Object.keys(agents).length}`);
+    console.log(`📂 Categories: ${Object.keys(categories).length}`);
+  }
+
+  // Show project status
+  status() {
+    console.log('📊 AI-Vibe-Prompts Project Status\n');
+
+    // Check installation
+    if (!fs.existsSync(this.configPath)) {
+      console.log('❌ AI-Vibe-Prompts not installed in this project');
+      console.log('💡 Run "avp install" to set up AI-Vibe-Prompts');
+      return;
+    }
+
+    console.log('✅ AI-Vibe-Prompts installed');
+
+    // Load configuration
+    const config = this.loadConfig();
+    if (config) {
+      console.log(`📄 Configuration: ${config.name} v${config.version}`);
+      console.log(`🎯 Framework: ${config.framework}`);
+    }
+
+    // Count agents
+    const agents = this.getAgents();
+    const agentCount = Object.keys(agents).length;
+    console.log(`🤖 Agents available: ${agentCount}`);
+
+    // Show agent categories
+    const categories = {};
+    Object.values(agents).forEach(agent => {
+      const category = agent.category || 'other';
+      categories[category] = (categories[category] || 0) + 1;
+    });
+
+    console.log('\n📂 Agent categories:');
+    Object.entries(categories).forEach(([category, count]) => {
+      console.log(`   ${category}: ${count} agents`);
+    });
+
+    // Check for workflow presets
+    if (config && config.workflow_presets) {
+      const presetCount = Object.keys(config.workflow_presets).length;
+      console.log(`\n🚀 Workflow presets: ${presetCount}`);
+    }
+
+    // Check for expansion packs
+    if (config && config.expansion_packs) {
+      const packCount = Object.keys(config.expansion_packs).length;
+      console.log(`📦 Expansion packs: ${packCount}`);
+    }
+
+    console.log('\n💡 Next steps:');
+    console.log('   • Use "avp explain <agent>" to learn about specific agents');
+    console.log('   • Use "avp run-workflow <preset>" to execute workflows');
+    console.log('   • Use "avp docs-gen" to generate documentation');
+  }
+
+  // Validate project
+  validate() {
+    console.log('🔍 Running quality validation...\n');
+
+    let score = 0;
+    let maxScore = 0;
+
+    // Check configuration
+    maxScore += 10;
+    if (fs.existsSync(this.configPath)) {
+      console.log('✅ Configuration file exists');
+      score += 10;
+    } else {
+      console.log('❌ Configuration file missing');
+    }
+
+    // Check agents directory
+    maxScore += 10;
+    if (fs.existsSync(this.agentsPath)) {
+      console.log('✅ Agents directory exists');
+      score += 10;
+    } else {
+      console.log('❌ Agents directory missing');
+    }
+
+    // Check system directory
+    maxScore += 10;
+    const systemPath = path.join(process.cwd(), 'system');
+    if (fs.existsSync(systemPath)) {
+      console.log('✅ System directory exists');
+      score += 10;
+    } else {
+      console.log('❌ System directory missing');
+    }
+
+    // Check handoff checklist
+    maxScore += 10;
+    const handoffPath = path.join(process.cwd(), 'system', 'checklists', 'handoff-checklist.md');
+    if (fs.existsSync(handoffPath)) {
+      console.log('✅ Handoff checklist exists');
+      score += 10;
+    } else {
+      console.log('❌ Handoff checklist missing');
+    }
+
+    // Check agent files
+    const agents = this.getAgents();
+    const agentCount = Object.keys(agents).length;
+    maxScore += 20;
+    
+    if (agentCount >= 4) {
+      console.log(`✅ Sufficient agents available (${agentCount})`);
+      score += 20;
+    } else {
+      console.log(`⚠️  Limited agents available (${agentCount})`);
+      score += Math.floor((agentCount / 4) * 20);
+    }
+
+    // Calculate final score
+    const percentage = Math.round((score / maxScore) * 100);
+    console.log(`\n📊 Overall Score: ${score}/${maxScore} (${percentage}%)`);
+
+    if (percentage >= 80) {
+      console.log('🎉 Excellent! Your AI-Vibe-Prompts setup is ready for production.');
+    } else if (percentage >= 60) {
+      console.log('👍 Good setup. Consider addressing missing components.');
+    } else {
+      console.log('⚠️  Setup incomplete. Run "avp install" or "avp update".');
+    }
+  }
+
+  // Main CLI handler
+  run() {
+    const args = process.argv.slice(2);
+    const command = args[0];
+    const params = args.slice(1);
+
+    switch (command) {
+      case 'init':
+        this.init(params[0]);
+        break;
+      case 'install':
+        this.install();
+        break;
+      case 'update':
+        this.update();
+        break;
+      case 'explain':
+        this.explain(params[0]);
+        break;
+      case 'agents-for':
+        this.agentsFor(params[0]);
+        break;
+      case 'handoff':
+        this.handoff(params[0], params[1]);
+        break;
+      case 'run-workflow':
+        this.runWorkflow(params[0]);
+        break;
+      case 'pack':
+        this.pack(params[0]);
+        break;
+      case 'docs-gen':
+        this.docsGen();
+        break;
+      case 'validate':
+        this.validate();
+        break;
+      case 'status':
+        this.status();
+        break;
+      case 'help':
+      case '--help':
+      case '-h':
+        this.showHelp();
+        break;
+      case 'version':
+      case '--version':
+      case '-v':
+        console.log(`AI-Vibe-Prompts CLI v${this.version}`);
+        break;
+      default:
+        if (!command) {
+          this.showHelp();
+        } else {
+          console.log(`❌ Unknown command: ${command}`);
+          console.log('💡 Run "avp help" to see available commands');
+        }
+    }
   }
 }
 
-if (require.main === module) {
-  main();
-}
-
-module.exports = {
-  createProject,
-  initializeInExisting,
-  copyAgents,
-  listTemplates,
-  listAgents
-}; 
+// Run CLI
+const cli = new AVPCli();
+cli.run(); 
