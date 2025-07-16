@@ -444,6 +444,8 @@ export const documentationPrompts = {
   - [ ] Configure Husky pre-commit hooks for quality enforcement
   - [ ] Initialize Vitest with React Testing Library integration
 
+- [ ] Implement walking skeleton: Minimal end-to-end system to validate all pieces work together.
+
 **Deliverables**:
 - Complete project scaffolding with BMAD structure
 - Comprehensive documentation foundation

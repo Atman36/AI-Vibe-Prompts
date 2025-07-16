@@ -55,72 +55,169 @@ context:
       - "agents/core/analyst.md"
       - "agents/project/audit.md"
 
-# Agent Configuration (Enhanced with BMAD frontmatter)
+# Agent Configuration (Enhanced with AI Blindspot Prevention)
 agents:
   # Core Agents (main workflow)
   orchestrator:
     name: "AI Agent Orchestrator"
     file: "agents/core/orchestrator.md"
-    capabilities: ["coordination", "handoffs", "workflow-management"]
+    capabilities: ["coordination", "handoffs", "workflow-management", "stop-digging-detection"]
     phase: "all"
     invokable_by: ["user", "cli"]
+    dependencies: ["workflow-composer", "quality-monitor"]
     frontmatter_template: "system/templates/agent.md"
   
   architect:
     name: "System Architect"
     file: "agents/core/architect.md"
-    capabilities: ["design", "planning", "architecture"]
+    capabilities: ["design", "planning", "architecture", "walking-skeleton", "complexity-management"]
     phase: "planning"
     invokable_by: ["orchestrator", "user"]
-    dependencies: ["requirements", "analysis"]
+    dependencies: ["rag-assistant", "quality-monitor"]
     
-  developer:
+      developer:
     name: "AI Developer"
     file: "agents/core/developer.md"
-    capabilities: ["implementation", "coding", "testing"]
+    capabilities: ["implementation", "coding", "testing", "mise-en-place"]
     phase: "implementation"
     invokable_by: ["orchestrator", "architect"]
+    dependencies: ["architect", "rag-assistant", "refactor-assistant"]
     dependencies: ["architecture", "design-specs"]
     
   analyst:
     name: "Project Analyst"
     file: "agents/core/analyst.md"
-    capabilities: ["analysis", "optimization", "quality-assurance"]
+    capabilities: ["analysis", "optimization", "quality-assurance", "black-box-testing"]
     phase: "review"
     invokable_by: ["orchestrator", "developer"]
+    dependencies: ["developer", "rag-assistant", "quality-monitor"]
     
   # Project Agents (lifecycle management)
   project_init:
     name: "Project Initializer"
     file: "agents/project/init.md"
-    capabilities: ["setup", "scaffolding", "technology-selection"]
+    capabilities: ["setup", "scaffolding", "technology-selection", "walking-skeleton"]
     phase: "initialization"
+    dependencies: ["architect"]
     
   project_audit:
     name: "Project Auditor"
     file: "agents/project/audit.md"
-    capabilities: ["audit", "modernization", "optimization"]
+    capabilities: ["audit", "modernization", "optimization", "technical-debt-analysis"]
     phase: "maintenance"
+    dependencies: ["quality-monitor", "rag-assistant"]
 
-# Workflow Presets (BMAD-inspired ready scenarios)
+  # Helper Agents (AI Blindspot Prevention)
+  rag_assistant:
+    name: "RAG Assistant (Quality Gateway)"
+    file: "agents/helpers/rag-assistant.md"
+    capabilities: ["documentation-verification", "spec-compliance", "context-validation", "ai-blindspot-prevention"]
+    phase: "continuous"
+    invokable_by: ["all"]
+    mandatory_gate: true
+    
+  refactor_assistant:
+    name: "Refactor Assistant"
+    file: "agents/helpers/refactor-assistant.md"
+    capabilities: ["preparatory-refactoring", "code-cleanup", "architecture-preparation"]
+    phase: "pre-implementation"
+    invokable_by: ["developer", "architect"]
+    
+  debugger_assistant:
+    name: "Debugger Assistant"
+    file: "agents/helpers/debugger-assistant.md"
+    capabilities: ["scientific-debugging", "hypothesis-testing", "error-analysis"]
+    phase: "debugging"
+    invokable_by: ["developer", "analyst"]
+    
+  quality_monitor:
+    name: "Quality Monitor"
+    file: "agents/helpers/quality-monitor.md"
+    capabilities: ["quality-metrics", "technical-debt-detection", "code-health-monitoring"]
+    phase: "continuous"
+    invokable_by: ["all"]
+    
+  workflow_composer:
+    name: "Workflow Composer"
+    file: "agents/helpers/workflow-composer.md"
+    capabilities: ["workflow-design", "agent-coordination", "process-automation"]
+    phase: "orchestration"
+    invokable_by: ["orchestrator"]
+
+  # Design Agents
+  figma_converter:
+    name: "Figma to Code Converter"
+    file: "agents/design/figma-converter.md"
+    capabilities: ["design-conversion", "component-generation", "responsive-implementation"]
+    phase: "implementation"
+    dependencies: ["architect", "rag-assistant"]
+
+# Workflow Presets (AI Blindspot Prevention Integrated)
 workflow_presets:
   auth-system:
     name: "Authentication System Implementation"
-    agents: ["architect", "developer", "analyst"]
-    phases: ["planning", "implementation", "review"]
-    deliverables: ["auth-architecture.md", "auth-implementation/", "security-audit.md"]
+    agents: 
+      - "rag-assistant"  # Mandatory quality gate
+      - "architect"
+      - "refactor-assistant"  # Preparatory refactoring
+      - "developer"
+      - "analyst"
+      - "quality-monitor"
+    phases: ["validation", "planning", "preparation", "implementation", "review", "monitoring"]
+    quality_gates: ["spec-compliance", "security-requirements", "walking-skeleton", "black-box-testing"]
+    deliverables: ["auth-requirements-validation.md", "auth-architecture.md", "refactor-plan.md", "auth-implementation/", "security-test-suite/", "quality-metrics.md"]
     
   dashboard-modernization:
     name: "Legacy Dashboard Modernization"
-    agents: ["analyst", "architect", "developer"]
-    phases: ["audit", "redesign", "migration"]
-    deliverables: ["current-analysis.md", "modern-architecture.md", "migration-plan.md"]
+    agents: 
+      - "project-audit"
+      - "rag-assistant"
+      - "architect"
+      - "refactor-assistant"
+      - "developer"
+      - "quality-monitor"
+      - "analyst"
+    phases: ["audit", "validation", "redesign", "preparation", "migration", "monitoring", "review"]
+    quality_gates: ["legacy-analysis", "spec-compliance", "preparatory-refactoring", "walking-skeleton", "performance-targets"]
+    deliverables: ["legacy-analysis.md", "requirements-validation.md", "modern-architecture.md", "refactor-strategy.md", "migration-plan.md", "performance-report.md"]
     
   component-system:
     name: "Design System & Component Library"
-    agents: ["design-system", "developer", "analyst"]
-    phases: ["design", "implementation", "documentation"]
-    deliverables: ["design-tokens.md", "component-library/", "usage-guide.md"]
+    agents: 
+      - "rag-assistant"
+      - "figma-converter"
+      - "architect"
+      - "developer"
+      - "quality-monitor"
+      - "analyst"
+    phases: ["validation", "design-conversion", "architecture", "implementation", "monitoring", "documentation"]
+    quality_gates: ["design-spec-compliance", "accessibility-requirements", "performance-budgets", "component-testing"]
+    deliverables: ["design-requirements.md", "design-tokens.md", "component-architecture.md", "component-library/", "accessibility-audit.md", "usage-guide.md"]
+    
+  bug-resolution:
+    name: "Scientific Bug Resolution"
+    agents:
+      - "debugger-assistant"
+      - "rag-assistant"
+      - "analyst"
+      - "developer"
+      - "quality-monitor"
+    phases: ["triage", "validation", "analysis", "implementation", "monitoring"]
+    quality_gates: ["bug-reproduction", "spec-compliance", "root-cause-identification", "regression-prevention"]
+    deliverables: ["bug-analysis.md", "hypothesis-testing.md", "fix-implementation/", "regression-tests/", "post-fix-monitoring.md"]
+    
+  legacy-refactoring:
+    name: "Legacy Code Refactoring"
+    agents:
+      - "project-audit"
+      - "rag-assistant"
+      - "refactor-assistant"
+      - "architect"
+      - "developer"
+      - "quality-monitor"
+    phases: ["audit", "validation", "planning", "preparation", "implementation", "monitoring"]
+    quality_gates: ["technical-debt-assessment", "spec-compliance", "refactor-safety", "performance-maintenance"]
+    deliverables: ["refactor-audit.md", "compliance-validation.md", "refactor-plan.md", "safety-analysis.md", "refactored-code/", "quality-improvement.md"]
 
 # Quality Control (Enhanced with handoff protocol)
 quality:
@@ -154,10 +251,10 @@ handoffs:
     checklist: "system/checklists/handoff-checklist.md"
     validation: "implementation-quality"
 
-# CLI Configuration (Enhanced BMAD commands)
+# CLI Configuration (AI Blindspot Prevention Enhanced)
 cli:
   name: "avp"
-  version: "2.0.0"
+  version: "2.1.0"
   
   commands:
     # Core commands
@@ -165,19 +262,38 @@ cli:
     install: "Install prompts in existing project"
     update: "Update existing installation"
     
-    # BMAD-inspired commands  
-    explain: "Show role, phase, dependencies of agent"
-    handoff: "Validate agent-to-agent quality transfer"
+    # AI Blindspot Prevention commands
+    validate-spec: "Validate implementation against documentation/specs"
+    check-blindspots: "Run AI blindspot detection analysis"
+    verify-docs: "Cross-reference code with documentation"
+    gate-check: "Run mandatory quality gate validation"
+    
+    # Enhanced BMAD commands  
+    explain: "Show role, phase, dependencies, capabilities of agent"
+    handoff: "Validate agent-to-agent quality transfer with blindspot checks"
     pack: "Install domain-specific agent toolsets"
     
-    # Workflow commands
-    agents-for: "Find agents by capability or phase"
-    run-workflow: "Execute predefined workflow preset"
-    docs-gen: "Generate agent documentation index"
+    # Scientific debugging commands
+    debug-session: "Start systematic debugging session"
+    hypothesis-test: "Test debugging hypothesis"
+    stop-digging: "Detect and escape debugging loops"
     
-    # Quality commands
+    # Workflow commands
+    agents-for: "Find agents by capability, phase, or blindspot prevention"
+    run-workflow: "Execute predefined workflow preset with quality gates"
+    docs-gen: "Generate agent documentation index"
+    compose-workflow: "Design custom workflow with blindspot prevention"
+    
+    # Quality & monitoring commands
     validate: "Run quality validation for current phase"
-    status: "Show current project state and active agents"
+    status: "Show current project state, active agents, and quality metrics"
+    quality-report: "Generate comprehensive quality assessment"
+    debt-analysis: "Analyze and prioritize technical debt"
+    
+    # Prevention & learning commands
+    learn-patterns: "Analyze past issues to improve blindspot detection"
+    refactor-prep: "Prepare codebase for upcoming changes (Mise en Place)"
+    requirements-check: "Validate requirements clarity and completeness"
 
 # Template Configuration (BMAD-style)
 templates:

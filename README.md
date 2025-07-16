@@ -21,8 +21,12 @@ This collection follows the core principles from "A Philosophy of Software Desig
 ## ✨ Features
 
 - **🤖 Specialized AI Agents** - 10+ domain-specific agents for different development tasks
+- **🧠 AI Blindspot Prevention** - Combat "Read the Docs", "Respect the Spec", and other AI limitations
+- **🛡️ Mandatory Quality Gates** - RAG Assistant validates all implementations against documentation
+- **🔬 Scientific Debugging** - Systematic hypothesis-driven debugging methodology
 - **🔄 Workflow Orchestration** - Multi-agent workflows with quality gates and handoffs
-- **📊 Quality Monitoring** - Real-time metrics and performance tracking
+- **📊 Quality Monitoring** - Real-time metrics and technical debt tracking
+- **🏗️ Preparatory Refactoring** - "Mise en Place" approach to code preparation
 - **🎨 Design System Integration** - Figma-to-code conversion and component libraries
 - **🚀 Project Templates** - Ready-made starters for different project types
 - **📝 Context Engineering** - Smart code analysis and pattern recognition

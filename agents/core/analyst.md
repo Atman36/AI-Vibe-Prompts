@@ -142,6 +142,9 @@ interface CodeQualityMetrics {
 - **Maintainability Factors**: Ease of modification and extension
 - **Integration Quality**: Effectiveness of external service integrations
 
+### Test Case Generation
+- Generate black box test cases based on specifications, including positive, negative, and edge cases.
+
 ## Analysis Workflow
 
 ### Phase 1: Initial Assessment

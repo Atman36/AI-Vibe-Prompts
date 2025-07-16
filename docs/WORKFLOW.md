@@ -70,6 +70,18 @@ graph LR
 - [ ] Security requirements comprehensive
 - [ ] Integration points clearly defined
 
+### Preparatory Refactoring Phase - Refactor Assistant
+
+Analyze and refactor affected code to prepare for implementation.
+
+@agents/helpers/refactor-assistant.md
+"Analyze code affected by the specification from Architect. Perform necessary refactoring to simplify subsequent implementation. Do not add new functionality."
+
+**Quality Gates:**
+- [ ] Codebase prepared for new features
+- [ ] No functionality changes
+- [ ] Tests preserved or enhanced
+
 ### Implementation Phase - Developer Agent
 
 The implementation phase transforms architectural plans into production-ready code with comprehensive testing.

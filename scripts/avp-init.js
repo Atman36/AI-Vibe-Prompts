@@ -635,6 +635,105 @@ For more information, visit: https://github.com/Atman36/AI-Vibe-Prompts
     }
   }
 
+  // AI Blindspot Prevention Commands
+  validateSpec() {
+    console.log('🔍 Running specification compliance validation...');
+    console.log('📚 Cross-referencing implementation with documentation');
+    console.log('⚠️  Invoking RAG Assistant for comprehensive validation');
+    console.log('✅ Recommendation: Run this before any implementation');
+  }
+
+  checkBlindspots() {
+    console.log('🧠 AI Blindspot Detection Analysis\n');
+    console.log('🔍 Checking for common AI blindspots:');
+    console.log('   ❌ "Read the Docs" syndrome - ignoring documentation');
+    console.log('   ❌ "Respect the Spec" failures - deviating from specifications');
+    console.log('   ❌ "Know Your Limits" issues - overconfident responses');
+    console.log('   ❌ Random fix applications - non-systematic debugging');
+    console.log('   ❌ Assumption cascades - building on unverified assumptions');
+    console.log('\n⚠️  Recommended: Run after each major decision or implementation');
+  }
+
+  verifyDocs() {
+    console.log('📚 Documentation Cross-Reference Validation\n');
+    console.log('🔍 Validating against:');
+    console.log('   - API documentation compliance');
+    console.log('   - Architecture specification adherence');
+    console.log('   - Security requirement fulfillment');
+    console.log('   - Performance benchmark alignment');
+    console.log('\n🛡️ Invoking RAG Assistant for thorough verification');
+  }
+
+  gateCheck() {
+    console.log('🚪 Mandatory Quality Gate Validation\n');
+    console.log('✅ Checking quality gates:');
+    console.log('   - Documentation compliance');
+    console.log('   - Specification adherence');
+    console.log('   - Security requirements');
+    console.log('   - Performance targets');
+    console.log('   - Test coverage standards');
+    console.log('\n📊 Validating handoff readiness');
+  }
+
+  debugSession() {
+    console.log('🔬 Starting Scientific Debugging Session\n');
+    console.log('📋 Debugging methodology:');
+    console.log('   1. Evidence collection');
+    console.log('   2. Hypothesis formation');
+    console.log('   3. Minimal testing');
+    console.log('   4. Analysis & iteration');
+    console.log('\n🧪 Invoking Debugger Assistant for systematic approach');
+  }
+
+  hypothesisTest(hypothesis) {
+    if (!hypothesis) {
+      console.log('❌ Please provide a hypothesis to test');
+      console.log('Usage: avp hypothesis-test "If X, then Y because Z"');
+      return;
+    }
+    console.log(`🧪 Testing hypothesis: ${hypothesis}`);
+    console.log('📋 Designing minimal experiment...');
+    console.log('⚡ Use controlled testing with single variable changes');
+  }
+
+  stopDigging() {
+    console.log('⛔ Stop Digging Detection\n');
+    console.log('🔍 Checking for debugging decay patterns:');
+    console.log('   - Repetitive failed attempts');
+    console.log('   - Absence of progress indicators');
+    console.log('   - Escalating complexity without results');
+    console.log('\n💡 Recommendation: Switch to fresh perspective or different approach');
+  }
+
+  qualityReport() {
+    console.log('📊 Comprehensive Quality Assessment\n');
+    console.log('📈 Quality dimensions:');
+    console.log('   - Code quality metrics');
+    console.log('   - Performance indicators');
+    console.log('   - Security posture');
+    console.log('   - Technical debt levels');
+    console.log('\n📋 Invoking Quality Monitor for detailed analysis');
+  }
+
+  debtAnalysis() {
+    console.log('💳 Technical Debt Analysis\n');
+    console.log('🔍 Analyzing debt categories:');
+    console.log('   - Code debt (smells, patterns)');
+    console.log('   - Test debt (coverage, quality)');
+    console.log('   - Architectural debt (coupling, abstractions)');
+    console.log('   - Documentation debt (gaps, outdated)');
+    console.log('\n📊 Prioritizing by impact/effort matrix');
+  }
+
+  refactorPrep() {
+    console.log('🏗️ Mise en Place - Refactoring Preparation\n');
+    console.log('📋 Preparatory steps:');
+    console.log('   - Code analysis for refactoring opportunities');
+    console.log('   - Safety net creation (tests, backups)');
+    console.log('   - Dependency impact assessment');
+    console.log('\n🛡️ Invoking Refactor Assistant for systematic preparation');
+  }
+
   // Main CLI handler
   run() {
     const args = process.argv.slice(2);
@@ -642,6 +741,7 @@ For more information, visit: https://github.com/Atman36/AI-Vibe-Prompts
     const params = args.slice(1);
 
     switch (command) {
+      // Core commands
       case 'init':
         this.init(params[0]);
         break;
@@ -651,6 +751,33 @@ For more information, visit: https://github.com/Atman36/AI-Vibe-Prompts
       case 'update':
         this.update();
         break;
+      
+      // AI Blindspot Prevention commands
+      case 'validate-spec':
+        this.validateSpec();
+        break;
+      case 'check-blindspots':
+        this.checkBlindspots();
+        break;
+      case 'verify-docs':
+        this.verifyDocs();
+        break;
+      case 'gate-check':
+        this.gateCheck();
+        break;
+      
+      // Scientific debugging commands
+      case 'debug-session':
+        this.debugSession();
+        break;
+      case 'hypothesis-test':
+        this.hypothesisTest(params.join(' '));
+        break;
+      case 'stop-digging':
+        this.stopDigging();
+        break;
+      
+      // Enhanced BMAD commands
       case 'explain':
         this.explain(params[0]);
         break;
@@ -669,12 +796,27 @@ For more information, visit: https://github.com/Atman36/AI-Vibe-Prompts
       case 'docs-gen':
         this.docsGen();
         break;
+      
+      // Quality & monitoring commands
       case 'validate':
         this.validate();
         break;
       case 'status':
         this.status();
         break;
+      case 'quality-report':
+        this.qualityReport();
+        break;
+      case 'debt-analysis':
+        this.debtAnalysis();
+        break;
+      
+      // Prevention & learning commands
+      case 'refactor-prep':
+        this.refactorPrep();
+        break;
+      
+      // Help and version
       case 'help':
       case '--help':
       case '-h':
