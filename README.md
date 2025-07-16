@@ -5,299 +5,243 @@
 [![React 19](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 
-A comprehensive **Context Engineering Framework** for AI-assisted development, featuring production-ready prompts optimized for React 19 + Next.js 15 + TypeScript workflows. Built with advanced context management, RAG integration, and state alignment for predictable AI-assisted development.
+> **Agent-Driven Development Framework for Modern Web Applications**
+
+A comprehensive **Context Engineering Framework** for AI-assisted development, featuring specialized AI agents, workflow orchestration, and production-ready prompts optimized for React 19 + Next.js 15 + TypeScript workflows. Built on "A Philosophy of Software Design" principles with advanced context management, RAG integration, and state alignment.
 
 ## 🎯 Philosophy
 
-This collection follows core software engineering principles for building maintainable AI-assisted development systems:
+This collection follows the core principles from "A Philosophy of Software Design":
 
 - **Deep Modules**: Create simple interfaces with powerful implementations
 - **Complexity Management**: Hide implementation details behind clean abstractions  
 - **Strategic Programming**: Invest in good architecture to reduce future complexity
 - **Information Hiding**: Separate what developers need to know from how things work internally
-- **Context Engineering**: Manage AI context and state for predictable, reliable outputs
+
+## ✨ Features
+
+- **🤖 Specialized AI Agents** - 10+ domain-specific agents for different development tasks
+- **🔄 Workflow Orchestration** - Multi-agent workflows with quality gates and handoffs
+- **📊 Quality Monitoring** - Real-time metrics and performance tracking
+- **🎨 Design System Integration** - Figma-to-code conversion and component libraries
+- **🚀 Project Templates** - Ready-made starters for different project types
+- **📝 Context Engineering** - Smart code analysis and pattern recognition
 
 ## 📜 Table of Contents
 - [🎯 Philosophy](#-philosophy)
+- [✨ Features](#-features)
 - [📁 Repository Structure](#-repository-structure)
 - [🧠 Context Engineering](#-context-engineering-add-ons)
 - [🚀 Quick Start](#-quick-start)
-- [🤖 AI Agent System](#-ai-agent-system)
-- [📚 Prompt Catalog](#-prompt-catalog)
+- [🤖 AI Agents](#-ai-agents)
+- [📋 Project Templates](#-project-templates)
+- [🔄 Development Workflow](#-development-workflow)
 - [💡 Best Practices](#-best-practices)
 - [🔧 Customization](#-customization)
-- [📋 Development Workflow](#-development-workflow)
 - [🤝 Contributing](#-contributing)
+- [💰 Support This Project](#-support-this-project)
 
 ## 📁 Repository Structure
 
 ```
-/
-├── core-config.yaml              # 🎯 Central configuration & path management
-├── system/
-│   └── system-prompt.md          # Base rules with context policy
-├── context/                      # 🧠 Context Engineering Modules
-│   ├── task-decompose.md        # Task breakdown & verification
-│   ├── rag-template.md          # Information retrieval & fact-checking
-│   ├── history-summarizer.md    # Conversation compression
-│   └── state-align.md           # Phase management & tool constraints
-├── modes/                        # 🤖 AI Agent Roles (inspired by BMAD-METHOD)
-│   ├── mode-orchestrator.md     # Multi-agent coordinator & handoff manager
-│   ├── mode-architect.md        # Architecture planning agent
-│   ├── mode-developer.md        # Implementation specialist agent
-│   └── mode-analyst.md          # Quality assurance & optimization agent
-├── tasks/
-│   ├── task-init-project.md     # Strategic project initialization
-│   └── task-analyze-project.md  # Project auditing and optimization
-├── tools/
-│   ├── tool-design-system-gen.md # Design system generator
-│   └── tool-figma-importer.md   # Figma-to-React converter
-├── checklists/                   # ✅ Quality Control & Handoff Validation
-│   └── handoff-checklist.md     # Agent-to-agent transition quality gates
-├── docs/
-│   ├── WORKFLOW.md              # Development workflow with Mermaid diagrams
-│   ├── CONTRIBUTING.md          # Contribution guidelines
-│   └── PROMPT_SPEC.md          # Prompt specification standards
-└── _template.prompt.md         # Template for new prompts
+ai-vibe-prompts/
+├── agents/ (USER ENTRY POINT)
+│   ├── core/           # Development workflow agents
+│   │   ├── orchestrator.md    # Multi-agent workflow coordination
+│   │   ├── architect.md       # System design and architecture
+│   │   ├── developer.md       # Code implementation specialist
+│   │   └── analyst.md         # Quality assurance and analysis
+│   ├── project/        # Project lifecycle agents
+│   │   ├── init.md            # Project initialization
+│   │   └── audit.md           # Project auditing and optimization
+│   ├── design/         # UI/UX specialized agents
+│   │   ├── design-system.md   # Design token architecture
+│   │   └── figma-converter.md # Figma to React conversion
+│   └── helpers/        # Utility and analysis agents
+│       ├── rag-assistant.md   # Codebase analysis
+│       ├── workflow-composer.md # Multi-agent workflows
+│       └── quality-monitor.md # Metrics and monitoring
+├── system/ (MINIMAL - delegation only)
+│   ├── system-prompt.md       # Central orchestration
+│   ├── context-helpers.md     # Utility templates
+│   ├── rag-template.md        # Information retrieval
+│   ├── history-summarizer.md  # Conversation compression
+│   ├── state-align.md         # Phase management
+│   └── task-decompose.md      # Task breakdown
+├── templates/          # Ready-made project starters
+│   ├── shadcn-vite/           # Lightweight SPA starter
+│   ├── next-enterprise/       # Enterprise applications
+│   └── t3-stack/              # Full-stack TypeScript
+└── scripts/            # CLI tools and automation
+    └── avp-init.js            # Project initialization CLI
 ```
 
 ## 🧠 Context Engineering Add-Ons
 
-This repository now includes **advanced AI agent coordination** inspired by BMAD-METHOD:
+This repository includes **context engineering modules** that implement advanced AI management techniques:
 
-### 🤖 Multi-Agent System
-- **AI Agent Orchestrator**: Central coordinator managing specialized agent roles and handoffs
-- **Specialized Agents**: Architect, Developer, and Analyst agents with distinct capabilities
-- **Structured Handoffs**: Formal knowledge transfer between agents with quality validation
-- **Quality Gates**: Automated validation checkpoints ensuring deliverable quality
-
-### 🧠 Context Engineering Modules
 - **Task Decomposition**: Break complex tasks into verifiable steps with checkpoints
 - **RAG Integration**: Fact-based generation using retrieved documentation
 - **History Compression**: Intelligent conversation summarization for long sessions
 - **State Alignment**: Phase-based workflow management with tool constraints
 
-### 📋 Quality Control System
-- **Interactive Checklists**: Automated quality validation at each development phase
-- **Handoff Validation**: Ensure context preservation during agent transitions
-- **Performance Monitoring**: Track workflow efficiency and quality metrics
-
-These systems work together to create a **full development lifecycle management** with predictable, efficient, and reliable AI-assisted development.
+These modules work together to create more predictable, efficient, and reliable AI interactions while preventing hallucinations and maintaining context coherence.
 
 ## 🚀 Quick Start
 
-### Option 1: Agent Orchestrator (Recommended)
-**For full workflow management with specialized agents:**
-
-1. **Set Up System Prompt**
-   - Copy content from `system/system-prompt.md` to your AI assistant settings
-   - This establishes the foundation with TypeScript, performance, and quality standards
-
-2. **Initialize Agent Orchestrator**
-   ```
-   @modes/mode-orchestrator.md
-   *status
-   ```
-
-3. **Start Development Workflow**
-   ```
-   *phase planning
-   *architect
-   I need to build a [describe your project]
-   ```
-
-### Option 2: Individual Prompts
-**For specific tasks without full workflow:**
-
-Reference prompts directly using the `@` symbol:
-```
-@tasks/task-init-project.md Create a new SaaS dashboard with authentication
-@tools/tool-design-system-gen.md Generate a design system for a fintech app
-@modes/mode-architect.md Plan the architecture for a real-time chat feature
-```
-
-### Option 3: CLI Installation (Coming Soon)
-**Automated setup with CLI tool:**
+### New Project
 ```bash
-# Install globally
-npm install -g ai-vibe-prompts
+# Create project with AI agents
+npx ai-vibe-prompts create my-app --template=t3-stack
+cd my-app
+npm install
 
-# Initialize in project
-avp-init [target-directory]
+# Start with codebase analysis
+@agents/helpers/rag-assistant.md
 ```
 
-### Option 4: Manual Setup
-1. Copy `system/system-prompt.md` to your AI assistant settings
-2. Copy specific prompt content as needed for individual tasks
-
-## 🤖 AI Agent System
-
-### Multi-Agent Workflow
-AI-Vibe-Prompts now includes a sophisticated agent coordination system inspired by BMAD-METHOD:
-
-#### `modes/mode-orchestrator.md` - Master Coordinator
-**Purpose**: Central agent that manages specialist agents and development workflow  
-**Commands**: `*status`, `*phase [name]`, `*handoff [source] [target]`, `*quality-check`  
-**Key features**:
-- Coordinates multiple specialized AI agents
-- Manages development phase transitions  
-- Ensures quality through automated validation
-- Maintains context across agent handoffs
-
-#### `modes/mode-architect.md` - Architecture Specialist
-**Purpose**: Strategic system design and technology planning  
-**Best for**: Complex system architecture, technology selection, integration planning  
-**Handoff to**: Developer Agent with complete architectural specifications
-
-#### `modes/mode-developer.md` - Implementation Specialist  
-**Purpose**: High-quality code implementation with testing  
-**Best for**: Feature development, code optimization, technical implementation  
-**Receives from**: Architect Agent | **Handoff to**: Analyst Agent
-
-#### `modes/mode-analyst.md` - Quality Assurance Specialist
-**Purpose**: Comprehensive project analysis and optimization  
-**Best for**: Code review, performance analysis, security assessment, optimization  
-**Receives from**: Developer Agent
-
-### Workflow Example
+### Existing Project
 ```bash
-# Start with orchestrator
-@modes/mode-orchestrator.md
-*phase planning
-*architect
+# Add AI agents to existing project
+npx ai-vibe-prompts init
 
-# After architecture phase
-*quality-check
-*handoff architect developer  
-
-# After implementation phase
-*phase review
-*analyst
+# Begin with project analysis
+@agents/helpers/rag-assistant.md
+"Analyze this codebase and provide development recommendations"
 ```
 
-## 📖 Prompt Catalog
+### Set Up System Prompt
+1. Open your AI assistant settings
+2. Navigate to the rules or system prompt section
+3. Copy the entire content from `system/system-prompt.md` and paste it
 
-### 🔧 System Level
+This establishes the foundation with:
+- Deep module design principles
+- TypeScript strict mode configurations
+- Performance and accessibility standards
+- Error prevention strategies
 
-#### `system/system-prompt.md`
-**Purpose**: Base configuration for all AI interactions  
-**When to use**: Always - set this up first in your AI assistant  
-**Key features**:
-- Deep module design principles for maintainable software architecture
-- TypeScript strict mode with comprehensive error prevention
-- React 19 + Next.js 15 + TypeScript patterns
-- Performance optimization guidelines (Core Web Vitals)
-- Accessibility standards (WCAG 2.2 AA)
+## 🤖 AI Agents
 
-### 🎯 Task Automation
+### Core Development Agents
+- **🎯 Orchestrator** - Multi-agent workflow coordination and task distribution
+- **🏗️ Architect** - System design, architecture planning, and technology selection
+- **💻 Developer** - Code implementation, testing, and quality assurance
+- **📊 Analyst** - Performance analysis, security review, and optimization
 
-#### `tasks/task-init-project.md`
-**Purpose**: Strategic project initialization with complexity management  
-**When to use**: Starting new projects from scratch  
-**Key features**:
-- React 19 + Next.js 15 + TypeScript modern stack setup
-- Package versions matrix with compatibility rationale
-- Deep module project structure with clear boundaries  
-- CI/CD pipeline configuration with quality gates
-- Comprehensive documentation template generation
-- Error prevention systems with strict TypeScript validation
+### Project Management Agents
+- **🚀 Project Init** - Project setup, technology stack selection, and scaffolding
+- **🔍 Project Audit** - Comprehensive analysis of existing codebases and tech debt
 
-**Example usage**:
-```
-@tasks/task-init-project.md Create a new e-commerce platform with:
-- User authentication and role management
-- Payment processing integration
-- Admin dashboard with analytics
-- Mobile-responsive design with offline capabilities
-```
+### Design & UI Agents
+- **🎨 Design System** - Component libraries, design tokens, and style guides
+- **🎭 Figma Converter** - Figma designs to production React components
 
-#### `tasks/task-analyze-project.md`
-**Purpose**: Comprehensive project auditing and optimization  
-**When to use**: Analyzing existing codebases for improvements  
-**Key features**:
-- React 19 + Next.js 15 best practices compliance audit
-- Performance optimization with Core Web Vitals focus (INP ≤ 200ms)
-- Design system consistency evaluation
-- Future-proofing assessment with technology evolution roadmap
-- Security vulnerability identification and mitigation strategies
+### Helper & Utility Agents
+- **🧠 RAG Assistant** - Code analysis, pattern recognition, and context extraction
+- **⚙️ Workflow Composer** - Multi-agent workflow creation and optimization
+- **📈 Quality Monitor** - Metrics tracking, performance monitoring, and reporting
 
-**Example usage**:
-```
-@tasks/task-analyze-project.md Audit this web app for:
-- Performance bottlenecks and optimization opportunities
-- Design system compliance across components
-- Security vulnerabilities and best practices gaps
-- Migration readiness for React 19 features
+## 📋 Project Templates
+
+| Template | Best For | Tech Stack |
+|----------|----------|------------|
+| **shadcn-vite** | Marketing sites, SPAs | Vite + React 18 + Tailwind + shadcn/ui |
+| **next-enterprise** | Enterprise applications | Next.js 15 + TypeScript + NextAuth + Prisma |
+| **t3-stack** | Full-stack applications | Next.js + tRPC + Prisma + NextAuth |
+
+## 🔄 Development Workflow
+
+### 1. Project Analysis
+```bash
+@agents/helpers/rag-assistant.md
+"Analyze this codebase and identify the architecture, patterns, and improvement opportunities"
 ```
 
-### 🛠️ Specialized Tools
-
-#### `tools/tool-design-system-gen.md`
-**Purpose**: Generate comprehensive design systems with deep module architecture  
-**When to use**: Creating or standardizing design systems  
-**Key features**:
-- Three-layer token architecture (Primitive → Semantic → Component)
-- OKLCH color space with perceptual uniformity and wide gamut support
-- TypeScript definitions for design tokens and component interfaces
-- Accessibility compliance with WCAG 2.2 AA standards built-in
-- Integration with Tailwind CSS v4 and modern CSS features
-
-**Example usage**:
-```
-@tools/tool-design-system-gen.md Generate design system for fintech app:
-- OKLCH color palette with professional blue/green theme
-- Typography scale optimized for data-heavy interfaces  
-- Component library with security-focused interaction patterns
+### 2. Feature Planning
+```bash
+@agents/core/architect.md
+"Design a user authentication system with social login and role-based permissions"
 ```
 
-#### `tools/tool-figma-importer.md`
-**Purpose**: Transform Figma exports into production-ready React components  
-**When to use**: Converting design files to code  
-**Key features**:
-- Six-phase post-processing checklist for comprehensive code transformation
-- Design system integration with automatic token mapping
-- Accessibility implementation with WCAG 2.2 AA compliance
-- Performance optimization with React 19 patterns and lazy loading
-- Quality assurance standards for maintainable component architecture
-
-**Example usage**:
-```
-@tools/tool-figma-importer.md Transform this Figma design:
-- Convert landing page layouts to responsive React components
-- Integrate with existing design system tokens
-- Ensure accessibility and performance optimization
-- Add TypeScript interfaces and proper state management
+### 3. Implementation
+```bash
+@agents/core/developer.md
+"Implement the authentication system according to the architect's specifications"
 ```
 
-### 🏗️ Architecture & Planning
-
-#### `modes/mode-architect.md`
-**Purpose**: Strategic architecture planning with complexity management  
-**When to use**: Planning complex features or system architecture  
-**Key features**:
-- Token management with context optimization (≤ 80% usage)
-- Structured output template with 8-step planning process
-- Risk assessment and mitigation strategies
-- Technology selection with clear rationale and trade-offs
-- Compliance enforcement with Core Development Principles
-
-**Example usage**:
+### 4. Quality Assurance
+```bash
+@agents/core/analyst.md
+"Review the implementation for security, performance, and best practices"
 ```
-@modes/mode-architect.md Plan architecture for real-time collaboration feature:
-- WebSocket integration with React 19 Server Components
-- Conflict resolution algorithms for concurrent editing
-- Offline-first design with sync capabilities
-- Scalable backend with microservices architecture
+
+## 🎯 Usage Examples
+
+### Creating a Design System
+```bash
+# Step 1: Design system foundation
+@agents/design/design-system.md
+"Create a comprehensive design system with tokens, components, and documentation for a SaaS dashboard"
+
+# Step 2: Implement components
+@agents/core/developer.md
+"Implement the design system components with TypeScript and accessibility features"
 ```
+
+### Converting Figma to Code
+```bash
+# Convert Figma designs to React components
+@agents/design/figma-converter.md
+"Convert this Figma dashboard design to responsive React components with proper TypeScript definitions"
+```
+
+### Complex Feature Development
+```bash
+# Use workflow composer for multi-step features
+@agents/helpers/workflow-composer.md
+"Create a workflow for adding real-time chat functionality to our SaaS application"
+```
+
+### Project Modernization
+```bash
+# Audit existing project
+@agents/project/audit.md
+"Analyze this legacy React project and provide a modernization roadmap"
+
+# Plan migration
+@agents/core/architect.md
+"Design a migration strategy from the legacy system to modern React 19 + Next.js 15"
+```
+
+## 📊 Quality Standards
+
+AI-Vibe-Prompts enforces enterprise-grade quality standards:
+
+### Performance
+- ⚡ Core Web Vitals: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1
+- 📦 Bundle optimization and code splitting
+- 🖼️ Image optimization and lazy loading
+
+### Accessibility
+- ♿ WCAG 2.2 AA compliance
+- 🎹 Keyboard navigation
+- 📱 Screen reader compatibility
+
+### Code Quality
+- 🔍 TypeScript strict mode
+- 🧪 Test coverage ≥ 85%
+- 📏 ESLint + Prettier configuration
+- 🔒 Security best practices
 
 ## 💡 Best Practices
 
 ### Prompt Combination Strategies
 
-1. **Start with Architecture**: Use `mode-architect.mdc` to plan before coding
-2. **Initialize with Strategy**: Use `task-init-project.mdc` for new projects
-3. **Maintain Design Consistency**: Reference `tool-design-system-gen.mdc` regularly
-4. **Optimize Continuously**: Use `task-analyze-project.mdc` for regular audits
+1. **Start with Architecture**: Use `agents/core/architect.md` to plan before coding
+2. **Initialize with Strategy**: Use `agents/project/init.md` for new projects
+3. **Maintain Design Consistency**: Reference `agents/design/design-system.md` regularly
+4. **Optimize Continuously**: Use `agents/project/audit.md` for regular audits
 
 ### Example Workflow: Building a Dashboard Feature
 
@@ -306,55 +250,56 @@ Follow this structured approach using context engineering:
 #### 1. **Strategic Planning Phase**
 ```bash
 # Set planning phase and decompose the task
-@context/state-align.md current_phase="planning"
-@context/task-decompose.md goal="Build user dashboard with real-time widgets"
-@modes/mode-architect.md Plan dashboard architecture and data flow
+@system/state-align.md current_phase="planning"
+@system/task-decompose.md goal="Build user dashboard with real-time widgets"
+@agents/core/architect.md Plan dashboard architecture and data flow
 ```
 
 #### 2. **Knowledge Gathering Phase**  
 ```bash
 # Retrieve relevant documentation and patterns
-@context/rag-template.md query="React 19 dashboard components best practices"
-@context/rag-template.md query="Next.js 15 real-time data fetching patterns"
+@system/rag-template.md query="React 19 dashboard components best practices"
+@system/rag-template.md query="Next.js 15 real-time data fetching patterns"
 ```
 
 #### 3. **Design System Phase**
 ```bash
 # Generate design components with context
-@context/state-align.md current_phase="design"
-@tools/tool-design-system-gen.md Create dashboard design system with widgets
+@system/state-align.md current_phase="design"
+@agents/design/design-system.md Create dashboard design system with widgets
 ```
 
 #### 4. **Implementation Phase**
 ```bash
 # Code with phase constraints and verification
-@context/state-align.md current_phase="implementation"
-# System prompt guides implementation automatically
-# Built-in verification ensures quality at each step
+@system/state-align.md current_phase="implementation"
+@agents/core/developer.md Implement dashboard components
 ```
 
 #### 5. **Review & Optimization Phase**
 ```bash
 # Compress history and conduct thorough analysis
-@context/history-summarizer.md compression_level="medium"
-@context/state-align.md current_phase="review"
-@tasks/task-analyze-project.md Audit dashboard for performance and accessibility
+@system/history-summarizer.md compression_level="medium"
+@system/state-align.md current_phase="review"
+@agents/project/audit.md Audit dashboard for performance and accessibility
 ```
 
 **Result**: Predictable, high-quality implementation with maintained context and verified outcomes.
 
 ## 🧭 Guide Usage
 
-### When to Use Each Prompt Category
+### When to Use Each Agent Category
 
-| Situation | Use This Prompt | Purpose |
+| Situation | Use This Agent | Purpose |
 |-----------|----------------|---------|
 | **Setting up AI assistant** | `system/system-prompt.md` | Establish base rules and philosophy |
-| **Starting new project** | `tasks/task-init-project.md` | Strategic project initialization with modern stack |
-| **Auditing existing project** | `tasks/task-analyze-project.md` | Comprehensive analysis and optimization recommendations |
-| **Creating design system** | `tools/tool-design-system-gen.md` | Generate design tokens and component specifications |
-| **Converting Figma designs** | `tools/tool-figma-importer.md` | Transform design exports into production React |
-| **Planning complex features** | `modes/mode-architect.md` | Strategic architecture and system design |
+| **Starting new project** | `agents/project/init.md` | Strategic project initialization with modern stack |
+| **Auditing existing project** | `agents/project/audit.md` | Comprehensive analysis and optimization recommendations |
+| **Creating design system** | `agents/design/design-system.md` | Generate design tokens and component specifications |
+| **Converting Figma designs** | `agents/design/figma-converter.md` | Transform design exports into production React |
+| **Planning complex features** | `agents/core/architect.md` | Strategic architecture and system design |
+| **Code implementation** | `agents/core/developer.md` | Implementation with quality assurance |
+| **Quality analysis** | `agents/core/analyst.md` | Performance and security review |
 
 ### Context Engineering Workflow
 
@@ -362,55 +307,27 @@ For advanced AI management, combine system prompts with context modules:
 
 ```
 1. Start with system/system-prompt.md (always active)
-2. For complex tasks: @context/task-decompose.md
-3. For information retrieval: @context/rag-template.md  
-4. For long sessions: @context/history-summarizer.md
-5. For workflow management: @context/state-align.md
-```
-
-### Example Usage Patterns
-
-**Project Initialization**:
-```
-@tasks/task-init-project.md Create a SaaS dashboard with:
-- User authentication and role management
-- Real-time notifications
-- Payment processing integration
-- Mobile-responsive design
-```
-
-**Design System Creation**:
-```
-@tools/tool-design-system-gen.md Generate design system for fintech app:
-- OKLCH color palette with dark mode
-- Typography scale for data-heavy interfaces  
-- Component library with accessibility focus
-```
-
-**Architecture Planning**:
-```
-@modes/mode-architect.md Plan architecture for real-time chat feature:
-- WebSocket integration
-- Message persistence
-- File sharing capabilities
-- Mobile app synchronization
+2. For complex tasks: @system/task-decompose.md
+3. For information retrieval: @system/rag-template.md  
+4. For long sessions: @system/history-summarizer.md
+5. For workflow management: @system/state-align.md
 ```
 
 ## 🔧 Customization
 
-### Adding Your Own Prompts
+### Adding Your Own Agents
 
-1. **Follow the YAML structure**:
+1. **Follow the agent structure**:
 ```yaml
 ---
-name: Your Prompt Name
+name: Your Agent Name
 description: Brief description of what it does
 model: universal
 version: 1.0.0
-category: tasks|tools|modes|system
-variables: []
+category: core|project|design|helpers
+specialization: specific domain
 ---
-Your prompt content here...
+Your agent content here...
 ```
 
 2. **Apply deep module principles**:
@@ -420,28 +337,65 @@ Your prompt content here...
    - Error prevention built-in
 
 3. **Place in appropriate folder**:
-   - `system/` - Core configuration
-   - `tasks/` - Automated workflows
-   - `tools/` - Specific utilities
-   - `modes/` - Role-based behavior
+   - `agents/core/` - Core development workflow
+   - `agents/project/` - Project lifecycle management
+   - `agents/design/` - UI/UX specialization
+   - `agents/helpers/` - Utility and analysis
 
-### Extending Existing Prompts
+### Extending Existing Agents
 
-Fork this repository and modify prompts to match your:
+Fork this repository and modify agents to match your:
 - Technology preferences
 - Design system requirements
 - Team coding standards
 - Project-specific needs
 
+## 🛠️ CLI Commands
+
+```bash
+# Project creation
+npx ai-vibe-prompts create <name> --template=<template>
+
+# Add to existing project
+npx ai-vibe-prompts init [directory]
+
+# List available resources
+npx ai-vibe-prompts list-templates
+npx ai-vibe-prompts list-agents
+
+# Help and documentation
+npx ai-vibe-prompts help
+```
+
+## 🌟 Key Benefits
+
+### For Individual Developers
+- **Faster Development** - AI agents accelerate coding with context-aware assistance
+- **Better Code Quality** - Built-in quality gates and best practices enforcement
+- **Learning Tool** - Learn modern patterns and architectural decisions
+- **Consistency** - Standardized approaches across all projects
+
+### For Teams
+- **Workflow Standardization** - Consistent development processes
+- **Knowledge Sharing** - Capture and reuse architectural decisions
+- **Quality Assurance** - Automated quality checks and monitoring
+- **Onboarding** - New team members get up to speed faster
+
+### For Projects
+- **Modern Stack** - React 19, Next.js 15, TypeScript best practices
+- **Performance First** - Core Web Vitals optimization built-in
+- **Accessibility** - WCAG 2.2 AA compliance by default
+- **Security** - Security best practices and vulnerability detection
+
 ## 🎓 Learning Resources
 
-### Software Engineering Principles Applied
+### "A Philosophy of Software Design" Concepts Applied
 
-- **Strategic Programming**: Our system prompt emphasizes thoughtful architecture decisions
-- **Deep Modules**: Component design follows simple interface, complex implementation patterns
-- **Information Hiding**: Configuration abstraction in project initialization workflows
-- **General-Purpose Design**: Design system components are built for maximum reuse
-- **Error Prevention**: TypeScript strict mode and validation schemas eliminate common mistakes
+- **Chapter 3 (Working Code Isn't Enough)**: Our system prompt emphasizes strategic programming
+- **Chapter 4 (Modules Should Be Deep)**: Component design follows simple interface, complex implementation
+- **Chapter 5 (Information Hiding)**: Configuration abstraction in project initialization
+- **Chapter 6 (General-Purpose Modules)**: Design system components are built for reuse
+- **Chapter 10 (Define Errors Out of Existence)**: TypeScript strict mode and validation schemas
 
 ### Modern Web Development Stack
 
@@ -452,20 +406,10 @@ Fork this repository and modify prompts to match your:
 - **Cursor AI**: AI-powered development with intelligent code completion
 - **Figma**: Design systems, component specs, design-to-code workflows
 
-## 📋 Development Workflow
-
-For a complete understanding of the agent-based development workflow, see **[docs/WORKFLOW.md](docs/WORKFLOW.md)** which includes:
-
-- **Mermaid Diagrams**: Visual representation of the development process
-- **Phase Breakdown**: Detailed explanation of Planning → Implementation → Review cycles
-- **Agent Handoff Protocols**: How agents transfer knowledge and maintain context
-- **Quality Gates**: Validation checkpoints ensuring deliverable quality
-- **Usage Examples**: Practical examples of agent coordination commands
-
-## 💡 Best Practices from Community Research
+## 💡 Advanced Features from Community Research
 
 ### Safety & Refusal Patterns
-Our prompts incorporate safety principles from leading AI research:
+Our agents incorporate safety principles from leading AI research:
 - **Factual accuracy**: Built-in fact-checking and verification patterns
 - **Bias prevention**: Explicit instructions for inclusive, unbiased responses  
 - **Error boundaries**: Clear guidelines for handling edge cases and limitations
@@ -473,7 +417,7 @@ Our prompts incorporate safety principles from leading AI research:
 
 ### Advanced Prompting Techniques
 - **Chain-of-Thought**: Step-by-step reasoning for complex architectural decisions
-- **Few-Shot Learning**: Examples and patterns embedded in prompt design
+- **Few-Shot Learning**: Examples and patterns embedded in agent design
 - **Meta-Language**: Custom command structures for efficient AI interaction
 - **Context Engineering**: Advanced memory management and state alignment
 
@@ -481,14 +425,22 @@ Our prompts incorporate safety principles from leading AI research:
 - Direct and professional communication - no filler or apologetic language
 - Focus on actionable outcomes rather than theoretical discussions  
 - Concrete examples and code snippets when beneficial
-- Clear delegation to specialized prompts when appropriate
+- Clear delegation to specialized agents when appropriate
 
 ## 🤝 Contributing
 
-1. **Follow the philosophy**: Ensure new prompts reduce complexity rather than add it
-2. **Test thoroughly**: Verify prompts work with current AI assistants
-3. **Document clearly**: Explain the purpose and usage of new prompts
-4. **Maintain consistency**: Follow the established YAML structure and naming conventions
+1. **Follow the philosophy**: Ensure new agents reduce complexity rather than add it
+2. **Test thoroughly**: Verify agents work with current AI assistants
+3. **Document clearly**: Explain the purpose and usage of new agents
+4. **Maintain consistency**: Follow the established structure and naming conventions
+
+### Development Setup
+```bash
+git clone https://github.com/Atman36/AI-Vibe-Prompts.git
+cd AI-Vibe-Prompts
+npm install
+npm run dev
+```
 
 ## 💰 Support This Project
 
@@ -502,14 +454,25 @@ If these prompts save you time and improve your development workflow, consider s
 ### Other Ways to Support
 - ⭐ Star this repository
 - 🐛 Report issues and bugs
-- 💡 Suggest new prompt ideas
+- 💡 Suggest new agent ideas
 - 🔄 Share with your development team
 - 📝 Contribute improvements and documentation
 
 ## 📄 License
 
-MIT License - feel free to use these prompts in your projects and modify them to fit your needs.
+MIT License - feel free to use these agents in your projects and modify them to fit your needs.
+
+## 🔗 Links
+
+- **[GitHub Repository](https://github.com/Atman36/AI-Vibe-Prompts)**
+- **[Documentation](https://github.com/Atman36/AI-Vibe-Prompts/wiki)**
+- **[Issues & Support](https://github.com/Atman36/AI-Vibe-Prompts/issues)**
+- **[Discussions](https://github.com/Atman36/AI-Vibe-Prompts/discussions)**
 
 ---
 
-**Remember**: The goal is to create software that gets easier to work with over time, not harder. These prompts are designed to help you build systems that reduce cognitive load and manage complexity effectively.
+**Built with ❤️ for the modern web development community**
+
+**Remember**: The goal is to create software that gets easier to work with over time, not harder. These agents are designed to help you build systems that reduce cognitive load and manage complexity effectively.
+
+*Inspired by BMAD-METHOD's agent coordination principles and focused on React/Next.js development excellence.*
