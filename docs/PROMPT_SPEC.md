@@ -165,12 +165,36 @@ Always provide:
 - Avoid jargon without explanation
 
 ### Code Examples
-```markdown
+
+- Provide concrete code snippets, especially when dealing with external APIs or custom frameworks.
+- Always include language specification for code blocks.
+
 ```typescript
 // Good: Include language specification
 interface ExampleInterface {
   property: string;
 }
+```
+
+### Pseudocode Instructions
+
+- Use pseudocode for complex logic to provide clear, step-by-step guidance before full implementation.
+
+### XML Tagged Instructions
+
+- For detailed multi-step instructions to a coding agent, wrap the entire set of instructions within `<instructions>` and `</instructions>` XML tags.
+
+```xml
+<instructions>
+  <step number="1">
+    <description>Initialize a new Node.js project.</description>
+    <code>npm init -y</code>
+  </step>
+  <step number="2">
+    <description>Install Express.js.</description>
+    <code>npm install express</code>
+  </step>
+</instructions>
 ```
 
 ### Brand Neutrality
