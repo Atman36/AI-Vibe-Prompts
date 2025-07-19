@@ -20,13 +20,15 @@ This collection follows the core principles from "A Philosophy of Software Desig
 
 ## ✨ Features
 
-- **🤖 Specialized AI Agents** - 10+ domain-specific agents for different development tasks
-- **🧠 AI Blindspot Prevention** - Combat "Read the Docs", "Respect the Spec", and other AI limitations
-- **🛡️ Mandatory Quality Gates** - RAG Assistant validates all implementations against documentation
-- **🔬 Scientific Debugging** - Systematic hypothesis-driven debugging methodology
-- **🔄 Workflow Orchestration** - Multi-agent workflows with quality gates and handoffs
+- **🤖 Specialized AI Agents** - 13+ domain-specific agents for different development tasks
+- **🧠 AI Blindspot Prevention** - Combat "Stop Digging", "Read the Docs", "Bulldozer Method" and 15+ other AI limitations
+- **🛡️ Mandatory Quality Gates** - Enhanced RAG Assistant validates all implementations against documentation
+- **🔬 Scientific Debugging** - Systematic hypothesis-driven debugging methodology with DebuggerAssistant
+- **🏗️ Preparatory Refactoring** - "Mise en Place" approach with dedicated RefactorAssistant
+- **🎯 Requirements-First Development** - Focus on "what" and "why" before jumping to "how"
+- **🚶 Walking Skeleton Architecture** - Minimal end-to-end prototypes to validate integrations early
+- **🔄 Workflow Orchestration** - Multi-agent workflows with AI blindspot detection and handoffs
 - **📊 Quality Monitoring** - Real-time metrics and technical debt tracking
-- **🏗️ Preparatory Refactoring** - "Mise en Place" approach to code preparation
 - **🎨 Design System Integration** - Figma-to-code conversion and component libraries
 - **🚀 Project Templates** - Ready-made starters for different project types
 - **📝 Context Engineering** - Smart code analysis and pattern recognition
@@ -142,9 +144,26 @@ This establishes the foundation with:
 - **🎭 Figma Converter** - Figma designs to production React components
 
 ### Helper & Utility Agents
-- **🧠 RAG Assistant** - Code analysis, pattern recognition, and context extraction
+- **🧠 RAG Assistant** - Enhanced quality gateway with spec validation and documentation verification
+- **🔧 Refactor Assistant** - Preparatory refactoring and "Mise en Place" code preparation
+- **🔬 Debugger Assistant** - Scientific debugging with hypothesis-driven methodology
 - **⚙️ Workflow Composer** - Multi-agent workflow creation and optimization
 - **📈 Quality Monitor** - Metrics tracking, performance monitoring, and reporting
+
+### 🧠 AI Blindspot Protection
+
+Our system actively combats common AI limitations identified in [AI Blindspots research](https://ezyang.github.io/ai-blindspots/):
+
+| Blindspot | Protection Mechanism | Implementation |
+|-----------|---------------------|----------------|
+| **Stop Digging** | Orchestrator monitors agent effectiveness | Auto-halt after 3 failed cycles |
+| **Preparatory Refactoring** | Dedicated RefactorAssistant | Mandatory code prep before features |
+| **Requirements vs Solutions** | Requirements-first validation | Block solution-first approaches |
+| **Walking Skeleton** | Architect enforces minimal prototypes | End-to-end validation priority |
+| **Black Box Testing** | Analyst generates spec-based tests | Test from requirements, not code |
+| **Scientific Debugging** | DebuggerAssistant methodology | Hypothesis → Experiment → Conclusion |
+| **Read the Docs** | RAG Assistant as quality gate | Mandatory documentation validation |
+| **Know Your Limits** | Explicit uncertainty handling | Agents acknowledge limitations |
 
 ## 📋 Project Templates
 

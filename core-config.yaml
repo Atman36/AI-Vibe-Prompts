@@ -75,14 +75,13 @@ agents:
     invokable_by: ["orchestrator", "user"]
     dependencies: ["rag-assistant", "quality-monitor"]
     
-      developer:
+  developer:
     name: "AI Developer"
     file: "agents/core/developer.md"
     capabilities: ["implementation", "coding", "testing", "mise-en-place"]
     phase: "implementation"
     invokable_by: ["orchestrator", "architect"]
-    dependencies: ["architect", "rag-assistant", "refactor-assistant"]
-    dependencies: ["architecture", "design-specs"]
+    dependencies: ["architecture", "design-specs", "rag-assistant", "refactor-assistant"]
     
   analyst:
     name: "Project Analyst"
