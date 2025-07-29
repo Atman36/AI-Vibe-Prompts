@@ -4,6 +4,10 @@ description: Specialized agent for code implementation and technical development
 model: universal
 version: 1.0.0
 category: modes
+status: active
+metrics:
+  - code_commit_frequency
+  - feature_completion_times
 dependencies:
   - core-config.yaml
   - context/state-align.md

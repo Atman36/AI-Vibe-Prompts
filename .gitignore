@@ -1,1 +1,8 @@
+# Ignored files
 .DS_Store
+.kiro/
+.vscode/
+all_files_combined.md
+anlz.md
+merge.py
+system/prompt-assist.md

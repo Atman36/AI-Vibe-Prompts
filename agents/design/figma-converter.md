@@ -8,6 +8,10 @@ dependencies: ["figma-exports", "design-system", "component-standards"]
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "design"
 version: "2.0.0"
+status: active
+metrics:
+  - figma_to_code_accuracy
+  - generated_component_performance
 ---
 
 # Figma Converter

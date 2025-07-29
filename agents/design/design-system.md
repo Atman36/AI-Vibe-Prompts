@@ -7,6 +7,10 @@ category: agents
 agent_type: design
 capabilities: ["design_tokens", "component_library", "accessibility", "documentation"]
 delegates_to: ["figma-converter", "developer", "quality-monitor"]
+status: active
+metrics:
+  - design_token_coverage
+  - component_adoption_rate
 ---
 
 # Design System Agent

@@ -9,6 +9,10 @@ phase: "orchestration"
 complexity_level: "high"
 handoff_protocol: "workflow_gates"
 exit_criteria: ["workflow_completed", "quality_validated", "handoffs_successful"]
+status: active
+metrics:
+  - workflow_creation_time
+  - agent_coordination_errors
 ---
 
 # 🎼 Workflow Composer

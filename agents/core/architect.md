@@ -7,6 +7,10 @@ invokable_by: ["orchestrator", "user"]
 dependencies: ["requirements", "analysis", "project-context"]
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "core"
+status: active
+metrics:
+  - architectural_decision_records_created
+  - design_pattern_adherence
 version: "2.0.0"
 ---
 

@@ -8,6 +8,10 @@ dependencies: ["project-codebase", "performance-data", "security-requirements"]
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "project"
 version: "2.0.0"
+status: active
+metrics:
+  - technical_debt_score
+  - security_vulnerabilities_found
 ---
 
 # Project Auditor

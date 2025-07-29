@@ -9,6 +9,10 @@ phase: "continuous"
 complexity_level: "moderate"
 handoff_protocol: "quality_gates"
 exit_criteria: ["documentation_validated", "spec_compliance_verified", "context_complete"]
+status: active
+metrics:
+  - context_retrieval_accuracy
+  - outdated_documentation_found
 ---
 
 # 📚 RAG Assistant - Enhanced Quality Gateway

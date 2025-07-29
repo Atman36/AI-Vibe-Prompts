@@ -8,6 +8,10 @@ dependencies: ["requirements", "tech-preferences"]
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "project"
 version: "2.0.0"
+status: active
+metrics:
+  - project_setup_time
+  - initial_config_errors
 ---
 
 # Project Initializer

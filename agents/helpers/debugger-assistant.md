@@ -9,6 +9,10 @@ phase: "debug"
 complexity_level: "moderate"
 handoff_protocol: "quality_gates"
 exit_criteria: ["bug_identified", "fix_validated", "tests_added"]
+status: active
+metrics:
+  - time_to_root_cause
+  - bug_recurrence_rate
 ---
 
 # 🔬 Debugger Assistant

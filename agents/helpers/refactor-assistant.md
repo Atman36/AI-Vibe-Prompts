@@ -8,6 +8,10 @@ dependencies: ["existing-codebase", "feature-specifications"]
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "helpers"
 version: "1.0.0"
+status: active
+metrics:
+  - cyclomatic_complexity_reduction
+  - code_duplication_percentage
 ---
 
 # Refactor Assistant

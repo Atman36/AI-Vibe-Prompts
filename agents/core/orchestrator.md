@@ -10,6 +10,10 @@ dependencies:
   - "system/state-align.md"
 handoff_reference: "system/checklists/handoff-checklist.md"
 category: "core"
+status: active
+metrics:
+  - workflow_success_rate
+  - task_handoff_efficiency
 version: "2.0.0"
 ---
 

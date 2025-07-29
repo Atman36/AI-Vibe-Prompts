@@ -55,11 +55,27 @@ ai-vibe-prompts/
 │   ├── core/           # Development workflow agents
 │   │   ├── orchestrator.md    # Multi-agent workflow coordination
 │   │   ├── architect.md       # System design and architecture
-│   │   ├── developer.md       # Code implementation specialist
+│   │   ├── developer.md       # Generalist developer, delegates to specialists
+│   │   └── developer/         # Developer specialists
+│   │       ├── frontend.md    # React 19, Next.js 15
+│   │       ├── backend.md     # Next.js API, Prisma
+│   │       └── testing.md     # Vitest, Playwright
 │   │   └── analyst.md         # Quality assurance and analysis
 │   ├── project/        # Project lifecycle agents
 │   │   ├── init.md            # Project initialization
 │   │   └── audit.md           # Project auditing and optimization
+│   ├── strategy/        # Product strategy agents
+│   │   └── product-strategist.md # Defines value & success metrics
+│   ├── coaching/        # Productivity & focus agents
+│   │   └── focus-driver.md # Deep-work planning & morale
+│   ├── product/         # Product lifecycle agents
+│   │   └── user-researcher.md # User research and persona development
+│   ├── marketing/       # Growth and marketing agents
+│   │   └── content-creator.md # SEO & marketing copy
+│   ├── testing/         # QA and testing agents
+│   │   └── performance-tester.md # Load and performance testing
+│   └── operations/      # Infrastructure and ops agents
+│       └── deployment-specialist.md # CI/CD and deployment automation
 │   ├── design/         # UI/UX specialized agents
 │   │   ├── design-system.md   # Design token architecture
 │   │   └── figma-converter.md # Figma to React conversion
@@ -129,15 +145,38 @@ This establishes the foundation with:
 
 ## 🤖 AI Agents
 
+With a growing team of specialized agents, it can be hard to know who to call. Check out our **[📖 Agent Selection Guide](docs/agent-selection-guide.md)** to find the right expert for your task.
+
 ### Core Development Agents
 - **🎯 Orchestrator** - Multi-agent workflow coordination and task distribution
 - **🏗️ Architect** - System design, architecture planning, and technology selection
-- **💻 Developer** - Code implementation, testing, and quality assurance
+- **💻 Developer** - A generalist agent that coordinates with specialists for code implementation.
+  - **Frontend Specialist**: Builds UIs with React 19 & Next.js 15.
+  - **Backend Specialist**: Creates APIs with Next.js & Prisma.
+  - **Testing Specialist**: Ensures quality with Vitest & Playwright.
 - **📊 Analyst** - Performance analysis, security review, and optimization
 
 ### Project Management Agents
 - **🚀 Project Init** - Project setup, technology stack selection, and scaffolding
 - **🔍 Project Audit** - Comprehensive analysis of existing codebases and tech debt
+
+### Strategy Agents
+- **📈 Product Strategist** - Define feature value, KPIs, user stories
+
+### Marketing Agents
+- **✍️ Content Creator** - Creates engaging blog posts, social media copy, and landing pages.
+
+### Product Agents
+- **🕵️ User Researcher** - Identifies user needs, pain points, and behaviors.
+
+### Coaching & Productivity Agents
+- **🧘 Focus Driver** - Deep-work planning, energy management, distraction mitigation
+
+### Testing Agents
+- **⏱️ Performance Tester** - Identifies performance bottlenecks with Lighthouse and load testing.
+
+### Operations Agents
+- **⚙️ Deployment Specialist** - Manages CI/CD pipelines, IaC, and automated deployments.
 
 ### Design & UI Agents
 - **🎨 Design System** - Component libraries, design tokens, and style guides

@@ -9,6 +9,10 @@ phase: "continuous"
 complexity_level: "moderate"
 handoff_protocol: "quality_gates"
 exit_criteria: ["metrics_stable", "quality_gates_passing", "recommendations_delivered"]
+status: active
+metrics:
+  - code_coverage_percentage
+  - critical_lint_errors
 ---
 
 # 📊 Quality Monitor
