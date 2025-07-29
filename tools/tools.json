@@ -3,22 +3,10 @@
     "type": "function",
     "function": {
       "name": "message_notify_user",
-      "description": "Send a message to user without requiring a response. Use for acknowledging receipt of messages, providing progress updates, reporting task completion, or explaining changes in approach.",
+      "description": "Send a non-blocking message to the user for progress updates or completion notices.",
       "parameters": {
         "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "Message text to display to user"
-          },
-          "attachments": {
-            "anyOf": [
-              {"type": "string"},
-              {"items": {"type": "string"}, "type": "array"}
-            ],
-            "description": "(Optional) List of attachments to show to user, can be file paths or URLs"
-          }
-        },
+        "properties": { "text": { "type": "string", "description": "Message to display." } },
         "required": ["text"]
       }
     }
@@ -27,27 +15,10 @@
     "type": "function",
     "function": {
       "name": "message_ask_user",
-      "description": "Ask user a question and wait for response. Use for requesting clarification, asking for confirmation, or gathering additional information.",
+      "description": "Ask the user a question and wait for a response.",
       "parameters": {
         "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "description": "Question text to present to user"
-          },
-          "attachments": {
-            "anyOf": [
-              {"type": "string"},
-              {"items": {"type": "string"}, "type": "array"}
-            ],
-            "description": "(Optional) List of question-related files or reference materials"
-          },
-          "suggest_user_takeover": {
-            "type": "string",
-            "enum": ["none", "browser"],
-            "description": "(Optional) Suggested operation for user takeover"
-          }
-        },
+        "properties": { "text": { "type": "string", "description": "Question to ask." } },
         "required": ["text"]
       }
     }
@@ -56,28 +27,11 @@
     "type": "function",
     "function": {
       "name": "file_read",
-      "description": "Read file content. Use for checking file contents, analyzing logs, or reading configuration files.",
+      "description": "Read the full content of a specified file.",
       "parameters": {
         "type": "object",
-        "properties": {
-          "file": {
-            "type": "string",
-            "description": "Absolute path of the file to read"
-          },
-          "start_line": {
-            "type": "integer",
-            "description": "(Optional) Starting line to read from, 0-based"
-          },
-          "end_line": {
-            "type": "integer",
-            "description": "(Optional) Ending line number (exclusive)"
-          },
-          "sudo": {
-            "type": "boolean",
-            "description": "(Optional) Whether to use sudo privileges"
-          }
-        },
-        "required": ["file"]
+        "properties": { "file_path": { "type": "string", "description": "The absolute path of the file to read." } },
+        "required": ["file_path"]
       }
     }
   },
@@ -85,36 +39,14 @@
     "type": "function",
     "function": {
       "name": "file_write",
-      "description": "Overwrite or append content to a file. Use for creating new files, appending content, or modifying existing files.",
+      "description": "Create a new file or completely overwrite an existing file with new content.",
       "parameters": {
         "type": "object",
         "properties": {
-          "file": {
-            "type": "string",
-            "description": "Absolute path of the file to write to"
-          },
-          "content": {
-            "type": "string",
-            "description": "Text content to write"
-          },
-          "append": {
-            "type": "boolean",
-            "description": "(Optional) Whether to use append mode"
-          },
-          "leading_newline": {
-            "type": "boolean",
-            "description": "(Optional) Whether to add a leading newline"
-          },
-          "trailing_newline": {
-            "type": "boolean",
-            "description": "(Optional) Whether to add a trailing newline"
-          },
-          "sudo": {
-            "type": "boolean",
-            "description": "(Optional) Whether to use sudo privileges"
-          }
+          "file_path": { "type": "string", "description": "The absolute path of the file to write to." },
+          "content": { "type": "string", "description": "The new content for the file." }
         },
-        "required": ["file", "content"]
+        "required": ["file_path", "content"]
       }
     }
   },
@@ -122,95 +54,14 @@
     "type": "function",
     "function": {
       "name": "file_apply_patch",
-      "description": "Apply a diff patch to safely modify an existing file. Preferred over file_write for modifications.",
+      "description": "Safely modify an existing file by applying a diff patch. Preferred over file_write for modifications.",
       "parameters": {
         "type": "object",
         "properties": {
-          "file": {
-            "type": "string",
-            "description": "Absolute path of the file to patch"
-          },
-          "patch_content": {
-            "type": "string",
-            "description": "Content of the patch in a unified diff format"
-          }
+          "file_path": { "type": "string", "description": "The absolute path of the file to patch." },
+          "patch_content": { "type": "string", "description": "Content of the patch in a unified diff format." }
         },
-        "required": ["file", "patch_content"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "file_str_replace",
-      "description": "Replace specified string in a file. Use for updating specific content in files or fixing errors in code.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "file": {
-            "type": "string",
-            "description": "Absolute path of the file to perform replacement on"
-          },
-          "old_str": {
-            "type": "string",
-            "description": "Original string to be replaced"
-          },
-          "new_str": {
-            "type": "string",
-            "description": "New string to replace with"
-          },
-          "sudo": {
-            "type": "boolean",
-            "description": "(Optional) Whether to use sudo privileges"
-          }
-        },
-        "required": ["file", "old_str", "new_str"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "file_find_in_content",
-      "description": "Search for matching text within file content. Use for finding specific content or patterns in files.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "file": {
-            "type": "string",
-            "description": "Absolute path of the file to search within"
-          },
-          "regex": {
-            "type": "string",
-            "description": "Regular expression pattern to match"
-          },
-          "sudo": {
-            "type": "boolean",
-            "description": "(Optional) Whether to use sudo privileges"
-          }
-        },
-        "required": ["file", "regex"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "file_find_by_name",
-      "description": "Find files by name pattern in specified directory. Use for locating files with specific naming patterns.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "path": {
-            "type": "string",
-            "description": "Absolute path of directory to search"
-          },
-          "glob": {
-            "type": "string",
-            "description": "Filename pattern using glob syntax wildcards"
-          }
-        },
-        "required": ["path", "glob"]
+        "required": ["file_path", "patch_content"]
       }
     }
   },
@@ -218,205 +69,41 @@
     "type": "function",
     "function": {
       "name": "shell_exec",
-      "description": "Execute commands in a specified shell session. Use for running code, installing packages, or managing files.",
+      "description": "Execute a shell command in a specified directory.",
       "parameters": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the target shell session"
-          },
-          "exec_dir": {
-            "type": "string",
-            "description": "Working directory for command execution (must use absolute path)"
-          },
-          "command": {
-            "type": "string",
-            "description": "Shell command to execute"
-          }
+          "command": { "type": "string", "description": "The command to execute." },
+          "exec_dir": { "type": "string", "description": "The working directory for the command." }
         },
-        "required": ["id", "exec_dir", "command"]
+        "required": ["command", "exec_dir"]
       }
     }
   },
   {
     "type": "function",
     "function": {
-      "name": "shell_view",
-      "description": "View the content of a specified shell session. Use for checking command execution results or monitoring output.",
+      "name": "codebase_search",
+      "description": "Perform a semantic search across the codebase to find relevant files or code snippets.",
+      "parameters": {
+        "type": "object",
+        "properties": { "query": { "type": "string", "description": "The natural language query to search for." } },
+        "required": ["query"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "invoke_agent",
+      "description": "Used by the Workflow Composer to invoke another specialized agent.",
       "parameters": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the target shell session"
-          }
+          "agent_name": { "type": "string", "description": "The name of the agent to invoke (e.g., 'Developer')." },
+          "task_description": { "type": "string", "description": "The specific task for the agent to perform." }
         },
-        "required": ["id"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "shell_wait",
-      "description": "Wait for the running process in a specified shell session to return. Use after running commands that require longer runtime.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the target shell session"
-          },
-          "seconds": {
-            "type": "integer",
-            "description": "Wait duration in seconds"
-          }
-        },
-        "required": ["id"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "shell_write_to_process",
-      "description": "Write input to a running process in a specified shell session. Use for responding to interactive command prompts.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the target shell session"
-          },
-          "input": {
-            "type": "string",
-            "description": "Input content to write to the process"
-          },
-          "press_enter": {
-            "type": "boolean",
-            "description": "Whether to press Enter key after input"
-          }
-        },
-        "required": ["id", "input", "press_enter"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "shell_kill_process",
-      "description": "Terminate a running process in a specified shell session. Use for stopping long-running processes or handling frozen commands.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "description": "Unique identifier of the target shell session"
-          }
-        },
-        "required": ["id"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "browser_view",
-      "description": "View content of the current browser page. Use for checking the latest state of previously opened pages.",
-      "parameters": {
-        "type": "object"
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "browser_navigate",
-      "description": "Navigate browser to specified URL. Use when accessing new pages is needed.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string",
-            "description": "Complete URL to visit. Must include protocol prefix."
-          }
-        },
-        "required": ["url"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "browser_restart",
-      "description": "Restart browser and navigate to specified URL. Use when browser state needs to be reset.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "url": {
-            "type": "string",
-            "description": "Complete URL to visit after restart. Must include protocol prefix."
-          }
-        },
-        "required": ["url"]
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "browser_click",
-      "description": "Click on elements in the current browser page. Use when clicking page elements is needed.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "index": {
-            "type": "integer",
-            "description": "(Optional) Index number of the element to click"
-          },
-          "coordinate_x": {
-            "type": "number",
-            "description": "(Optional) X coordinate of click position"
-          },
-          "coordinate_y": {
-            "type": "number",
-            "description": "(Optional) Y coordinate of click position"
-          }
-        }
-      }
-    }
-  },
-  {
-    "type": "function",
-    "function": {
-      "name": "browser_input",
-      "description": "Overwrite text in editable elements on the current browser page. Use when filling content in input fields.",
-      "parameters": {
-        "type": "object",
-        "properties": {
-          "index": {
-            "type": "integer",
-            "description": "(Optional) Index number of the element to overwrite text"
-          },
-          "coordinate_x": {
-            "type": "number",
-            "description": "(Optional) X coordinate of the element to overwrite text"
-          },
-          "coordinate_y": {
-            "type": "number",
-            "description": "(Optional) Y coordinate of the element to overwrite text"
-          },
-          "text": {
-            "type": "string",
-            "description": "Complete text content to overwrite"
-          },
-          "press_enter": {
-            "type": "boolean",
-            "description": "Whether to press Enter key after input"
-          }
-        },
-        "required": ["text", "press_enter"]
+        "required": ["agent_name", "task_description"]
       }
     }
   }

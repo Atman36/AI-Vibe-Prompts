@@ -38,28 +38,6 @@ paths:
   architecture: "docs/architecture/"
   requirements: "docs/requirements/"
 
-# Context Management (Enhanced BMAD approach)
-context:
-  # Always load these files for enhanced context
-  core_files:
-    - "system/system-prompt.md"
-    - "core-config.yaml"
-    - "system/checklists/handoff-checklist.md"
-  
-  # Load on-demand based on phase
-  phase_files:
-    planning:
-      - "system/task-decompose.md"
-      - "system/rag-template.md"
-      - "agents/core/architect.md"
-    implementation:
-      - "system/state-align.md"
-      - "agents/core/developer.md"
-      - "agents/project/init.md"
-    review:
-      - "system/history-summarizer.md"
-      - "agents/core/analyst.md"
-      - "agents/project/audit.md"
 
 # Agent Configuration (Enhanced with AI Blindspot Prevention)
 agents:
