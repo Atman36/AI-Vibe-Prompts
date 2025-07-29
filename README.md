@@ -42,7 +42,7 @@ Create a new project using one of our templates. This is the recommended way to 
 
 ```bash
 # Create a new Next.js project with Shadcn UI
-npx ai-vibe-prompts create my-app --template=next-shadcn
+npx ai-vibe-prompts create my-app --template=shadcn-vite
 cd my-app
 ```
 

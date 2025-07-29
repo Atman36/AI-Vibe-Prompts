@@ -31,7 +31,7 @@ paths:
   # System subdirectories
   system_checklists: "system/checklists/"
   system_context: "system/"
-  
+
   # Project structure (when used in projects)
   project_docs: "docs/"
   stories: "docs/stories/"
