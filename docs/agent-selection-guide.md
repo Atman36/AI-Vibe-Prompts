@@ -1,85 +1,49 @@
-# 📖 Agent Selection Guide
+# 📖 Guide to the AI Agent Team
 
-Welcome to the AI-Vibe-Prompts ecosystem! This guide will help you choose the right AI agent for your task. Our agents are hyper-specialized to provide expert-level assistance at every stage of the development lifecycle.
+Welcome to the AI-Vibe-Prompts framework. This guide introduces your team of specialized AI agents and their capabilities. Instead of manually choosing agents for each step, your primary interaction for complex tasks will be with the `Workflow Composer`, who acts as the project manager.
 
-## How to Use This Guide
+## The `Workflow Composer`: Your Primary Point of Contact
 
-Find the category that best matches your current need, then identify the specialist agent within that category. You can invoke agents directly or let the `Orchestrator` manage the workflow for you.
+For any goal that requires more than one step, start with the `Workflow Composer`. It is responsible for:
 
----
+1.  **Understanding Your Goal**: You provide a high-level objective (e.g., "Add Stripe payments").
+2.  **Creating a Plan**: It designs a multi-step workflow, selecting the right agents for each stage.
+3.  **Orchestrating Execution**: It invokes each agent in sequence, manages the handoff of work, and ensures quality gates are met.
 
-## 🏛️ Core Agents: The Central Nervous System
-
-These agents manage the primary development workflow.
-
-- **🎯 Orchestrator**: **Use when** you have a complex task requiring multiple steps and specialists. It coordinates the entire workflow, from architecture to deployment.
-- **🏗️ Architect**: **Use when** you need to design a new system, define the technical stack, or create architectural diagrams. It lays the foundation for development.
-- **💻 Developer (Coordinator)**: **Use when** you need to implement a feature. It analyzes the task and delegates to the appropriate specialist (Frontend, Backend, Testing).
-
-### 🧑‍💻 Developer Specialists
-
-- **Frontend Specialist**: **Use for** building UI components, implementing designs in React 19/Next.js 15, and ensuring accessibility.
-- **Backend Specialist**: **Use for** creating API endpoints, managing database schemas with Prisma, and handling authentication logic.
-- **Testing Specialist**: **Use for** writing unit tests (Vitest), integration tests, and end-to-end tests (Playwright) to ensure code quality.
+**When to use it**: For any complex feature, refactoring task, or new project setup.
+**How to use it**: `@agents/helpers/workflow-composer.md "My high-level goal is..."`
 
 ---
 
-## 🚀 Strategy & Coaching Agents
+## Meet the Team: Agent Capabilities
 
-These agents focus on the 'why' and the 'how' of your work, not just the 'what'.
+This section describes the skills of the agents that the `Workflow Composer` will manage on your behalf.
 
-- **📈 Product Strategist**: **Use before** writing any code. It helps define the feature's value, target audience, and success metrics (KPIs).
-- **🧘 Focus Driver**: **Use when** you need to plan a deep work session, manage distractions, or maintain focus during a complex task.
+### 🏛️ Core Development Team
 
----
+-   **`Architect`**: Designs system architecture, data models, and technical specifications. It creates the blueprint for the `Developer`.
+-   **`Developer`**: A generalist that implements features according to the `Architect`'s plan. It coordinates its own team of specialists:
+    -   **`Frontend Specialist`**: Builds UIs with React/Next.js, implements design systems, and ensures accessibility.
+    -   **`Backend Specialist`**: Creates APIs, manages database logic with Prisma, and handles server-side operations.
+    -   **`Testing Specialist`**: Writes unit, integration, and end-to-end tests to guarantee code quality.
 
-## 📂 Project Lifecycle Agents
+### 🛠️ Helper & Quality Assurance Team
 
-These agents manage the project at a high level.
+These agents are active, tool-driven specialists that support the core team.
 
-- **🚀 Project Initializer**: **Use at the very beginning** of a new project to set up the repository, scaffold the codebase, and configure the environment.
-- **🔍 Project Auditor**: **Use for** analyzing an existing codebase to identify technical debt, security vulnerabilities, and areas for optimization.
+-   **`Onboarder`**: **Automates Project Setup**. Runs dependency checks, installs packages, sets up `.env` files, and runs initial tests. A true time-saver for new projects or new developers.
+-   **`Refactor Assistant`**: **Prepares Codebase for Changes**. Before a new feature is added, this agent safely refactors existing code to make it easier to work with. It uses tools to perform changes and runs tests to ensure nothing breaks.
+-   **`Debugger Assistant`**: **Finds and Fixes Bugs Systematically**. Applies a scientific, hypothesis-driven method to identify the root cause of bugs and fix them.
+-   **`Quality Monitor`**: **Enforces Quality Standards**. Automatically runs linters, tests, and security scanners to ensure the code meets predefined quality metrics.
+-   **`RAG Assistant`**: **Provides Contextual Awareness**. Analyzes the codebase and relevant documentation to provide other agents with the information they need to make smart decisions.
 
----
+### 🚀 Project & Strategy Team
 
-## 🎨 Design Agents
+-   **`Project Initializer`**: Scaffolds new projects from templates.
+-   **`Project Auditor`**: Analyzes an existing codebase to identify technical debt, security risks, and areas for improvement.
+-   **`Product Strategist`**: Helps define feature requirements, user stories, and success metrics before development begins.
 
-Specialists for UI/UX and design implementation.
+### 🎨 Design Team
 
-- **🎨 Design System Agent**: **Use for** creating and maintaining a design token library, component style guides, and ensuring UI consistency.
-- **🎭 Figma Converter**: **Use when** you have Figma designs that need to be converted into production-ready, accessible React components.
-
----
-
-## 🛠️ Helper Agents: Your Support Team
-
-These agents provide specialized support and enforce quality throughout the process.
-
-- **📚 RAG Assistant**: A mandatory quality gate that verifies context, checks for spec compliance, and prevents AI blindspots.
-- **✨ Refactor Assistant**: **Use before** implementing a new feature in a complex module. It cleans up and prepares the code for new additions.
-- **🔬 Debugger Assistant**: **Use when** you're stuck on a bug. It helps form hypotheses and systematically finds the root cause.
-- **📊 Quality Monitor**: A continuous agent that tracks code health, test coverage, and other quality metrics.
-- **🎼 Workflow Composer**: An advanced agent for designing and automating complex, multi-agent workflows.
-
----
-
-## 🔜 Coming Soon
-
-We are expanding our team! Keep an eye out for new agents in these categories:
-
-- **📦 Product**: Agents for user research, A/B testing, and feature validation.
-- **📢 Marketing**: Agents for growth hacking, content creation, and SEO.
-
-### 📢 Marketing Agents
-
-- **✍️ Content Creator**: **Use when** you need blog posts, social media updates, or landing page copy.
-- **✅ Testing**: Advanced QA agents for performance, load, and security testing.
-
-### 🧪 Testing Agents
-
-- **⏱️ Performance Tester**: **Use when** you need to diagnose performance issues, run load tests, or audit Core Web Vitals.
-- **⚙️ Operations**: Agents for CI/CD pipeline management, infrastructure as code (IaC), and deployment monitoring.
-
-### ⚙️ Operations Agents
-
-- **Deployment Specialist**: **Use when** you need to set up CI/CD, manage infrastructure as code, or automate deployments.
+-   **`Design System Agent`**: Creates and manages design tokens, component libraries, and style guides.
+-   **`Figma Converter`**: Converts Figma designs into production-ready React components.

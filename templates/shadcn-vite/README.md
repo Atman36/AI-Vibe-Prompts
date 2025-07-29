@@ -22,22 +22,29 @@ Lightweight starter template for React applications with modern tooling. Ideal f
 - 🧪 Testing setup with Vitest + Playwright
 - 📦 Optimized build with code splitting
 
-## Quick Start
+## 🚀 Getting Started: The Automated Way
 
-### Using AI-Vibe-Prompts CLI
+This template is designed for a fast, automated setup using your AI agent team. Follow these two steps to get started.
+
+### Step 1: Create Your Project
+
+Use the AI-Vibe-Prompts CLI to create a new project from this template.
+
 ```bash
 npx ai-vibe-prompts create my-app --template=shadcn-vite
 cd my-app
-npm run dev
 ```
 
-### Manual Setup
+### Step 2: Let the `Onboarder` Agent Handle Setup
+
+Instead of manual installation and configuration, invoke the `Onboarder` agent. It will install dependencies and run verification checks for you.
+
 ```bash
-git clone <this-template> my-app
-cd my-app
-npm install
-npm run dev
+@agents/helpers/onboarder.md
+"Onboard this new shadcn-vite project. Install all dependencies and run verification tests."
 ```
+
+Once the `Onboarder` is finished, your project is ready for development.
 
 ## Project Structure
 ```
@@ -83,21 +90,12 @@ Pre-configured with shadcn/ui components:
 - Small to medium SPAs
 - MVP prototypes
 
-## AI-Vibe-Prompts Integration
-This template includes AI-Vibe-Prompts agents configuration:
-- `agents/` folder with specialized development agents
-- Pre-configured workflows for common tasks
-- Quality gates for performance and accessibility
+## 🤖 Start Building with the `Workflow Composer`
 
-## Next Steps
-After setup, use AI-Vibe-Prompts agents:
+Now that your project is set up, the `Workflow Composer` is your primary tool for development. Give it a high-level goal, and it will orchestrate the agent team to build your feature.
+
+**Example:**
 ```bash
-# Analyze project structure
-@agents/helpers/rag-assistant.md
-
-# Create new components  
-@agents/design/design-system.md
-
-# Add new features
-@agents/core/developer.md
+@agents/helpers/workflow-composer.md
+"My goal is to build a new landing page section for customer testimonials. Design the component, add it to the main page, and make sure it's responsive."
 ``` 

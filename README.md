@@ -5,398 +5,99 @@
 [![React 19](https://img.shields.io/badge/React-19-blue.svg)](https://react.dev/)
 [![Next.js 15](https://img.shields.io/badge/Next.js-15-black.svg)](https://nextjs.org/)
 
-> **Agent-Driven Development Framework for Modern Web Applications**
+> **An Autonomous AI-Agent Framework for Modern Web Development**
 
-A comprehensive **Context Engineering Framework** for AI-assisted development, featuring specialized AI agents, workflow orchestration, and production-ready prompts optimized for React 19 + Next.js 15 + TypeScript workflows. Built on "A Philosophy of Software Design" principles with advanced context management, RAG integration, and state alignment.
+**AI-Vibe-Prompts** has evolved from a collection of prompts into a powerful, agent-driven framework. It provides a team of specialized AI agents that collaborate to design, build, and maintain complex web applications, following a predictable, tool-based workflow.
 
-## 🎯 Philosophy
+## 🎯 The New Paradigm: Agent-Driven Development
 
-This collection follows the core principles from "A Philosophy of Software Design":
+This framework introduces a structured, tool-first approach to AI-assisted development, moving beyond simple prompts to a robust system of autonomous agents.
 
-- **Deep Modules**: Create simple interfaces with powerful implementations
-- **Complexity Management**: Hide implementation details behind clean abstractions  
-- **Strategic Programming**: Invest in good architecture to reduce future complexity
-- **Information Hiding**: Separate what developers need to know from how things work internally
+- **From Prompts to Agents**: We've transformed descriptive markdown files into active, specialized agents. Each agent has a clear role and uses a powerful set of tools to perform its tasks.
+- **The `PLAN -> ACT` Cycle**: All agents operate on a strict **Plan-then-Act** cycle. They first analyze the task and create a detailed, transparent plan of tool calls. Only after the plan is defined do they execute it, ensuring predictable and auditable behavior.
+- **Orchestration with `Workflow Composer`**: For complex tasks, the `Workflow Composer` acts as a director, creating and managing multi-agent workflows. It sequences tasks, hands off work between agents, and enforces quality gates, turning a high-level goal into a fully managed, automated process.
 
 ## ✨ Features
 
-- **🤖 Specialized AI Agents** - 13+ domain-specific agents for different development tasks
-- **🧠 AI Blindspot Prevention** - Combat "Stop Digging", "Read the Docs", "Bulldozer Method" and 15+ other AI limitations
-- **🛡️ Mandatory Quality Gates** - Enhanced RAG Assistant validates all implementations against documentation
-- **🔬 Scientific Debugging** - Systematic hypothesis-driven debugging methodology with DebuggerAssistant
-- **🏗️ Preparatory Refactoring** - "Mise en Place" approach with dedicated RefactorAssistant
-- **🎯 Requirements-First Development** - Focus on "what" and "why" before jumping to "how"
-- **🚶 Walking Skeleton Architecture** - Minimal end-to-end prototypes to validate integrations early
-- **🔄 Workflow Orchestration** - Multi-agent workflows with AI blindspot detection and handoffs
-- **📊 Quality Monitoring** - Real-time metrics and technical debt tracking
-- **🎨 Design System Integration** - Figma-to-code conversion and component libraries
-- **🚀 Project Templates** - Ready-made starters for different project types
-- **📝 Context Engineering** - Smart code analysis and pattern recognition
+- **🤖 Autonomous AI Agents**: A team of specialized agents for architecture, development, refactoring, debugging, and more.
+- **🔄 Predictable `PLAN -> ACT` Workflow**: Ensures transparency and reliability in all agent operations.
+- **🎼 Multi-Agent Orchestration**: The `Workflow Composer` designs and executes complex development workflows.
+- **🛠️ Tool-Based Execution**: Agents perform all actions through a well-defined set of tools (`shell_exec`, `replace_file_content`, `codebase_search`), eliminating guesswork.
+- **🚀 Automated Onboarding**: The `Onboarder` agent automates project setup, from dependency checks to initial tests.
+- **🔬 Scientific Debugging & Refactoring**: Dedicated agents apply systematic, safe, and verifiable methods to improve code quality.
+- **🛡️ Built-in Quality Gates**: The `Quality Monitor` and `RAG Assistant` ensure that all work meets predefined standards.
+- **🧩 Project Templates**: Production-ready starters for various application types, now with automated setup.
 
-## 📜 Table of Contents
-- [🎯 Philosophy](#-philosophy)
-- [✨ Features](#-features)
-- [📁 Repository Structure](#-repository-structure)
-- [🧠 Context Engineering](#-context-engineering-add-ons)
-- [🚀 Quick Start](#-quick-start)
-- [🤖 AI Agents](#-ai-agents)
-- [📋 Project Templates](#-project-templates)
-- [🔄 Development Workflow](#-development-workflow)
-- [💡 Best Practices](#-best-practices)
-- [🔧 Customization](#-customization)
-- [🤝 Contributing](#-contributing)
-- [💰 Support This Project](#-support-this-project)
+## 🚀 Quick Start
+
+Get your project running in minutes with the new automated setup.
+
+1.  **Create a new project** (or add to an existing one):
+    ```bash
+    # Create a new project using a template
+    npx ai-vibe-prompts create my-app --template=shadcn-vite
+    cd my-app
+    
+    # Or, add to an existing project
+    # npx ai-vibe-prompts init
+    ```
+
+2.  **Run the Onboarder Agent**:
+    Invoke the `Onboarder` to automatically set up your environment. It will check dependencies, install packages, create config files, and run initial tests.
+    ```bash
+    @agents/helpers/onboarder.md
+    "Set up this project for development."
+    ```
+
+## 🔄 A New Development Workflow
+
+Forget manually calling one agent after another. The `Workflow Composer` now manages the entire process. Simply state your high-level goal.
+
+**Example: Implementing a new feature**
+
+```bash
+# Define the goal for the Workflow Composer
+@agents/helpers/workflow-composer.md
+"Create a complete workflow to add a Stripe payment gateway to this application. This should include preparatory refactoring, implementation, and a final quality check."
+```
+
+The `Workflow Composer` will then create and execute a plan that might look like this:
+1.  **Invoke `Refactor Assistant`**: To prepare the code for the new feature.
+2.  **Invoke `Developer`**: To write the Stripe integration code.
+3.  **Invoke `Quality Monitor`**: To run tests and security scans.
+
+This orchestrated approach makes development faster, safer, and more reliable.
+
+## 🤖 The Agent Team
+
+Our agents have been upgraded to be active participants in the development process.
+
+- **`core/architect`**: Designs system architecture and creates technical plans for the `Developer`.
+- **`core/developer`**: Implements features based on architectural plans, using its `frontend`, `backend`, and `testing` specialists.
+- **`helpers/refactor-assistant`**: An active agent that uses tools like `replace_file_content` and `shell_exec` to safely prepare code *before* new features are added.
+- **`helpers/debugger-assistant`**: Uses a scientific method and tools to systematically find and fix bugs.
+- **`helpers/quality-monitor`**: Automatically runs linters, tests, and security scans using `shell_exec` to enforce quality standards.
+- **`helpers/onboarder`**: Automates the entire project setup process.
+- **`helpers/workflow-composer`**: The team lead. Decomposes high-level goals into multi-agent workflows and orchestrates their execution.
+
+...and many more specialized agents in the `agents` directory.
 
 ## 📁 Repository Structure
 
 ```
 ai-vibe-prompts/
-├── agents/ (USER ENTRY POINT)
-│   ├── core/           # Development workflow agents
-│   │   ├── orchestrator.md    # Multi-agent workflow coordination
-│   │   ├── architect.md       # System design and architecture
-│   │   ├── developer.md       # Generalist developer, delegates to specialists
-│   │   └── developer/         # Developer specialists
-│   │       ├── frontend.md    # React 19, Next.js 15
-│   │       ├── backend.md     # Next.js API, Prisma
-│   │       └── testing.md     # Vitest, Playwright
-│   │   └── analyst.md         # Quality assurance and analysis
-│   ├── project/        # Project lifecycle agents
-│   │   ├── init.md            # Project initialization
-│   │   └── audit.md           # Project auditing and optimization
-│   ├── strategy/        # Product strategy agents
-│   │   └── product-strategist.md # Defines value & success metrics
-│   ├── coaching/        # Productivity & focus agents
-│   │   └── focus-driver.md # Deep-work planning & morale
-│   ├── product/         # Product lifecycle agents
-│   │   └── user-researcher.md # User research and persona development
-│   ├── marketing/       # Growth and marketing agents
-│   │   └── content-creator.md # SEO & marketing copy
-│   ├── testing/         # QA and testing agents
-│   │   └── performance-tester.md # Load and performance testing
-│   └── operations/      # Infrastructure and ops agents
-│       └── deployment-specialist.md # CI/CD and deployment automation
-│   ├── design/         # UI/UX specialized agents
-│   │   ├── design-system.md   # Design token architecture
-│   │   └── figma-converter.md # Figma to React conversion
-│   └── helpers/        # Utility and analysis agents
-│       ├── rag-assistant.md   # Codebase analysis
-│       ├── workflow-composer.md # Multi-agent workflows
-│       └── quality-monitor.md # Metrics and monitoring
-├── system/ (MINIMAL - delegation only)
-│   ├── system-prompt.md       # Central orchestration
-│   ├── context-helpers.md     # Utility templates
-│   ├── rag-template.md        # Information retrieval
-│   ├── history-summarizer.md  # Conversation compression
-│   ├── state-align.md         # Phase management
-│   └── task-decompose.md      # Task breakdown
-├── templates/          # Ready-made project starters
-│   ├── shadcn-vite/           # Lightweight SPA starter
-│   ├── next-enterprise/       # Enterprise applications
-│   └── t3-stack/              # Full-stack TypeScript
-└── scripts/            # CLI tools and automation
-    └── avp-init.js            # Project initialization CLI
+├── agents/           # The home of all specialized AI agents
+│   ├── core/         # Core development team (Architect, Developer)
+│   └── helpers/      # Utility agents (Composer, Refactor, Debugger, etc.)
+│   └── ...           # Other specialized agents
+├── docs/             # Project documentation
+├── templates/        # Production-ready project starters
+└── system/           # Low-level system prompts (rarely used directly)
 ```
 
-## 🧠 Context Engineering Add-Ons
+## 🤝 Contributing
 
-This repository includes **context engineering modules** that implement advanced AI management techniques:
-
-- **Task Decomposition**: Break complex tasks into verifiable steps with checkpoints
-- **RAG Integration**: Fact-based generation using retrieved documentation
-- **History Compression**: Intelligent conversation summarization for long sessions
-- **State Alignment**: Phase-based workflow management with tool constraints
-
-These modules work together to create more predictable, efficient, and reliable AI interactions while preventing hallucinations and maintaining context coherence.
-
-## 🚀 Quick Start
-
-### New Project
-```bash
-# Create project with AI agents
-npx ai-vibe-prompts create my-app --template=t3-stack
-cd my-app
-npm install
-
-# Start with codebase analysis
-@agents/helpers/rag-assistant.md
-```
-
-### Existing Project
-```bash
-# Add AI agents to existing project
-npx ai-vibe-prompts init
-
-# Begin with project analysis
-@agents/helpers/rag-assistant.md
-"Analyze this codebase and provide development recommendations"
-```
-
-### Set Up System Prompt
-1. Open your AI assistant settings
-2. Navigate to the rules or system prompt section
-3. Copy the entire content from `system/system-prompt.md` and paste it
-
-This establishes the foundation with:
-- Deep module design principles
-- TypeScript strict mode configurations
-- Performance and accessibility standards
-- Error prevention strategies
-
-## 🤖 AI Agents
-
-With a growing team of specialized agents, it can be hard to know who to call. Check out our **[📖 Agent Selection Guide](docs/agent-selection-guide.md)** to find the right expert for your task.
-
-### Core Development Agents
-- **🎯 Orchestrator** - Multi-agent workflow coordination and task distribution
-- **🏗️ Architect** - System design, architecture planning, and technology selection
-- **💻 Developer** - A generalist agent that coordinates with specialists for code implementation.
-  - **Frontend Specialist**: Builds UIs with React 19 & Next.js 15.
-  - **Backend Specialist**: Creates APIs with Next.js & Prisma.
-  - **Testing Specialist**: Ensures quality with Vitest & Playwright.
-- **📊 Analyst** - Performance analysis, security review, and optimization
-
-### Project Management Agents
-- **🚀 Project Init** - Project setup, technology stack selection, and scaffolding
-- **🔍 Project Audit** - Comprehensive analysis of existing codebases and tech debt
-
-### Strategy Agents
-- **📈 Product Strategist** - Define feature value, KPIs, user stories
-
-### Marketing Agents
-- **✍️ Content Creator** - Creates engaging blog posts, social media copy, and landing pages.
-
-### Product Agents
-- **🕵️ User Researcher** - Identifies user needs, pain points, and behaviors.
-
-### Coaching & Productivity Agents
-- **🧘 Focus Driver** - Deep-work planning, energy management, distraction mitigation
-
-### Testing Agents
-- **⏱️ Performance Tester** - Identifies performance bottlenecks with Lighthouse and load testing.
-
-### Operations Agents
-- **⚙️ Deployment Specialist** - Manages CI/CD pipelines, IaC, and automated deployments.
-
-### Design & UI Agents
-- **🎨 Design System** - Component libraries, design tokens, and style guides
-- **🎭 Figma Converter** - Figma designs to production React components
-
-### Helper & Utility Agents
-- **🧠 RAG Assistant** - Enhanced quality gateway with spec validation and documentation verification
-- **🔧 Refactor Assistant** - Preparatory refactoring and "Mise en Place" code preparation
-- **🔬 Debugger Assistant** - Scientific debugging with hypothesis-driven methodology
-- **⚙️ Workflow Composer** - Multi-agent workflow creation and optimization
-- **📈 Quality Monitor** - Metrics tracking, performance monitoring, and reporting
-
-### 🧠 AI Blindspot Protection
-
-Our system actively combats common AI limitations identified in [AI Blindspots research](https://ezyang.github.io/ai-blindspots/):
-
-| Blindspot | Protection Mechanism | Implementation |
-|-----------|---------------------|----------------|
-| **Stop Digging** | Orchestrator monitors agent effectiveness | Auto-halt after 3 failed cycles |
-| **Preparatory Refactoring** | Dedicated RefactorAssistant | Mandatory code prep before features |
-| **Requirements vs Solutions** | Requirements-first validation | Block solution-first approaches |
-| **Walking Skeleton** | Architect enforces minimal prototypes | End-to-end validation priority |
-| **Black Box Testing** | Analyst generates spec-based tests | Test from requirements, not code |
-| **Scientific Debugging** | DebuggerAssistant methodology | Hypothesis → Experiment → Conclusion |
-| **Read the Docs** | RAG Assistant as quality gate | Mandatory documentation validation |
-| **Know Your Limits** | Explicit uncertainty handling | Agents acknowledge limitations |
-
-## 📋 Project Templates
-
-| Template | Best For | Tech Stack |
-|----------|----------|------------|
-| **shadcn-vite** | Marketing sites, SPAs | Vite + React 18 + Tailwind + shadcn/ui |
-| **next-enterprise** | Enterprise applications | Next.js 15 + TypeScript + NextAuth + Prisma |
-| **t3-stack** | Full-stack applications | Next.js + tRPC + Prisma + NextAuth |
-
-## 🔄 Development Workflow
-
-### 1. Project Analysis
-```bash
-@agents/helpers/rag-assistant.md
-"Analyze this codebase and identify the architecture, patterns, and improvement opportunities"
-```
-
-### 2. Feature Planning
-```bash
-@agents/core/architect.md
-"Design a user authentication system with social login and role-based permissions"
-```
-
-### 3. Implementation
-```bash
-@agents/core/developer.md
-"Implement the authentication system according to the architect's specifications"
-```
-
-### 4. Quality Assurance
-```bash
-@agents/core/analyst.md
-"Review the implementation for security, performance, and best practices"
-```
-
-## 🎯 Usage Examples
-
-### Creating a Design System
-```bash
-# Step 1: Design system foundation
-@agents/design/design-system.md
-"Create a comprehensive design system with tokens, components, and documentation for a SaaS dashboard"
-
-# Step 2: Implement components
-@agents/core/developer.md
-"Implement the design system components with TypeScript and accessibility features"
-```
-
-### Converting Figma to Code
-```bash
-# Convert Figma designs to React components
-@agents/design/figma-converter.md
-"Convert this Figma dashboard design to responsive React components with proper TypeScript definitions"
-```
-
-### Complex Feature Development
-```bash
-# Use workflow composer for multi-step features
-@agents/helpers/workflow-composer.md
-"Create a workflow for adding real-time chat functionality to our SaaS application"
-```
-
-### Project Modernization
-```bash
-# Audit existing project
-@agents/project/audit.md
-"Analyze this legacy React project and provide a modernization roadmap"
-
-# Plan migration
-@agents/core/architect.md
-"Design a migration strategy from the legacy system to modern React 19 + Next.js 15"
-```
-
-## 📊 Quality Standards
-
-AI-Vibe-Prompts enforces enterprise-grade quality standards:
-
-### Performance
-- ⚡ Core Web Vitals: LCP ≤ 2.5s, INP ≤ 200ms, CLS ≤ 0.1
-- 📦 Bundle optimization and code splitting
-- 🖼️ Image optimization and lazy loading
-
-### Accessibility
-- ♿ WCAG 2.2 AA compliance
-- 🎹 Keyboard navigation
-- 📱 Screen reader compatibility
-
-### Code Quality
-- 🔍 TypeScript strict mode
-- 🧪 Test coverage ≥ 85%
-- 📏 ESLint + Prettier configuration
-- 🔒 Security best practices
-
-## 💡 Best Practices
-
-### Prompt Combination Strategies
-
-1. **Start with Architecture**: Use `agents/core/architect.md` to plan before coding
-2. **Initialize with Strategy**: Use `agents/project/init.md` for new projects
-3. **Maintain Design Consistency**: Reference `agents/design/design-system.md` regularly
-4. **Optimize Continuously**: Use `agents/project/audit.md` for regular audits
-
-### Example Workflow: Building a Dashboard Feature
-
-Follow this structured approach using context engineering:
-
-#### 1. **Strategic Planning Phase**
-```bash
-# Set planning phase and decompose the task
-@system/state-align.md current_phase="planning"
-@system/task-decompose.md goal="Build user dashboard with real-time widgets"
-@agents/core/architect.md Plan dashboard architecture and data flow
-```
-
-#### 2. **Knowledge Gathering Phase**  
-```bash
-# Retrieve relevant documentation and patterns
-@system/rag-template.md query="React 19 dashboard components best practices"
-@system/rag-template.md query="Next.js 15 real-time data fetching patterns"
-```
-
-#### 3. **Design System Phase**
-```bash
-# Generate design components with context
-@system/state-align.md current_phase="design"
-@agents/design/design-system.md Create dashboard design system with widgets
-```
-
-#### 4. **Implementation Phase**
-```bash
-# Code with phase constraints and verification
-@system/state-align.md current_phase="implementation"
-@agents/core/developer.md Implement dashboard components
-```
-
-#### 5. **Review & Optimization Phase**
-```bash
-# Compress history and conduct thorough analysis
-@system/history-summarizer.md compression_level="medium"
-@system/state-align.md current_phase="review"
-@agents/project/audit.md Audit dashboard for performance and accessibility
-```
-
-**Result**: Predictable, high-quality implementation with maintained context and verified outcomes.
-
-## 🧭 Guide Usage
-
-### When to Use Each Agent Category
-
-| Situation | Use This Agent | Purpose |
-|-----------|----------------|---------|
-| **Setting up AI assistant** | `system/system-prompt.md` | Establish base rules and philosophy |
-| **Starting new project** | `agents/project/init.md` | Strategic project initialization with modern stack |
-| **Auditing existing project** | `agents/project/audit.md` | Comprehensive analysis and optimization recommendations |
-| **Creating design system** | `agents/design/design-system.md` | Generate design tokens and component specifications |
-| **Converting Figma designs** | `agents/design/figma-converter.md` | Transform design exports into production React |
-| **Planning complex features** | `agents/core/architect.md` | Strategic architecture and system design |
-| **Code implementation** | `agents/core/developer.md` | Implementation with quality assurance |
-| **Quality analysis** | `agents/core/analyst.md` | Performance and security review |
-
-### Context Engineering Workflow
-
-For advanced AI management, combine system prompts with context modules:
-
-```
-1. Start with system/system-prompt.md (always active)
-2. For complex tasks: @system/task-decompose.md
-3. For information retrieval: @system/rag-template.md  
-4. For long sessions: @system/history-summarizer.md
-5. For workflow management: @system/state-align.md
-```
-
-## 🔧 Customization
-
-### Adding Your Own Agents
-
-1. **Follow the agent structure**:
-```yaml
----
-name: Your Agent Name
-description: Brief description of what it does
-model: universal
-version: 1.0.0
-category: core|project|design|helpers
-specialization: specific domain
----
-Your agent content here...
-```
-
-2. **Apply deep module principles**:
-   - Simple interfaces for users
-   - Complex implementations hidden
-   - Clear documentation
-   - Error prevention built-in
+This project is rapidly evolving. Contributions to improve agents, tools, and workflows are welcome. Please see `CONTRIBUTING.md` for guidelines.
 
 3. **Place in appropriate folder**:
    - `agents/core/` - Core development workflow

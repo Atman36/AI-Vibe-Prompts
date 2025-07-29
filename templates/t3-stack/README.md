@@ -25,26 +25,29 @@ Full-stack TypeScript template with tRPC, Prisma, and NextAuth. Perfect for rapi
 - 🛡️ Security best practices
 - 📊 Database migrations
 
-## Quick Start
+## 🚀 Getting Started: The Automated Way
 
-### Using AI-Vibe-Prompts CLI
+This T3 Stack template is designed for a fully automated setup process managed by your AI agent team. Follow these two steps to get your full-stack, type-safe application running.
+
+### Step 1: Create Your Project
+
+Use the AI-Vibe-Prompts CLI to create a new project from this template.
+
 ```bash
 npx ai-vibe-prompts create my-t3-app --template=t3-stack
 cd my-t3-app
-npm install
-npm run dev
 ```
 
-### Manual Setup
+### Step 2: Let the `Onboarder` Agent Handle Setup
+
+Instead of a manual setup process, invoke the `Onboarder` agent. It will handle everything for you: install dependencies, guide you through creating your `.env` file, and run the initial database migrations.
+
 ```bash
-git clone <this-template> my-t3-app
-cd my-t3-app
-npm install
-cp .env.example .env.local
-# Configure your environment variables
-npx prisma db push
-npm run dev
+@agents/helpers/onboarder.md
+"Onboard this new T3 Stack project. Install dependencies, help me configure the environment variables for the database and authentication, and run `prisma db push` to set up the database."
 ```
+
+Once the `Onboarder` is finished, your project is fully configured and ready for development.
 
 ## Project Structure
 ```
@@ -280,62 +283,12 @@ npm run test:db
 - Real-time dashboards
 - API-first applications
 
-## AI-Vibe-Prompts Integration
-This template includes:
-- Pre-configured agent workflows
-- Database schema design patterns
-- API development workflows
-- Authentication patterns
-- Testing strategies
+## 🤖 Start Building with the `Workflow Composer`
 
-## Common Patterns
+Now that your project is set up, the `Workflow Composer` is your primary tool for development. Give it a high-level goal, and it will orchestrate the entire agent team to build your feature, from database schema changes to frontend components.
 
-### Protected Pages
-```typescript
-import { getServerAuthSession } from "~/server/auth";
-import { redirect } from "next/navigation";
-
-export default async function ProtectedPage() {
-  const session = await getServerAuthSession();
-  
-  if (!session) {
-    redirect("/api/auth/signin");
-  }
-
-  return <div>Protected content for {session.user.name}</div>;
-}
-```
-
-### Form Handling
-```typescript
-function CreatePostForm() {
-  const createPost = api.post.create.useMutation({
-    onSuccess: () => {
-      // Handle success
-    },
-  });
-
-  const handleSubmit = (data: { title: string; content: string }) => {
-    createPost.mutate(data);
-  };
-
-  return (
-    <form onSubmit={handleSubmit}>
-      {/* Form fields */}
-    </form>
-  );
-}
-```
-
-## Next Steps
-After setup, use AI-Vibe-Prompts:
+**Example:**
 ```bash
-# Analyze your database schema
-@agents/project/audit.md
-
-# Design new features
-@agents/core/architect.md
-
-# Implement with type safety
-@agents/core/developer.md
+@agents/helpers/workflow-composer.md
+"My goal is to add a blogging feature. This requires creating a 'Post' model in the database, building API endpoints for creating and reading posts, and developing the UI to display and create posts."
 ``` 

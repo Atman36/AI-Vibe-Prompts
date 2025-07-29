@@ -26,26 +26,29 @@ Production-ready Next.js template for enterprise applications with advanced feat
 - 🌍 i18n ready for multiple languages
 - 📱 Mobile-first responsive design
 
-## Quick Start
+## 🚀 Getting Started: The Automated Way
 
-### Using AI-Vibe-Prompts CLI
+This template is designed to be set up automatically by your AI agent team. Follow these two simple steps to get your enterprise-grade application running.
+
+### Step 1: Create Your Project
+
+Use the AI-Vibe-Prompts CLI to create a new project from this template.
+
 ```bash
 npx ai-vibe-prompts create my-enterprise-app --template=next-enterprise
 cd my-enterprise-app
-npm install
-npm run dev
 ```
 
-### Manual Setup
+### Step 2: Let the `Onboarder` Agent Handle Setup
+
+Instead of manual setup, invoke the `Onboarder` agent. It will handle everything for you: install dependencies, configure environment variables, and run initial tests.
+
 ```bash
-git clone <this-template> my-enterprise-app
-cd my-enterprise-app
-npm install
-cp .env.example .env.local
-# Configure environment variables
-npm run db:migrate
-npm run dev
+@agents/helpers/onboarder.md
+"Onboard this new enterprise project. Install all dependencies, guide me through setting up the `.env` file, and run all verification tests to ensure the project is ready."
 ```
+
+Once the `Onboarder` is finished, your project is fully configured and ready for development.
 
 ## Project Structure
 ```
@@ -198,22 +201,12 @@ npm run deploy:preview
 - E-commerce platforms
 - Content management systems
 
-## AI-Vibe-Prompts Integration
-This template includes:
-- Complete agent setup for enterprise development
-- Workflow templates for feature development
-- Quality gates for enterprise standards
-- Performance monitoring integration
+## 🤖 Start Building with the `Workflow Composer`
 
-## Next Steps
-After setup, leverage AI-Vibe-Prompts:
+Now that your project is set up, the `Workflow Composer` is your primary tool for development. Give it a high-level goal, and it will orchestrate the entire agent team to build your feature.
+
+**Example:**
 ```bash
-# Analyze enterprise architecture
-@agents/project/audit.md
-
-# Plan new features
-@agents/core/architect.md
-
-# Implement with quality gates
 @agents/helpers/workflow-composer.md
+"My goal is to add a new dashboard page that displays user analytics. Design the page, create the necessary API endpoints, and build the frontend components."
 ``` 

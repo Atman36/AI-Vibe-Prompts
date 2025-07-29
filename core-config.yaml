@@ -63,15 +63,6 @@ context:
 
 # Agent Configuration (Enhanced with AI Blindspot Prevention)
 agents:
-  # Core Agents (main workflow)
-  orchestrator:
-    name: "AI Agent Orchestrator"
-    file: "agents/core/orchestrator.md"
-    capabilities: ["coordination", "handoffs", "workflow-management", "stop-digging-detection"]
-    phase: "all"
-    invokable_by: ["user", "cli"]
-    dependencies: ["workflow-composer", "quality-monitor"]
-    frontmatter_template: "system/templates/agent.md"
   
   architect:
     name: "System Architect"
@@ -172,7 +163,7 @@ agents:
     file: "agents/helpers/workflow-composer.md"
     capabilities: ["workflow-design", "agent-coordination", "process-automation"]
     phase: "orchestration"
-    invokable_by: ["orchestrator"]
+    invokable_by: ["user", "cli"]
 
   # Strategy & Coaching Agents
   product_strategist:
@@ -214,14 +205,6 @@ agents:
     category: "marketing"
     status: planned
     invokable_by: ["orchestrator", "product-strategist"]
-
-  # Operations Agents
-  deployment_specialist:
-    name: "Deployment Specialist"
-    file: "agents/operations/deployment-specialist.md"
-    category: "operations"
-    status: planned
-    invokable_by: ["orchestrator", "architect"]
 
   # Operations Agents
   deployment_specialist:

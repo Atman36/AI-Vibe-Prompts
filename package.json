@@ -36,15 +36,13 @@
     "node": ">=18.0.0"
   },
   "files": [
-    "system/",
-    "context/",
-    "modes/",
-    "tasks/",
-    "tools/",
-    "checklists/",
+    "agents/",
     "docs/",
     "scripts/",
+    "system/",
+    "templates/",
     "core-config.yaml",
-    "_template.prompt.md"
+    "_template.prompt.md",
+    "README.md"
   ]
 } 
