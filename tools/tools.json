@@ -121,6 +121,27 @@
   {
     "type": "function",
     "function": {
+      "name": "file_apply_patch",
+      "description": "Apply a diff patch to safely modify an existing file. Preferred over file_write for modifications.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file": {
+            "type": "string",
+            "description": "Absolute path of the file to patch"
+          },
+          "patch_content": {
+            "type": "string",
+            "description": "Content of the patch in a unified diff format"
+          }
+        },
+        "required": ["file", "patch_content"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
       "name": "file_str_replace",
       "description": "Replace specified string in a file. Use for updating specific content in files or fixing errors in code.",
       "parameters": {

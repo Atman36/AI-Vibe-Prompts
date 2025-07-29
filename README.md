@@ -28,45 +28,65 @@ This framework introduces a structured, tool-first approach to AI-assisted devel
 - **🛡️ Built-in Quality Gates**: The `Quality Monitor` and `RAG Assistant` ensure that all work meets predefined standards.
 - **🧩 Project Templates**: Production-ready starters for various application types, now with automated setup.
 
-## 🚀 Quick Start
+## 🚀 Getting Started
 
-Get your project running in minutes with the new automated setup.
+Follow these steps to get the agent-driven framework running.
 
-1.  **Create a new project** (or add to an existing one):
-    ```bash
-    # Create a new project using a template
-    npx ai-vibe-prompts create my-app --template=shadcn-vite
-    cd my-app
-    
-    # Or, add to an existing project
-    # npx ai-vibe-prompts init
-    ```
+### 1. Prerequisites
 
-2.  **Run the Onboarder Agent**:
-    Invoke the `Onboarder` to automatically set up your environment. It will check dependencies, install packages, create config files, and run initial tests.
-    ```bash
-    @agents/helpers/onboarder.md
-    "Set up this project for development."
-    ```
+Make sure you have [Node.js](https://nodejs.org/) version 18 or higher installed.
 
-## 🔄 A New Development Workflow
+### 2. Installation
 
-Forget manually calling one agent after another. The `Workflow Composer` now manages the entire process. Simply state your high-level goal.
-
-**Example: Implementing a new feature**
+Create a new project using one of our templates. This is the recommended way to start.
 
 ```bash
-# Define the goal for the Workflow Composer
-@agents/helpers/workflow-composer.md
-"Create a complete workflow to add a Stripe payment gateway to this application. This should include preparatory refactoring, implementation, and a final quality check."
+# Create a new Next.js project with Shadcn UI
+npx ai-vibe-prompts create my-app --template=next-shadcn
+cd my-app
 ```
 
-The `Workflow Composer` will then create and execute a plan that might look like this:
-1.  **Invoke `Refactor Assistant`**: To prepare the code for the new feature.
-2.  **Invoke `Developer`**: To write the Stripe integration code.
-3.  **Invoke `Quality Monitor`**: To run tests and security scans.
+### 3. Automated Environment Setup
 
-This orchestrated approach makes development faster, safer, and more reliable.
+Once inside your project, invoke the `Onboarder` agent. It will automatically:
+- Verify Node.js and npm versions.
+- Install all required dependencies.
+- Set up necessary configuration files (like `.env`).
+- Run initial tests to ensure the environment is ready.
+
+To run it, simply invoke the agent with a clear instruction:
+
+```bash
+@agents/helpers/onboarder.md
+"Set up this project for development."
+```
+
+## ⚙️ How to Use: The Development Workflow
+
+Interaction with the framework is simple. You provide a high-level goal to the main orchestrator, the `Workflow Composer`, and it handles the rest.
+
+### Step 1: Define Your Goal
+
+State what you want to achieve in plain English. Invoke the `Workflow Composer` with your goal.
+
+**Example: Adding a new feature**
+```bash
+@agents/helpers/workflow-composer.md
+"My goal is to add a new 'Contact Us' page with a functional form."
+```
+
+### Step 2: Review the Plan
+
+The `Workflow Composer` will enter **PLAN MODE**. It will analyze the codebase and create a detailed, multi-agent plan to achieve your goal. The plan will be presented to you for approval. It might look like this:
+
+1.  **Invoke `codebase-analyzer`**: To understand the project structure.
+2.  **Invoke `architect`**: To design the new 'Contact Us' page component and form logic.
+3.  **Invoke `developer`**: To implement the page based on the architect's plan.
+4.  **Invoke `quality-monitor`**: To run tests on the new page.
+
+### Step 3: Approve and Execute
+
+Once you approve the plan, the `Workflow Composer` switches to **ACT MODE** and executes the plan step-by-step, managing the entire process until the task is complete.
 
 ## 🤖 The Agent Team
 
@@ -74,7 +94,7 @@ Our agents have been upgraded to be active participants in the development proce
 
 - **`core/architect`**: Designs system architecture and creates technical plans for the `Developer`.
 - **`core/developer`**: Implements features based on architectural plans, using its `frontend`, `backend`, and `testing` specialists.
-- **`helpers/refactor-assistant`**: An active agent that uses tools like `replace_file_content` and `shell_exec` to safely prepare code *before* new features are added.
+- **`helpers/refactor-assistant`**: An active agent that uses tools like `file_apply_patch` and `shell_exec` to safely prepare code *before* new features are added.
 - **`helpers/debugger-assistant`**: Uses a scientific method and tools to systematically find and fix bugs.
 - **`helpers/quality-monitor`**: Automatically runs linters, tests, and security scans using `shell_exec` to enforce quality standards.
 - **`helpers/onboarder`**: Automates the entire project setup process.
