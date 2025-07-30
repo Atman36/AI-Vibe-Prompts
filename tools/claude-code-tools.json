@@ -1,0 +1,166 @@
+[
+  {
+    "name": "Read",
+    "description": "Read file contents from the local filesystem",
+    "claude_code_native": true,
+    "parameters": {
+      "file_path": {
+        "type": "string",
+        "description": "The absolute path to the file to read"
+      }
+    },
+    "usage_example": "Read the package.json file for dependency analysis"
+  },
+  {
+    "name": "Write", 
+    "description": "Create a new file or completely overwrite an existing file",
+    "claude_code_native": true,
+    "parameters": {
+      "file_path": {
+        "type": "string",
+        "description": "The absolute path to the file to write"
+      },
+      "content": {
+        "type": "string", 
+        "description": "The content to write to the file"
+      }
+    },
+    "usage_example": "Write new architectural documentation to docs/architecture/adr-001.md"
+  },
+  {
+    "name": "Edit",
+    "description": "Modify existing files by replacing specific text",
+    "claude_code_native": true,
+    "parameters": {
+      "file_path": {
+        "type": "string",
+        "description": "The absolute path to the file to modify"
+      },
+      "old_string": {
+        "type": "string",
+        "description": "The exact text to replace"
+      },
+      "new_string": {
+        "type": "string", 
+        "description": "The replacement text"
+      }
+    },
+    "replaces": "file_apply_patch",
+    "usage_example": "Update import statements or refactor code patterns"
+  },
+  {
+    "name": "MultiEdit",
+    "description": "Apply multiple edits to a single file in one operation",
+    "claude_code_native": true,
+    "parameters": {
+      "file_path": {
+        "type": "string",
+        "description": "The absolute path to the file to modify"
+      },
+      "edits": {
+        "type": "array",
+        "description": "Array of edit operations"
+      }
+    },
+    "replaces": "file_apply_patch",
+    "usage_example": "Perform multiple refactoring changes to a component file"
+  },
+  {
+    "name": "Bash",
+    "description": "Execute shell commands with timeout and security measures",
+    "claude_code_native": true,
+    "parameters": {
+      "command": {
+        "type": "string",
+        "description": "The command to execute"
+      },
+      "description": {
+        "type": "string",
+        "description": "Clear description of what the command does"
+      }
+    },
+    "replaces": "shell_exec",
+    "usage_example": "Run tests, install dependencies, or build the project"
+  },
+  {
+    "name": "Grep",
+    "description": "Search for patterns in files using ripgrep",
+    "claude_code_native": true,
+    "parameters": {
+      "pattern": {
+        "type": "string",
+        "description": "The regex pattern to search for"
+      },
+      "glob": {
+        "type": "string",
+        "description": "File pattern to filter (e.g., '*.js', '**/*.tsx')"
+      },
+      "output_mode": {
+        "type": "string",
+        "description": "Output format: 'content', 'files_with_matches', or 'count'"
+      }
+    },
+    "replaces": "codebase_search",
+    "usage_example": "Find React components, search for specific functions, or locate configuration files"
+  },
+  {
+    "name": "Glob",
+    "description": "Find files matching glob patterns",
+    "claude_code_native": true,
+    "parameters": {
+      "pattern": {
+        "type": "string",
+        "description": "Glob pattern like '**/*.js' or 'src/**/*.ts'"
+      },
+      "path": {
+        "type": "string",
+        "description": "Directory to search in (optional)"
+      }
+    },
+    "replaces": "list_files",
+    "usage_example": "Discover all TypeScript files, find test files, or locate configuration files"
+  },
+  {
+    "name": "LS",
+    "description": "List files and directories in a given path",
+    "claude_code_native": true,
+    "parameters": {
+      "path": {
+        "type": "string",
+        "description": "The absolute path to the directory to list"
+      }
+    },
+    "replaces": "get_directory",
+    "usage_example": "Explore project structure or verify directory contents"
+  },
+  {
+    "name": "WebSearch", 
+    "description": "Search the web for current information",
+    "claude_code_native": true,
+    "parameters": {
+      "query": {
+        "type": "string",
+        "description": "The search query"
+      }
+    },
+    "replaces": "search_web",
+    "usage_example": "Research best practices, find documentation, or check for latest framework updates"
+  },
+  {
+    "name": "WebFetch",
+    "description": "Fetch content from a specific URL",
+    "claude_code_native": true,
+    "parameters": {
+      "url": {
+        "type": "string",
+        "description": "The URL to fetch content from"
+      },
+      "prompt": {
+        "type": "string",
+        "description": "What information to extract from the page"
+      }
+    },
+    "replaces": "fetch_url",
+    "usage_example": "Get documentation, analyze API specifications, or fetch configuration examples"
+  }
+]

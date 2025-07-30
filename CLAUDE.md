@@ -148,8 +148,44 @@ Available templates:
 - `system/tool-calls.md` - Tool execution specification
 - `README.md` - User-facing documentation with usage examples
 
+## Claude Code Compatibility
+
+### Tool Mapping for Claude Code
+The framework has been updated for full Claude Code compatibility:
+
+**File Operations:**
+- `file_read` → `Read` - Read file contents
+- `file_write` → `Write` - Create or overwrite files  
+- `file_apply_patch` → `Edit/MultiEdit` - Modify existing files
+
+**Code Analysis:**
+- `codebase_search` → `Grep` - Search for patterns in code
+- `list_files` → `Glob` - Find files by pattern
+- `get_directory` → `LS` - List directory contents
+
+**System Operations:**
+- `shell_exec` → `Bash` - Execute shell commands
+- `search_web` → `WebSearch` - Search the internet
+
+**Removed Features (No Claude Code equivalent):**
+- `invoke_agent` - Claude Code operates as single agent
+- `message_notify_user/message_ask_user` - Use direct responses
+
+### Agent Compatibility Status
+- ✅ **Core Agents**: Updated for Claude Code (architect, developer, analyst)
+- ✅ **Workflow Composer**: Redesigned for single-agent execution model
+- ⚠️ **Helper Agents**: Most compatible, some need tool mapping updates
+- ⚠️ **Specialist Agents**: Compatible with tool mapping
+
+### Usage with Claude Code
+1. Use agents as planning and guidance documents
+2. Claude Code will automatically use native tools based on agent instructions
+3. Focus on agent's planning methodology rather than specific tool calls
+4. Confidence scoring and quality gates work seamlessly with Claude Code
+
 ## Common Issues & Troubleshooting
 - Tests not implemented yet (`npm test` fails)
 - Agent discovery relies on proper YAML front-matter formatting
 - CLI requires Node.js 18+ for proper execution
 - Quality gates may trigger frequent fallbacks during development
+- Some agents reference custom tools - refer to `tools/claude-code-tools.json` for mappings
