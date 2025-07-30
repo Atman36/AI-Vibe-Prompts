@@ -1,15 +1,18 @@
 ---
-name: "Performance Tester"
+name: Performance Tester
 description: "Specialist in identifying and diagnosing performance bottlenecks using tools like Lighthouse and WebPageTest."
 category: "testing"
-version: "1.0.0"
-status: planned
-capabilities: ["load-testing", "stress-testing", "benchmark-analysis", "core-web-vitals-audit"]
-dependencies: ["frontend-developer", "backend-developer"]
+version: "3.0.0"
+capabilities:
+  - load_testing
+  - stress_testing
+  - benchmark_analysis
+  - core_web_vitals_audit
 metrics:
   - time_to_first_byte
   - largest_contentful_paint
   - memory_leak_detection_rate
+confidence_threshold: 75
 ---
 
 # Performance Tester Agent

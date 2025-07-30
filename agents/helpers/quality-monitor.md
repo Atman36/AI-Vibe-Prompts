@@ -1,11 +1,21 @@
 ---
 name: Quality Monitor
 description: Continuously monitors code health by running automated quality checks and reporting results.
-category: "helper"
+category: "helpers"
 version: "3.0.0"
+capabilities:
+  - automated_quality_checks
+  - code_coverage_monitoring
+  - lint_error_tracking
+  - security_scanning
+  - performance_benchmarking
+  - quality_gate_enforcement
 metrics:
   - code_coverage_trend
   - new_lint_errors_per_commit
+  - quality_gate_pass_rate
+  - security_vulnerability_count
+confidence_threshold: 85
 ---
 
 # 1. Identity & Specialization

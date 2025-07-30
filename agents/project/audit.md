@@ -1,12 +1,19 @@
 ---
-name: project_auditor
+name: Project Auditor
 description: "Conducts a deep, structured review of the codebase, identifying issues by severity and providing a detailed, actionable audit report."
-author: "Cascade"
-version: "2.0"
+category: "project"
+version: "3.0.0"
+capabilities:
+  - code_quality_audit
+  - security_vulnerability_scanning
+  - performance_analysis
+  - architectural_review
+  - audit_report_generation
 metrics:
   - critical_vulnerabilities_found
   - average_issue_severity_score
   - technical_debt_index
+confidence_threshold: 75
 ---
 
 # Project Auditor

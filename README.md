@@ -30,63 +30,63 @@ This framework introduces a structured, tool-first approach to AI-assisted devel
 
 ## 🚀 Getting Started
 
-Follow these steps to get the agent-driven framework running.
+This framework is now managed via a powerful command-line interface (CLI). Follow these steps to get started.
 
 ### 1. Prerequisites
 
-Make sure you have [Node.js](https://nodejs.org/) version 18 or higher installed.
+- [Node.js](https://nodejs.org/) version 18 or higher.
+- Dependencies installed: `npm install`
 
-### 2. Installation
+### 2. Discover Available Agents
 
-Create a new project using one of our templates. This is the recommended way to start.
-
-```bash
-# Create a new Next.js project with Shadcn UI
-npx ai-vibe-prompts create my-app --template=shadcn-vite
-cd my-app
-```
-
-### 3. Automated Environment Setup
-
-Once inside your project, invoke the `Onboarder` agent. It will automatically:
-- Verify Node.js and npm versions.
-- Install all required dependencies.
-- Set up necessary configuration files (like `.env`).
-- Run initial tests to ensure the environment is ready.
-
-To run it, simply invoke the agent with a clear instruction:
+To see the full team of specialized agents available to you, run the `discover` command:
 
 ```bash
-@agents/helpers/onboarder.md
-"Set up this project for development."
+node scripts/avp-init.js discover
 ```
 
-## ⚙️ How to Use: The Development Workflow
+This will list all agents, their version, description, and capabilities, so you know who to assign to a task.
 
-Interaction with the framework is simple. You provide a high-level goal to the main orchestrator, the `Workflow Composer`, and it handles the rest.
+### 3. Define a Workflow
 
-### Step 1: Define Your Goal
+Create a JSON file (e.g., `my-workflow.json`) to define a sequence of tasks for the agents. Each step specifies the agent to use and the task to perform.
 
-State what you want to achieve in plain English. Invoke the `Workflow Composer` with your goal.
+**Example `my-workflow.json`:**
+```json
+{
+  "name": "New Feature Workflow",
+  "steps": [
+    {
+      "agentName": "Project Initializer",
+      "description": "Initialize a new project",
+      "task": { "projectName": "my-new-app" }
+    },
+    {
+      "agentName": "Codebase Analyzer Agent",
+      "description": "Analyze the new codebase",
+      "task": { "projectPath": "./my-new-app" }
+    }
+  ]
+}
+```
 
-**Example: Adding a new feature**
+### 4. Run the Workflow
+
+Execute your workflow using the `workflow:run` command:
+
 ```bash
-@agents/helpers/workflow-composer.md
-"My goal is to add a new 'Contact Us' page with a functional form."
+node scripts/avp-init.js workflow:run my-workflow.json
 ```
 
-### Step 2: Review the Plan
+The CLI will execute each step, applying confidence gating to ensure quality and reliability. If an agent's confidence is too low, the workflow will halt for an audit.
 
-The `Workflow Composer` will enter **PLAN MODE**. It will analyze the codebase and create a detailed, multi-agent plan to achieve your goal. The plan will be presented to you for approval. It might look like this:
+## ⚙️ The CLI-Driven Workflow
 
-1.  **Invoke `codebase-analyzer`**: To understand the project structure.
-2.  **Invoke `architect`**: To design the new 'Contact Us' page component and form logic.
-3.  **Invoke `developer`**: To implement the page based on the architect's plan.
-4.  **Invoke `quality-monitor`**: To run tests on the new page.
+Interaction with the framework is managed entirely through the CLI, providing a structured and repeatable process for complex tasks.
 
-### Step 3: Approve and Execute
-
-Once you approve the plan, the `Workflow Composer` switches to **ACT MODE** and executes the plan step-by-step, managing the entire process until the task is complete.
+1.  **Discover Agents**: Use `avp discover` to identify the best agent for each part of your task.
+2.  **Compose a Workflow**: Define a series of steps in a `.json` file. Each step assigns a task to a specific agent.
+3.  **Execute with Confidence**: Run your workflow with `avp workflow:run <your-file.json>`. The system orchestrates the agents, and its confidence-gating system ensures each step meets quality standards before proceeding.
 
 ## 🤖 The Agent Team
 
@@ -135,19 +135,22 @@ Fork this repository and modify agents to match your:
 
 ## 🛠️ CLI Commands
 
+The `avp-init.js` script provides the following commands to manage your agent workflows.
+
+### Discover Agents
+
+Lists all available agents and their capabilities.
+
 ```bash
-# Project creation
-npx ai-vibe-prompts create <name> --template=<template>
+node scripts/avp-init.js discover
+```
 
-# Add to existing project
-npx ai-vibe-prompts init [directory]
+### Run a Workflow
 
-# List available resources
-npx ai-vibe-prompts list-templates
-npx ai-vibe-prompts list-agents
+Executes a multi-agent workflow from a JSON definition file.
 
-# Help and documentation
-npx ai-vibe-prompts help
+```bash
+node scripts/avp-init.js workflow:run <path_to_workflow.json>
 ```
 
 ## 🌟 Key Benefits

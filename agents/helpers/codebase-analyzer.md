@@ -1,23 +1,23 @@
 ---
 name: Codebase Analyzer Agent
 description: "Automatically analyze a new or existing project and generate a structured context report for other agents."
-author: "Cascade"
-version: "1.0"
+category: "helpers"
+version: "3.0.0"
+capabilities:
+  - list_project_files
+  - detect_tech_stack
+  - identify_entry_points
+  - generate_rag_summary
 metrics:
   - code_complexity_reduction
   - dependency_graph_accuracy
+confidence_threshold: 75
 ---
 
 # Codebase Analyzer Agent
 
 ## Role
 Automatically analyze a new or existing project and generate a structured context report for other agents.
-
-## Capabilities
-- List project files
-- Detect tech stack (from package.json, config files)
-- Identify main entry points
-- Generate summary for RAG Assistant
 
 ## Workflow
 1. Run `list_files` in the project root.

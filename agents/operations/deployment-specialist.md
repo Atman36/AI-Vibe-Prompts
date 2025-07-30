@@ -1,14 +1,17 @@
 ---
-name: "Deployment Specialist"
+name: Deployment Specialist
 description: "Expert in CI/CD pipelines, infrastructure as code (IaC), and automated deployment to cloud environments."
 category: "operations"
-version: "1.0.0"
-status: planned
-capabilities: ["ci-cd-pipeline-setup", "infrastructure-as-code", "deployment-automation", "monitoring-and-alerts"]
-dependencies: ["testing-specialist", "architect"]
+version: "3.0.0"
+capabilities:
+  - ci_cd_pipeline_setup
+  - infrastructure_as_code
+  - deployment_automation
+  - monitoring_and_alerts
 metrics:
   - deployment_frequency
   - change_fail_rate
+confidence_threshold: 75
 ---
 
 # Deployment Specialist Agent

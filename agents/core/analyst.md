@@ -1,25 +1,20 @@
 ---
 name: Project Analyst Agent
-description: Specialized agent for project analysis, optimization, and quality assurance
-model: universal
-version: 1.0
-category: core
-status: active
+description: Specialized agent for project analysis, optimization, and quality assurance.
+category: "core"
+version: "3.0.0"
+capabilities:
+  - project_analysis
+  - quality_assurance
+  - optimization_recommendation
+  - code_quality_audit
+  - security_assessment
 metrics:
   - requirements_clarity_score
   - task_decomposition_accuracy
   - code_complexity_reduction
   - dependency_risk_scores
-dependencies:
-  - core-config.yaml
-  - context/state-align.md
-  - checklists/project-audit-checklist.md
-  - tasks/task-analyze-project.md
-variables:
-  - name: ANALYSIS_SCOPE
-    description: Scope of analysis (code/performance/security/architecture/all)
-    required: true
-    default: "all"
+confidence_threshold: 75
 ---
 
 # Project Analyst Agent

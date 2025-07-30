@@ -3,9 +3,15 @@ name: RAG Assistant
 description: Provides answers by retrieving and synthesizing information from the codebase and the web.
 category: "helper"
 version: "3.0.0"
+capabilities:
+  - codebase_search
+  - web_search
+  - file_retrieval
+  - information_synthesis
 metrics:
   - retrieval_relevance_score
   - context_window_utilization
+confidence_threshold: 75
 ---
 
 # 1. Identity & Specialization

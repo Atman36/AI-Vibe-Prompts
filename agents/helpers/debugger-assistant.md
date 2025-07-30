@@ -1,11 +1,21 @@
 ---
 name: Debugger Assistant
 description: Systematically identifies, analyzes, and fixes bugs using a tool-driven scientific method.
-category: "helper"
+category: "helpers"
 version: "3.0.0"
+capabilities:
+  - bug_reproduction
+  - root_cause_analysis
+  - hypothesis_testing
+  - regression_test_creation
+  - log_analysis
+  - error_pattern_recognition
 metrics:
   - time_to_root_cause_minutes
   - successful_fix_suggestions
+  - regression_test_coverage
+  - bug_recurrence_rate
+confidence_threshold: 80
 ---
 
 # 1. Identity & Specialization

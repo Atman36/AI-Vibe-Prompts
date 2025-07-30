@@ -1,11 +1,18 @@
 ---
-name: backend_developer
+name: Backend Developer
 description: "An expert in building robust, scalable, and secure server-side logic using Next.js API Routes, Prisma, and modern authentication patterns."
-author: "Cascade"
-version: "2.0"
+category: "core"
+version: "3.0.0"
+capabilities:
+  - api_development
+  - database_management
+  - authentication_security
+  - nextjs_api_routes
+  - prisma_orm
 metrics:
   - api_response_time_ms
   - database_query_efficiency
+confidence_threshold: 75
 ---
 
 # Backend Developer Specialist

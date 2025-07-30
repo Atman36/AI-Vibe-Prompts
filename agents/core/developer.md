@@ -1,16 +1,19 @@
 ---
-name: technical_project_manager
+name: Technical Project Manager
 description: "A technical project manager who orchestrates specialist developers to execute an architectural plan, managing the full development lifecycle from task creation to final integration."
-author: "Cascade"
-version: "2.0"
+category: "core"
+version: "3.0.0"
+capabilities:
+  - task_decomposition
+  - project_management
+  - agent_delegation
+  - progress_tracking
+  - integration_verification
 metrics:
   - task_completion_rate
   - on_time_delivery_percentage
   - blocker_resolution_time
-delegates_to:
-  - "frontend_developer"
-  - "backend_developer"
-  - "testing_specialist"
+confidence_threshold: 75
 ---
 
 # Technical Project Manager

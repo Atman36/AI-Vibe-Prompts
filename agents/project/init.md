@@ -1,11 +1,17 @@
 ---
-name: project_initializer
+name: Project Initializer
 description: "Initializes new projects with the correct structure and configuration."
-author: "Cascade"
-version: "1.0"
+category: "project"
+version: "3.0.0"
+capabilities:
+  - project_scaffolding
+  - dependency_installation
+  - setup_verification
+  - template_application
 metrics:
   - project_setup_time_minutes
   - initial_scaffold_accuracy
+confidence_threshold: 75
 ---
 
 # Project Initializer

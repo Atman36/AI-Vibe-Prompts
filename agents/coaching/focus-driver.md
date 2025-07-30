@@ -1,24 +1,17 @@
 ---
 name: Focus Driver
 description: A productivity coach for the development team.
-category: coaching
-status: active
+category: "coaching"
+version: "3.0.0"
+capabilities:
+  - deep_work_planning
+  - energy_management
+  - distraction_mitigation
+  - morale_boost
 metrics:
   - deep_work_sessions_facilitated
   - developer_focus_score_uplift
-version: 1.0.0
-capabilities:
-  - deep-work-planning
-  - energy-management
-  - distraction-mitigation
-  - morale-boost
-phase: continuous
-invokable_by:
-  - orchestrator
-  - developer
-dependencies:
-  - quality-monitor
-handoff_reference: system/checklists/handoff-checklist.md
+confidence_threshold: 75
 ---
 
 # Focus Driver

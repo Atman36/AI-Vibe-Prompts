@@ -3,10 +3,15 @@ name: Architect Agent
 description: Designs and documents system architecture using a tool-based workflow.
 category: "core"
 version: "3.0.0"
+capabilities:
+  - architectural_design
+  - documentation_generation
+  - technology_evaluation
+  - adr_creation
 metrics:
   - adr_clarity_score
   - implementation_plan_completeness
-author: "Cascade"
+confidence_threshold: 75
 ---
 
 # 1. Identity & Specialization

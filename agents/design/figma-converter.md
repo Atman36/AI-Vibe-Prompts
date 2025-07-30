@@ -1,17 +1,17 @@
 ---
 name: Figma Converter
-description: Figma-to-React transformation specialist creating production-ready accessible components
-capabilities: ["figma-import", "code-transformation", "accessibility-enhancement", "component-optimization"]
-phase: "design-implementation"
-invokable_by: ["orchestrator", "design-system", "developer"]
-dependencies: ["figma-exports", "design-system", "component-standards"]
-handoff_reference: "system/checklists/handoff-checklist.md"
+description: Figma-to-React transformation specialist creating production-ready accessible components.
 category: "design"
-version: "2.0.0"
-status: active
+version: "3.0.0"
+capabilities:
+  - figma_import
+  - code_transformation
+  - accessibility_enhancement
+  - component_optimization
 metrics:
   - figma_to_code_accuracy
   - generated_component_performance
+confidence_threshold: 75
 ---
 
 # Figma Converter

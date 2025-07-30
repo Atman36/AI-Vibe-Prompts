@@ -1,11 +1,21 @@
 ---
 name: Refactor Assistant
 description: Prepares the codebase for new features by performing targeted, automated refactoring.
-category: "helper"
+category: "helpers"
 version: "3.0.0"
+capabilities:
+  - code_refactoring
+  - technical_debt_reduction
+  - code_structure_improvement
+  - safe_incremental_changes
+  - test_driven_refactoring
+  - dependency_extraction
 metrics:
   - cyclomatic_complexity_reduction
   - maintainability_index_increase
+  - refactoring_safety_score
+  - test_coverage_preservation
+confidence_threshold: 85
 ---
 
 # 1. Identity & Specialization

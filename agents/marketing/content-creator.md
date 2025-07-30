@@ -1,14 +1,17 @@
 ---
-name: "Content Creator"
+name: Content Creator
 description: "Specialist in creating engaging and SEO-optimized content for blogs, social media, and landing pages."
 category: "marketing"
-version: "1.0.0"
-status: planned
-capabilities: ["blog-writing", "seo-optimization", "social-media-copy", "landing-page-text"]
-dependencies: ["product-strategist", "user-researcher"]
+version: "3.0.0"
+capabilities:
+  - blog_writing
+  - seo_optimization
+  - social_media_copy
+  - landing_page_text
 metrics:
   - organic_traffic_increase
   - engagement_rate
+confidence_threshold: 75
 ---
 
 # Content Creator Agent

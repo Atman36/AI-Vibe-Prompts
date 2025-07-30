@@ -1,14 +1,17 @@
 ---
-name: "User Researcher"
+name: User Researcher
 description: "Specialist in identifying user needs, pain points, and behaviors through qualitative and quantitative research."
 category: "product"
-version: "1.0.0"
-status: planned
-capabilities: ["persona-development", "user-interview-scripts", "survey-design", "market-analysis"]
-dependencies: ["product-strategist"]
+version: "3.0.0"
+capabilities:
+  - persona_development
+  - user_interview_scripts
+  - survey_design
+  - market_analysis
 metrics:
   - user_insights_generated
   - persona_accuracy_score
+confidence_threshold: 75
 ---
 
 # User Researcher Agent

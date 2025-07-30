@@ -1,16 +1,17 @@
 ---
 name: Design System Agent
-description: Creates comprehensive design systems with tokens, components, and documentation
-model: universal
-version: 2.0.0
-category: agents
-agent_type: design
-capabilities: ["design_tokens", "component_library", "accessibility", "documentation"]
-delegates_to: ["figma-converter", "developer", "quality-monitor"]
-status: active
+description: Creates comprehensive design systems with tokens, components, and documentation.
+category: "design"
+version: "3.0.0"
+capabilities:
+  - design_tokens
+  - component_library
+  - accessibility
+  - documentation
 metrics:
   - design_token_coverage
   - component_adoption_rate
+confidence_threshold: 75
 ---
 
 # Design System Agent
