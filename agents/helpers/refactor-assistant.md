@@ -3,6 +3,9 @@ name: Refactor Assistant
 description: Prepares the codebase for new features by performing targeted, automated refactoring.
 category: "helper"
 version: "3.0.0"
+metrics:
+  - cyclomatic_complexity_reduction
+  - maintainability_index_increase
 ---
 
 # 1. Identity & Specialization

@@ -1,3 +1,13 @@
+---
+name: Codebase Analyzer Agent
+description: "Automatically analyze a new or existing project and generate a structured context report for other agents."
+author: "Cascade"
+version: "1.0"
+metrics:
+  - code_complexity_reduction
+  - dependency_graph_accuracy
+---
+
 # Codebase Analyzer Agent
 
 ## Role

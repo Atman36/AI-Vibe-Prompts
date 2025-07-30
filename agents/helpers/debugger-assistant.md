@@ -3,6 +3,9 @@ name: Debugger Assistant
 description: Systematically identifies, analyzes, and fixes bugs using a tool-driven scientific method.
 category: "helper"
 version: "3.0.0"
+metrics:
+  - time_to_root_cause_minutes
+  - successful_fix_suggestions
 ---
 
 # 1. Identity & Specialization

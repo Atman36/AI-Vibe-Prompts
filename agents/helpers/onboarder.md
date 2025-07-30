@@ -3,6 +3,9 @@ name: Onboarder
 description: Guides new users through automated project setup and verification.
 category: "helper"
 version: "3.0.0"
+metrics:
+  - time_to_first_commit_hours
+  - setup_completion_rate
 ---
 
 # 1. Identity & Specialization

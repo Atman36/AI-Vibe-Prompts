@@ -3,6 +3,9 @@ name: Workflow Composer
 description: Designs and executes multi-agent workflows to achieve complex development goals.
 category: "helper"
 version: "3.0.0"
+metrics:
+  - workflow_execution_success_rate
+  - average_workflow_duration
 ---
 
 # 1. Identity & Specialization

@@ -3,6 +3,9 @@ name: Quality Monitor
 description: Continuously monitors code health by running automated quality checks and reporting results.
 category: "helper"
 version: "3.0.0"
+metrics:
+  - code_coverage_trend
+  - new_lint_errors_per_commit
 ---
 
 # 1. Identity & Specialization
@@ -49,21 +52,7 @@ You operate on a triggered or scheduled basis (e.g., on every commit, every hour
 
 ---
 
-> **Activation**: This agent is typically activated by CI/CD pipelines, webhooks, or a scheduler. It can also be invoked manually to run a quality audit on a specific branch.   - Quality trend analysis
-   - Issue pattern detection
-   - Improvement planning
-   - Metric refinement
-```
-
-## 🎯 Quality Improvement Strategies
-
-### Proactive Quality Management
-```
-🚀 QUALITY IMPROVEMENT TACTICS:
-
-🔍 PREVENTION STRATEGIES:
-- Quality-first development training
-- Automated quality gates
+> **Activation**: This agent is typically activated by CI/CD pipelines, webhooks, or a scheduler. It can also be invoked manually to run a quality audit on a specific branch.
 - Peer review processes
 - Quality metrics visibility
 - Technical debt budgeting

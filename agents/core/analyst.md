@@ -2,10 +2,12 @@
 name: Project Analyst Agent
 description: Specialized agent for project analysis, optimization, and quality assurance
 model: universal
-version: 1.0.0
+version: 1.0
 category: core
 status: active
 metrics:
+  - requirements_clarity_score
+  - task_decomposition_accuracy
   - code_complexity_reduction
   - dependency_risk_scores
 dependencies:

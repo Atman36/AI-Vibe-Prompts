@@ -1,384 +1,98 @@
 # AI-Vibe-Prompts Core Configuration
-# Enhanced BMAD-METHOD inspired configuration with agent-oriented architecture
+# This file defines the available agents and their roles within the system.
 
-# Project Metadata
-name: "AI-Vibe-Prompts"
-version: "2.0.0"
-framework: "Agent-Driven Context Engineering Framework"
-description: "Simplified, production-ready alternative to BMAD-METHOD with clear agent roles"
-
-# Path Configuration
-paths:
-  # Core directories (new agent-oriented structure)
-  agents: "agents/"
-  system: "system/"
-  templates: "templates/"
-  scripts: "scripts/"
-  docs: "docs/"
-  
-  # Agent subdirectories
-  agents_core: "agents/core/"
-  agents_project: "agents/project/"
-  agents_design: "agents/design/"
-  agents_helpers: "agents/helpers/"
-  agents_strategy: "agents/strategy/"
-  agents_coaching: "agents/coaching/"
-  agents_product: "agents/product/"
-  agents_marketing: "agents/marketing/"
-  agents_testing: "agents/testing/"
-  agents_operations: "agents/operations/"
-  
-  # System subdirectories
-  system_checklists: "system/checklists/"
-  system_context: "system/"
-
-  # Project structure (when used in projects)
-  project_docs: "docs/"
-  stories: "docs/stories/"
-  architecture: "docs/architecture/"
-  requirements: "docs/requirements/"
-
-
-# Agent Configuration (Enhanced with AI Blindspot Prevention)
 agents:
-  
-  architect:
-    name: "System Architect"
-    file: "agents/core/architect.md"
-    capabilities: ["design", "planning", "architecture", "walking-skeleton", "complexity-management"]
-    phase: "planning"
-    invokable_by: ["orchestrator", "user"]
-    dependencies: ["rag-assistant", "quality-monitor"]
-    
-  developer:
-    name: "AI Developer (Coordinator)"
-    file: "agents/core/developer.md"
-    capabilities: ["coordination", "task-delegation", "specialist-supervision"]
-    phase: "implementation"
-    invokable_by: ["orchestrator", "architect"]
-    dependencies: ["architecture", "design-specs", "rag-assistant", "refactor-assistant"]
-    delegates_to: ["frontend_developer", "backend_developer", "testing_specialist"]
+  # Coaching
+  - name: focus_driver
+    path: agents/coaching/focus-driver.md
+    description: "Helps maintain focus and productivity during development sessions."
 
-  frontend_developer:
-    name: "Frontend Developer"
-    file: "agents/core/developer/frontend.md"
-    category: "core"
-    agent_type: "developer_specialist"
-    status: active
-    invokable_by: ["orchestrator", "developer"]
+  # Core Team
+  - name: analyst
+    path: agents/core/analyst.md
+    description: "Analyzes requirements and breaks down complex problems."
+  - name: architect
+    path: agents/core/architect.md
+    description: "Designs the overall system architecture and technical strategy."
+  - name: technical_project_manager
+    path: agents/core/developer.md
+    description: "A technical project manager who orchestrates specialist developers to execute an architectural plan, managing the full development lifecycle from task creation to final integration."
+    delegates_to:
+      - "frontend_developer"
+      - "backend_developer"
+      - "testing_specialist"
 
-  backend_developer:
-    name: "Backend Developer"
-    file: "agents/core/developer/backend.md"
-    category: "core"
-    agent_type: "developer_specialist"
-    status: active
-    invokable_by: ["orchestrator", "developer"]
+  # Developer Specialists
+  - name: frontend_developer
+    path: agents/core/developer/frontend.md
+    description: "A specialist in creating cutting-edge, high-performance user interfaces using React 19, Next.js 15 with the App Router, and Tailwind CSS."
+  - name: backend_developer
+    path: agents/core/developer/backend.md
+    description: "An expert in building robust, scalable, and secure server-side logic using Next.js API Routes, Prisma, and modern authentication patterns."
+  - name: testing_specialist
+    path: agents/core/developer/testing.md
+    description: "An expert in ensuring code quality through a robust automated testing strategy using Vitest for unit/integration tests and Playwright for end-to-end tests."
 
-  testing_specialist:
-    name: "Testing Specialist"
-    file: "agents/core/developer/testing.md"
-    category: "core"
-    agent_type: "developer_specialist"
-    status: active
-    invokable_by: ["orchestrator", "developer"]
-    
-  analyst:
-    name: "Project Analyst"
-    file: "agents/core/analyst.md"
-    capabilities: ["analysis", "optimization", "quality-assurance", "black-box-testing"]
-    phase: "review"
-    invokable_by: ["orchestrator", "developer"]
-    dependencies: ["developer", "rag-assistant", "quality-monitor"]
-    
-  # Project Agents (lifecycle management)
-  project_init:
-    name: "Project Initializer"
-    file: "agents/project/init.md"
-    capabilities: ["setup", "scaffolding", "technology-selection", "walking-skeleton"]
-    phase: "initialization"
-    dependencies: ["architect"]
-    
-  project_audit:
-    name: "Project Auditor"
-    file: "agents/project/audit.md"
-    capabilities: ["audit", "modernization", "optimization", "technical-debt-analysis"]
-    phase: "maintenance"
-    dependencies: ["quality-monitor", "rag-assistant"]
+  # Design
+  - name: design_system_specialist
+    path: agents/design/design-system.md
+    description: "Manages and enforces the design system."
+  - name: figma_converter
+    path: agents/design/figma-converter.md
+    description: "Converts Figma designs into code components."
 
-  # Helper Agents (AI Blindspot Prevention)
-  rag_assistant:
-    name: "RAG Assistant (Quality Gateway)"
-    file: "agents/helpers/rag-assistant.md"
-    capabilities: ["documentation-verification", "spec-compliance", "context-validation", "ai-blindspot-prevention"]
-    phase: "continuous"
-    invokable_by: ["all"]
-    mandatory_gate: true
-    
-  refactor_assistant:
-    name: "Refactor Assistant"
-    file: "agents/helpers/refactor-assistant.md"
-    capabilities: ["preparatory-refactoring", "code-cleanup", "architecture-preparation"]
-    phase: "pre-implementation"
-    invokable_by: ["developer", "architect"]
-    
-  debugger_assistant:
-    name: "Debugger Assistant"
-    file: "agents/helpers/debugger-assistant.md"
-    capabilities: ["scientific-debugging", "hypothesis-testing", "error-analysis"]
-    phase: "debugging"
-    invokable_by: ["developer", "analyst"]
-    
-  quality_monitor:
-    name: "Quality Monitor"
-    file: "agents/helpers/quality-monitor.md"
-    capabilities: ["quality-metrics", "technical-debt-detection", "code-health-monitoring"]
-    phase: "continuous"
-    invokable_by: ["all"]
-    
-  workflow_composer:
-    name: "Workflow Composer"
-    file: "agents/helpers/workflow-composer.md"
-    capabilities: ["workflow-design", "agent-coordination", "process-automation"]
-    phase: "orchestration"
-    invokable_by: ["user", "cli"]
+  # Helpers
+  - name: codebase_analyzer
+    path: agents/helpers/codebase-analyzer.md
+    description: "Analyzes the existing codebase for complexity and dependencies."
+  - name: debugger_assistant
+    path: agents/helpers/debugger-assistant.md
+    description: "Assists in debugging complex issues."
+  - name: onboarder
+    path: agents/helpers/onboarder.md
+    description: "Helps new developers get started with the project."
+  - name: quality_monitor
+    path: agents/helpers/quality-monitor.md
+    description: "Monitors code quality metrics over time."
+  - name: rag_assistant
+    path: agents/helpers/rag-assistant.md
+    description: "Retrieval-Augmented Generation assistant for context."
+  - name: refactor_assistant
+    path: agents/helpers/refactor-assistant.md
+    description: "Assists in refactoring code for better structure and performance."
+  - name: workflow_composer
+    path: agents/helpers/workflow-composer.md
+    description: "Helps compose and orchestrate agent workflows."
 
-  # Strategy & Coaching Agents
-  product_strategist:
-    name: "Product Strategist"
-    file: "agents/strategy/product-strategist.md"
-    capabilities: ["problem-definition", "value-proposition", "success-metrics", "user-stories"]
-    phase: "planning"
-    invokable_by: ["orchestrator", "user"]
-    dependencies: ["architect"]
+  # Marketing
+  - name: content_creator
+    path: agents/marketing/content-creator.md
+    description: "Creates marketing content and documentation."
 
-  focus_driver:
-    name: "Focus Driver"
-    file: "agents/coaching/focus-driver.md"
-    capabilities: ["deep-work-planning", "energy-management", "distraction-mitigation", "morale-boost"]
-    phase: "continuous"
-    invokable_by: ["orchestrator", "developer"]
-    dependencies: ["quality-monitor"]
+  # Operations
+  - name: deployment_specialist
+    path: agents/operations/deployment-specialist.md
+    description: "Manages the deployment and release process."
 
-  # Product Agents
-  user_researcher:
-    name: "User Researcher"
-    file: "agents/product/user-researcher.md"
-    category: "product"
-    status: planned
-    invokable_by: ["orchestrator", "product-strategist"]
+  # Product
+  - name: user_researcher
+    path: agents/product/user-researcher.md
+    description: "Conducts user research and gathers feedback."
 
-  # Testing Agents
-  performance_tester:
-    name: "Performance Tester"
-    file: "agents/testing/performance-tester.md"
-    category: "testing"
-    status: planned
-    invokable_by: ["orchestrator", "analyst"]
+  # Project Management
+  - name: project_auditor
+    path: agents/project/audit.md
+    description: "Audits the project for code quality, security, and best practices."
+  - name: project_initializer
+    path: agents/project/init.md
+    description: "Initializes new projects with the correct structure and configuration."
 
-  # Marketing Agents
-  content_creator:
-    name: "Content Creator"
-    file: "agents/marketing/content-creator.md"
-    category: "marketing"
-    status: planned
-    invokable_by: ["orchestrator", "product-strategist"]
+  # Strategy
+  - name: product_strategist
+    path: agents/strategy/product-strategist.md
+    description: "Defines the product vision and strategy."
 
-  # Operations Agents
-  deployment_specialist:
-    name: "Deployment Specialist"
-    file: "agents/operations/deployment-specialist.md"
-    category: "operations"
-    status: planned
-    invokable_by: ["orchestrator", "architect"]
-
-  # Design Agents
-  figma_converter:
-    name: "Figma to Code Converter"
-    file: "agents/design/figma-converter.md"
-    capabilities: ["design-conversion", "component-generation", "responsive-implementation"]
-    phase: "implementation"
-    dependencies: ["architect", "rag-assistant"]
-
-# Workflow Presets (AI Blindspot Prevention Integrated)
-workflow_presets:
-  auth-system:
-    name: "Authentication System Implementation"
-    agents: 
-      - "rag-assistant"  # Mandatory quality gate
-      - "architect"
-      - "refactor-assistant"  # Preparatory refactoring
-      - "developer"
-      - "analyst"
-      - "quality-monitor"
-    phases: ["validation", "planning", "preparation", "implementation", "review", "monitoring"]
-    quality_gates: ["spec-compliance", "security-requirements", "walking-skeleton", "black-box-testing"]
-    deliverables: ["auth-requirements-validation.md", "auth-architecture.md", "refactor-plan.md", "auth-implementation/", "security-test-suite/", "quality-metrics.md"]
-    
-  dashboard-modernization:
-    name: "Legacy Dashboard Modernization"
-    agents: 
-      - "project-audit"
-      - "rag-assistant"
-      - "architect"
-      - "refactor-assistant"
-      - "developer"
-      - "quality-monitor"
-      - "analyst"
-    phases: ["audit", "validation", "redesign", "preparation", "migration", "monitoring", "review"]
-    quality_gates: ["legacy-analysis", "spec-compliance", "preparatory-refactoring", "walking-skeleton", "performance-targets"]
-    deliverables: ["legacy-analysis.md", "requirements-validation.md", "modern-architecture.md", "refactor-strategy.md", "migration-plan.md", "performance-report.md"]
-    
-  component-system:
-    name: "Design System & Component Library"
-    agents: 
-      - "rag-assistant"
-      - "figma-converter"
-      - "architect"
-      - "developer"
-      - "quality-monitor"
-      - "analyst"
-    phases: ["validation", "design-conversion", "architecture", "implementation", "monitoring", "documentation"]
-    quality_gates: ["design-spec-compliance", "accessibility-requirements", "performance-budgets", "component-testing"]
-    deliverables: ["design-requirements.md", "design-tokens.md", "component-architecture.md", "component-library/", "accessibility-audit.md", "usage-guide.md"]
-    
-  bug-resolution:
-    name: "Scientific Bug Resolution"
-    agents:
-      - "debugger-assistant"
-      - "rag-assistant"
-      - "analyst"
-      - "developer"
-      - "quality-monitor"
-    phases: ["triage", "validation", "analysis", "implementation", "monitoring"]
-    quality_gates: ["bug-reproduction", "spec-compliance", "root-cause-identification", "regression-prevention"]
-    deliverables: ["bug-analysis.md", "hypothesis-testing.md", "fix-implementation/", "regression-tests/", "post-fix-monitoring.md"]
-    
-  legacy-refactoring:
-    name: "Legacy Code Refactoring"
-    agents:
-      - "project-audit"
-      - "rag-assistant"
-      - "refactor-assistant"
-      - "architect"
-      - "developer"
-      - "quality-monitor"
-    phases: ["audit", "validation", "planning", "preparation", "implementation", "monitoring"]
-    quality_gates: ["technical-debt-assessment", "spec-compliance", "refactor-safety", "performance-maintenance"]
-    deliverables: ["refactor-audit.md", "compliance-validation.md", "refactor-plan.md", "safety-analysis.md", "refactored-code/", "quality-improvement.md"]
-
-# Quality Control (Enhanced with handoff protocol)
-quality:
-  primary_handoff_protocol: "system/checklists/handoff-checklist.md"
-  
-  checklists:
-    - name: "Agent Handoff Quality"
-      file: "system/checklists/handoff-checklist.md"
-      phase: "all"
-      usage: "agent-transitions"
-    
-    - name: "Architecture Review"
-      file: "system/checklists/architecture-checklist.md"
-      phase: "planning"
-      
-    - name: "Code Quality Review"
-      file: "system/checklists/code-quality-checklist.md"
-      phase: "implementation"
-
-# Handoff System (Enhanced agent-to-agent communication)
-handoffs:
-  architect_to_developer:
-    input: "architectural design document"
-    output: "implementation plan with technical details"
-    checklist: "system/checklists/handoff-checklist.md"
-    validation: "architecture-completeness"
-  
-  developer_to_analyst:
-    input: "implemented code and documentation"
-    output: "quality assessment and optimization recommendations"
-    checklist: "system/checklists/handoff-checklist.md"
-    validation: "implementation-quality"
-
-# CLI Configuration (AI Blindspot Prevention Enhanced)
-cli:
-  name: "avp"
-  version: "2.1.0"
-  
-  commands:
-    # Core commands
-    init: "Initialize project with AI-Vibe-Prompts"
-    install: "Install prompts in existing project"
-    update: "Update existing installation"
-    
-    # AI Blindspot Prevention commands
-    validate-spec: "Validate implementation against documentation/specs"
-    check-blindspots: "Run AI blindspot detection analysis"
-    verify-docs: "Cross-reference code with documentation"
-    gate-check: "Run mandatory quality gate validation"
-    
-    # Enhanced BMAD commands  
-    explain: "Show role, phase, dependencies, capabilities of agent"
-    handoff: "Validate agent-to-agent quality transfer with blindspot checks"
-    pack: "Install domain-specific agent toolsets"
-    
-    # Scientific debugging commands
-    debug-session: "Start systematic debugging session"
-    hypothesis-test: "Test debugging hypothesis"
-    stop-digging: "Detect and escape debugging loops"
-    
-    # Workflow commands
-    agents-for: "Find agents by capability, phase, or blindspot prevention"
-    run-workflow: "Execute predefined workflow preset with quality gates"
-    docs-gen: "Generate agent documentation index"
-    compose-workflow: "Design custom workflow with blindspot prevention"
-    
-    # Quality & monitoring commands
-    validate: "Run quality validation for current phase"
-    status: "Show current project state, active agents, and quality metrics"
-    quality-report: "Generate comprehensive quality assessment"
-    debt-analysis: "Analyze and prioritize technical debt"
-    
-    # Prevention & learning commands
-    learn-patterns: "Analyze past issues to improve blindspot detection"
-    refactor-prep: "Prepare codebase for upcoming changes (Mise en Place)"
-    requirements-check: "Validate requirements clarity and completeness"
-
-# Template Configuration (BMAD-style)
-templates:
-  format: "yaml_frontmatter"
-  required_fields: ["name", "description", "category", "version"]
-  self_contained: true
-  dependency_loading: true
-  
-  # Agent template structure
-  agent_frontmatter:
-    - "name"
-    - "description" 
-    - "capabilities"
-    - "phase"
-    - "dependencies"
-    - "invokable_by"
-    - "handoff_reference"
-
-# Documentation & Automation
-docs:
-  autoindex: true
-  agent_matrix: "docs/AGENT_MATRIX.md"
-  workflow_diagrams: "docs/workflows/"
-  
-# Expansion Pack System (Domain-specific toolsets)
-expansion_packs:
-  frontend:
-    name: "Frontend Development Pack"
-    agents: ["design-system", "figma-converter"]
-    templates: ["shadcn-vite", "next-enterprise"]
-    
-  backend: 
-    name: "Backend Development Pack"
-    agents: ["api-designer", "database-modeler"]
-    templates: ["t3-stack", "express-api"]
-    
-  workflow:
-    name: "Advanced Workflow Pack"
-    agents: ["workflow-composer", "quality-monitor"]
-    presets: ["microservice-migration", "performance-optimization"] 
+  # Testing
+  - name: performance_tester
+    path: agents/testing/performance-tester.md
+    description: "Conducts performance and load testing."
