@@ -5,11 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # AI-Vibe-Prompts Project Context
 
 ## Project Overview
-AI-Vibe-Prompts is a framework for autonomous AI-assisted development with a system of specialized Claude Code subagents designed to transform complex development tasks into simple high-level instructions. The system now uses Claude Code's native subagent capabilities for seamless agent selection and coordination.
+AI-Vibe-Prompts is a framework for autonomous AI-assisted development with a dual-compatibility system supporting both Claude Code and Cursor AI environments. The system features specialized agents designed to transform complex development tasks into simple high-level instructions with seamless agent selection and coordination.
 
 ## Key Technologies & Dependencies  
 - **Runtime**: Node.js 18+, TypeScript 5.5+, React 19, Next.js 15
-- **Agent System**: Claude Code native subagents in `.claude/agents/`
+- **Agent System**: Dual compatibility - Claude Code (`.claude/agents/`) + Cursor AI (`agents/` + orchestration)
 - **Testing**: Vitest + Playwright (configured but tests not yet implemented)
 - **Package Manager**: npm (no lock file present, uses package.json only)
 
@@ -17,12 +17,19 @@ AI-Vibe-Prompts is a framework for autonomous AI-assisted development with a sys
 ```bash
 # Core commands
 npm test                        # Run tests (currently returns error - not implemented)
+node scripts/avp-init.js        # Initialize system (auto-detects environment)
 
-# Claude Code Subagent Usage
+# Claude Code Subagent Usage (Primary)
 @architect                      # Call architect agent explicitly
 @developer                      # Call developer agent explicitly
-@workflow-composer             # Call workflow composer for complex planning
+@designer                       # Call UI/UX designer agent
+@product-strategist             # Call product strategy agent
+@performance-tester             # Call performance testing agent
+@deployment-specialist          # Call DevOps/deployment agent
 # Or use natural language - Claude Code will auto-select appropriate agents
+
+# Cursor AI Compatibility (Secondary)
+# Use existing agents/ directory structure with orchestration files
 ```
 
 ## Project Architecture
@@ -49,6 +56,12 @@ The system uses Claude Code's native subagent capabilities for automatic agent s
    - `react-optimizer.md` - React 19 optimization patterns
    - `vue-optimizer.md` - Vue.js 3+ performance optimization
 
+4. **Design & Strategy Agents**
+   - `designer.md` - UI/UX design and design system specialist
+   - `product-strategist.md` - Product strategy and market research
+   - `performance-tester.md` - Performance testing and optimization
+   - `deployment-specialist.md` - CI/CD and deployment automation
+
 ### Tool-Based Execution
 All agents use Claude Code's native tools automatically:
 - **File Operations**: `Read`, `Write`, `Edit`, `MultiEdit`
@@ -59,7 +72,10 @@ All agents use Claude Code's native tools automatically:
 
 ### Configuration System
 - `.claude/agents/` - Claude Code subagent directory (auto-discovered)
-- `system/` directory - Core system prompts and specifications
+- `agents/` - Legacy Cursor AI agent directory (maintained for compatibility)
+- `core-config.yaml` - Agent registry and configuration metadata
+- `tools/tools.json` - Tool mapping for dual compatibility
+- `scripts/avp-init.js` - Environment detection and initialization
 - Dynamic agent discovery - Claude Code scans `.claude/agents/` at runtime
 - Native tool mapping via Claude Code's built-in capabilities
 
@@ -145,6 +161,36 @@ Available templates:
 - `agents/helpers/workflow-composer.md` - Main orchestrator logic  
 - `system/tool-calls.md` - Tool execution specification
 - `README.md` - User-facing documentation with usage examples
+
+## Dual Environment Compatibility
+
+### Environment Detection
+The system automatically detects whether it's running in Claude Code or Cursor AI environment:
+
+```javascript
+// Environment detection logic in scripts/avp-init.js
+detectEnvironment() {
+  if (process.env.CLAUDE_CODE || fs.existsSync('.claude')) {
+    return 'claude-code';
+  }
+  if (process.env.CURSOR_AI || fs.existsSync('.cursor') || process.env.ANTHROPIC_API_KEY) {
+    return 'cursor';
+  }
+  return 'unknown';
+}
+```
+
+### Claude Code Environment (Primary)
+- **Agent Directory**: `.claude/agents/`
+- **Syntax**: `@agent-name` or natural language auto-selection
+- **Tools**: Native Claude Code tools (Read, Write, Edit, Bash, etc.)
+- **Orchestration**: Built-in Claude Code coordination
+
+### Cursor AI Environment (Secondary)  
+- **Agent Directory**: `agents/` (legacy structure maintained)
+- **Configuration**: `core-config.yaml` for agent registry
+- **Tools**: Custom tool mapping via `tools/tools.json`
+- **Orchestration**: Manual agent invocation with configuration files
 
 ## Claude Code Compatibility
 

@@ -1,0 +1,21 @@
+{
+  "name": "Sample Project Initialization Workflow",
+  "description": "A test workflow to initialize a project and then analyze its structure.",
+  "steps": [
+    {
+      "agentName": "Project Initializer",
+      "description": "Initialize a new web project",
+      "task": {
+        "projectName": "my-new-app",
+        "template": "nextjs"
+      }
+    },
+    {
+      "agentName": "Codebase Analyzer Agent",
+      "description": "Analyze the new project's codebase",
+      "task": {
+        "projectPath": "./my-new-app"
+      }
+    }
+  ]
+}

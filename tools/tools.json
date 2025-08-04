@@ -1,0 +1,118 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "message_notify_user",
+      "description": "Send a non-blocking message to the user for progress updates or completion notices.",
+      "claude_code_equivalent": "Direct response",
+      "parameters": {
+        "type": "object",
+        "properties": { "text": { "type": "string", "description": "Message to display." } },
+        "required": ["text"]
+      }
+    }
+  },
+  {
+    "type": "function",  
+    "function": {
+      "name": "message_ask_user",
+      "description": "Ask the user a question and wait for a response.",
+      "claude_code_equivalent": "Direct response",
+      "parameters": {
+        "type": "object",
+        "properties": { "text": { "type": "string", "description": "Question to ask." } },
+        "required": ["text"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "file_read",
+      "description": "Read the full content of a specified file.",
+      "claude_code_equivalent": "Read",
+      "parameters": {
+        "type": "object",
+        "properties": { "file_path": { "type": "string", "description": "The absolute path of the file to read." } },
+        "required": ["file_path"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "file_write",
+      "description": "Create a new file or completely overwrite an existing file with new content.",
+      "claude_code_equivalent": "Write",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": { "type": "string", "description": "The absolute path of the file to write to." },
+          "content": { "type": "string", "description": "The new content for the file." }
+        },
+        "required": ["file_path", "content"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "file_apply_patch",
+      "description": "Safely modify an existing file by applying a diff patch. Preferred over file_write for modifications.",
+      "claude_code_equivalent": "Edit/MultiEdit",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "file_path": { "type": "string", "description": "The absolute path of the file to patch." },
+          "patch_content": { "type": "string", "description": "Content of the patch in a unified diff format." }
+        },
+        "required": ["file_path", "patch_content"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "shell_exec",
+      "description": "Execute a shell command in a specified directory.",
+      "claude_code_equivalent": "Bash",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "command": { "type": "string", "description": "The command to execute." },
+          "exec_dir": { "type": "string", "description": "The working directory for the command." }
+        },
+        "required": ["command", "exec_dir"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "codebase_search", 
+      "description": "Perform a semantic search across the codebase to find relevant files or code snippets.",
+      "claude_code_equivalent": "Grep",
+      "parameters": {
+        "type": "object",
+        "properties": { "query": { "type": "string", "description": "The natural language query to search for." } },
+        "required": ["query"]
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "invoke_agent",
+      "description": "Used by the Workflow Composer to invoke another specialized agent.",
+      "claude_code_equivalent": "@agent-name syntax",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "agent_name": { "type": "string", "description": "The name of the agent to invoke (e.g., 'Developer')." },
+          "task_description": { "type": "string", "description": "The specific task for the agent to perform." }
+        },
+        "required": ["agent_name", "task_description"]
+      }
+    }
+  }
+]

@@ -1,0 +1,214 @@
+# AI-Vibe-Prompts Core Configuration
+# This file maintains compatibility with both Claude Code and Cursor AI
+
+project_name: "AI-Vibe-Prompts"
+version: "3.0.0"
+
+# Claude Code Integration (Primary)
+claude_code:
+  agents_directory: ".claude/agents/"
+  auto_discovery: true
+  syntax: "@agent-name"
+
+# Cursor AI Compatibility (Secondary)
+cursor_compatibility:
+  orchestration: true
+  tools_directory: "tools/"
+  config_file: "core-config.yaml"
+
+# Agent Registry
+agents:
+  # Core Team
+  core:
+    - name: "analyst"
+      file: "analyst.md"
+      path: "agents/core/analyst.md"
+      description: "Analyzes requirements and breaks down complex problems"
+      auto_select_keywords: ["analyze", "review", "audit", "quality"]
+      
+    - name: "architect"
+      file: "architect.md"
+      path: "agents/core/architect.md"
+      description: "Designs the overall system architecture and technical strategy"
+      auto_select_keywords: ["architecture", "design", "system", "structure"]
+      
+    - name: "developer"
+      file: "developer.md"
+      path: "agents/core/developer.md"
+      description: "A technical project manager who orchestrates specialist developers to execute an architectural plan"
+      auto_select_keywords: ["implement", "code", "develop", "build"]
+      delegates_to:
+        - "frontend_developer"
+        - "backend_developer"
+        - "testing_specialist"
+      
+    - name: "workflow-composer"
+      file: "workflow-composer.md"
+      path: "agents/helpers/workflow-composer.md"
+      description: "Helps compose and orchestrate agent workflows"
+      auto_select_keywords: ["plan", "workflow", "breakdown", "orchestrate"]
+
+  # Developer Specialists  
+  developers:
+    - name: "frontend_developer"
+      file: "frontend.md"
+      path: "agents/core/developer/frontend.md"
+      description: "A specialist in creating cutting-edge, high-performance user interfaces using React 19, Next.js 15 with the App Router, and Tailwind CSS"
+      
+    - name: "backend_developer"
+      file: "backend.md"
+      path: "agents/core/developer/backend.md"
+      description: "An expert in building robust, scalable, and secure server-side logic using Next.js API Routes, Prisma, and modern authentication patterns"
+      
+    - name: "testing_specialist"
+      file: "testing.md"
+      path: "agents/core/developer/testing.md"
+      description: "An expert in ensuring code quality through a robust automated testing strategy using Vitest for unit/integration tests and Playwright for end-to-end tests"
+
+  # Design
+  design:
+    - name: "designer"
+      file: "designer.md"
+      path: ".claude/agents/designer.md"
+      description: "UI/UX design and design system management"
+      auto_select_keywords: ["design", "ui", "ux", "component", "interface"]
+      
+    - name: "design_system_specialist"
+      file: "design-system.md"
+      path: "agents/design/design-system.md"
+      description: "Manages and enforces the design system"
+      
+    - name: "figma_converter"
+      file: "figma-converter.md"
+      path: "agents/design/figma-converter.md"
+      description: "Converts Figma designs into code components"
+
+  # Helpers
+  helpers:
+    - name: "codebase-analyzer"
+      file: "codebase-analyzer.md"
+      path: "agents/helpers/codebase-analyzer.md"
+      description: "Analyzes the existing codebase for complexity and dependencies"
+      
+    - name: "debugger-assistant"
+      file: "debugger-assistant.md"
+      path: "agents/helpers/debugger-assistant.md"
+      description: "Assists in debugging complex issues"
+      
+    - name: "onboarder"
+      file: "onboarder.md"
+      path: "agents/helpers/onboarder.md"
+      description: "Helps new developers get started with the project"
+      
+    - name: "quality-monitor"
+      file: "quality-monitor.md"
+      path: "agents/helpers/quality-monitor.md"
+      description: "Monitors code quality metrics over time"
+      
+    - name: "rag_assistant"
+      file: "rag-assistant.md"
+      path: "agents/helpers/rag-assistant.md"
+      description: "Retrieval-Augmented Generation assistant for context"
+      
+    - name: "refactor-assistant"
+      file: "refactor-assistant.md"
+      path: "agents/helpers/refactor-assistant.md"
+      description: "Assists in refactoring code for better structure and performance"
+
+  # Coaching
+  coaching:
+    - name: "focus_driver"
+      file: "focus-driver.md"
+      path: "agents/coaching/focus-driver.md"
+      description: "Helps maintain focus and productivity during development sessions"
+
+  # Marketing
+  marketing:
+    - name: "content_creator"
+      file: "content-creator.md"
+      path: "agents/marketing/content-creator.md"
+      description: "Creates marketing content and documentation"
+
+  # Operations
+  operations:
+    - name: "deployment-specialist"
+      file: "deployment-specialist.md"
+      path: ".claude/agents/deployment-specialist.md"
+      description: "CI/CD and deployment automation specialist"
+
+  # Product
+  product:
+    - name: "user_researcher"
+      file: "user-researcher.md"
+      path: "agents/product/user-researcher.md"
+      description: "Conducts user research and gathers feedback"
+
+  # Project Management
+  project:
+    - name: "project_auditor"
+      file: "audit.md"
+      path: "agents/project/audit.md"
+      description: "Audits the project for code quality, security, and best practices"
+      
+    - name: "project_initializer"
+      file: "init.md"
+      path: "agents/project/init.md"
+      description: "Initializes new projects with the correct structure and configuration"
+
+  # Strategy
+  strategy:
+    - name: "product-strategist"
+      file: "product-strategist.md"
+      path: ".claude/agents/product-strategist.md"
+      description: "Product strategy and market research specialist"
+
+  # Testing
+  testing:
+    - name: "performance-tester"
+      file: "performance-tester.md"
+      path: ".claude/agents/performance-tester.md"
+      description: "Performance testing and optimization specialist"
+
+  specialists:
+    - name: "nextjs-optimizer"
+      file: "nextjs-optimizer.md"
+      description: "Next.js 15 performance optimization"
+      
+    - name: "react-optimizer"
+      file: "react-optimizer.md"
+      description: "React 19 optimization patterns"
+      
+    - name: "vue-optimizer"
+      file: "vue-optimizer.md"
+      description: "Vue.js 3+ performance optimization"
+
+# Tool Configuration for Cursor Compatibility
+tools:
+  file_operations:
+    - "file_read"
+    - "file_write"
+    - "file_apply_patch"
+    - "list_files"
+    - "get_directory"
+  
+  code_analysis:
+    - "codebase_search"
+    - "grep_search"
+    - "regex_search"
+  
+  system_operations:
+    - "shell_exec"
+    - "search_web"
+
+# Quality Gates
+quality_gates:
+  confidence_threshold: 75
+  fallback_agent: "analyst"
+  validation_required: true
+
+# Framework Detection
+frameworks:
+  nextjs: ["next.config.js", "next.config.ts", "package.json"]
+  react: ["package.json", "src/App.jsx", "src/App.tsx"]
+  vue: ["vue.config.js", "src/App.vue", "package.json"]
+  angular: ["angular.json", "src/app/app.module.ts"]
