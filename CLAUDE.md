@@ -5,96 +5,94 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # AI-Vibe-Prompts Project Context
 
 ## Project Overview
-AI-Vibe-Prompts is a framework for autonomous AI-assisted development with a system of specialized agents designed to transform complex development tasks into simple high-level instructions. This is an agent-orchestration system where the `workflow-composer` acts as the main coordinator.
+AI-Vibe-Prompts is a framework for autonomous AI-assisted development with a system of specialized Claude Code subagents designed to transform complex development tasks into simple high-level instructions. The system now uses Claude Code's native subagent capabilities for seamless agent selection and coordination.
 
 ## Key Technologies & Dependencies  
 - **Runtime**: Node.js 18+, TypeScript 5.5+, React 19, Next.js 15
-- **Agent System**: Markdown files with YAML front-matter metadata
-- **CLI Tool**: JavaScript (`scripts/avp-init.js`) with expansion pack support
+- **Agent System**: Claude Code native subagents in `.claude/agents/`
 - **Testing**: Vitest + Playwright (configured but tests not yet implemented)
 - **Package Manager**: npm (no lock file present, uses package.json only)
 
 ## Build Commands
 ```bash
 # Core commands
-npm run init                    # Initialize project (runs scripts/avp-init.js)
 npm test                        # Run tests (currently returns error - not implemented)
-node scripts/avp-init.js        # Direct CLI access
 
-# CLI commands (via avp-init.js)
-node scripts/avp-init.js init [template]        # Initialize with template
-node scripts/avp-init.js explain <agent>        # Show agent details
-node scripts/avp-init.js agents-for <query>     # Find agents by capability
-node scripts/avp-init.js status                 # Show project status
-node scripts/avp-init.js validate               # Run quality validation
-node scripts/avp-init.js docs-gen               # Generate documentation
+# Claude Code Subagent Usage
+@architect                      # Call architect agent explicitly
+@developer                      # Call developer agent explicitly
+@workflow-composer             # Call workflow composer for complex planning
+# Or use natural language - Claude Code will auto-select appropriate agents
 ```
 
 ## Project Architecture
 
-### Agent System Architecture
-The system uses a hierarchical agent delegation pattern:
+### Claude Code Subagent System
+The system uses Claude Code's native subagent capabilities for automatic agent selection and coordination:
 
-1. **Workflow Composer** (`agents/helpers/workflow-composer.md`) - Main orchestrator
-   - Discovers available agents dynamically by scanning `agents/` directory
-   - Implements PLAN → ACT cycle with confidence scoring (75% threshold)
-   - Manages multi-agent workflows with quality gates
-   - Handles automatic fallbacks via `project-auditor`
+**Available Subagents** (stored in `.claude/agents/`):
 
-2. **Core Agents** (`agents/core/`)
+1. **Core Agents**
    - `architect.md` - System design and architectural decisions
-   - `analyst.md` - Requirements analysis and problem breakdown
-   - `developer.md` - Technical project manager that delegates to specialists:
-     - `developer/frontend.md` - React 19/Next.js 15 specialist
-     - `developer/backend.md` - API Routes/Prisma specialist  
-     - `developer/testing.md` - Vitest/Playwright specialist
+   - `developer.md` - Full-stack development and implementation  
+   - `analyst.md` - Project analysis and quality assurance
+   - `workflow-composer.md` - Complex task planning and breakdown
 
-3. **Helper Agents** (`agents/helpers/`)
+2. **Helper Agents**
    - `codebase-analyzer.md` - Code analysis and complexity assessment
    - `debugger-assistant.md` - Scientific debugging methodology
    - `refactor-assistant.md` - Safe code refactoring
    - `quality-monitor.md` - Code quality tracking
-   - `onboarder.md` - Project setup automation
+
+3. **Specialist Agents**
+   - `nextjs-optimizer.md` - Next.js 15 performance optimization
+   - `react-optimizer.md` - React 19 optimization patterns
+   - `vue-optimizer.md` - Vue.js 3+ performance optimization
 
 ### Tool-Based Execution
-All agents use JSON-formatted tool calls as defined in `system/tool-calls.md`:
-- Agents MUST respond with JSON objects containing `tool_name` and `parameters`
-- No direct code execution - all actions via tool system
-- Tools include: `file_read`, `file_write`, `shell_exec`, `message_user`, `codebase_search`
+All agents use Claude Code's native tools automatically:
+- **File Operations**: `Read`, `Write`, `Edit`, `MultiEdit`
+- **Code Analysis**: `Grep`, `Glob`, `LS`
+- **System Operations**: `Bash`
+- **Web Operations**: `WebSearch`, `WebFetch`
+- No manual tool configuration required - Claude Code handles tool selection
 
 ### Configuration System
-- `core-config.yaml` - Central agent registry and configuration
+- `.claude/agents/` - Claude Code subagent directory (auto-discovered)
 - `system/` directory - Core system prompts and specifications
-- Dynamic agent discovery - CLI scans `agents/` directory at runtime
+- Dynamic agent discovery - Claude Code scans `.claude/agents/` at runtime
+- Native tool mapping via Claude Code's built-in capabilities
 
-## Agent Development Rules
+## Claude Code Subagent Usage
 
-### Required YAML Front-matter Structure
+### Agent Calling Syntax
+- **Explicit calling**: `@agent-name please help with [task]`
+- **Auto-selection**: Use natural language - Claude Code automatically selects appropriate agents
+- **Examples**:
+  - `@architect design the authentication system`
+  - `@developer implement the user dashboard`
+  - `@react-optimizer optimize this component performance`
+  - `Can you help debug this API issue?` (auto-selects @debugger-assistant)
+
+### Claude Code Subagent Format
 ```yaml
 ---
-name: Agent Name
-description: Brief description
-category: "core|helpers|design|specialists|testing|operations|marketing|product|project|strategy|coaching"
-version: "X.Y.Z"
-capabilities:
-  - capability_1
-  - capability_2
-metrics:
-  - metric_1
-  - metric_2
+name: agent-name
+description: Clear description of when to use this agent (used for auto-selection)
+tools: read, write, bash, grep  # Optional, inherits all if not specified
 ---
 ```
 
 ### Agent File Organization
-- `agents/[category]/[agent-name].md` - Agent definition files
-- Categories: core, helpers, design, specialists, testing, operations, marketing, product, project, strategy, coaching
-- Agent content sections: Role Definition, Core Philosophy, Implementation, Success Metrics
+- `.claude/agents/[agent-name].md` - Claude Code subagent files
+- Auto-discovery by Claude Code - no manual configuration needed
+- Agent content sections: Role Definition, Core Mission, Workflow, Specializations
 
-### Quality Requirements
-- All agents must implement PLAN → ACT cycle
-- Confidence scoring required (0-100 scale)
-- Quality gates with automatic fallback to `project-auditor`
-- No silent failures - always provide meaningful errors
+### Quality Principles
+- All agents implement PLAN → ACT cycle methodology
+- Focus on single-agent execution (Claude Code handles coordination)
+- Clear, actionable descriptions for automatic agent selection
+- Native tool integration with Claude Code's built-in capabilities
 
 ## Development Workflow
 
