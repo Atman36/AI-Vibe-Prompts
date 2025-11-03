@@ -34,6 +34,13 @@ node scripts/avp-init.js        # Initialize system (auto-detects environment)
 
 ## Project Architecture
 
+### Claude Code v2.x Architecture (Enhanced)
+The system leverages Claude Code v2.x advanced features including:
+- **Skills** - Reusable expertise packages with progressive disclosure
+- **Subagents** - Specialized agents with isolated contexts
+- **Plugins** - Complete extension packages
+- **Progressive Disclosure** - Token-efficient on-demand context loading
+
 ### Claude Code Subagent System
 The system uses Claude Code's native subagent capabilities for automatic agent selection and coordination:
 
@@ -70,13 +77,50 @@ All agents use Claude Code's native tools automatically:
 - **Web Operations**: `WebSearch`, `WebFetch`
 - No manual tool configuration required - Claude Code handles tool selection
 
+### Claude Skills System (v2.x)
+Skills are reusable "expertise packages" that use **Progressive Disclosure** for token efficiency:
+
+**Available Skills** (stored in `.claude/skills/`):
+
+1. **Core Skills**
+   - `codebase-analysis` - Systematic codebase structure and complexity analysis
+   - `quality-gates` - Comprehensive quality checks (lint, test, security)
+
+2. **Framework-Specific Skills**
+   - `nextjs-optimization` - Next.js 15 performance and Core Web Vitals optimization
+
+3. **Workflow Skills**
+   - `git-workflow` - Git best practices with GitFlow and Conventional Commits
+   - `testing-strategy` - Comprehensive testing with Vitest and Playwright
+
+**Progressive Disclosure Mechanism**:
+1. **Metadata Loading** - Only name and description loaded initially (lightweight)
+2. **Full Context** - SKILL.md instructions loaded when relevant
+3. **Deep Resources** - Additional scripts/resources loaded on-demand
+
+**Skill Structure**:
+```
+.claude/skills/
+├── core/
+│   ├── codebase-analysis/
+│   │   ├── SKILL.md          # Metadata + Instructions
+│   │   └── resources/         # Optional additional resources
+│   └── quality-gates/
+│       └── SKILL.md
+└── framework-specific/
+    └── nextjs-optimization/
+        └── SKILL.md
+```
+
 ### Configuration System
 - `.claude/agents/` - Claude Code subagent directory (auto-discovered)
+- `.claude/skills/` - Reusable skills with progressive disclosure (NEW v2.x)
+- `.claude/plugins/` - Plugin packages (planned)
 - `agents/` - Legacy Cursor AI agent directory (maintained for compatibility)
-- `core-config.yaml` - Agent registry and configuration metadata
+- `core-config.yaml` - Agent, skill, and plugin registry
 - `tools/tools.json` - Tool mapping for dual compatibility
 - `scripts/avp-init.js` - Environment detection and initialization
-- Dynamic agent discovery - Claude Code scans `.claude/agents/` at runtime
+- Dynamic discovery - Claude Code auto-scans at runtime
 - Native tool mapping via Claude Code's built-in capabilities
 
 ## Claude Code Subagent Usage
@@ -227,9 +271,48 @@ The framework has been updated for full Claude Code compatibility:
 3. Focus on agent's planning methodology rather than specific tool calls
 4. Confidence scoring and quality gates work seamlessly with Claude Code
 
+## Claude Code v2.x Features Integration
+
+### Skills vs Subagents vs Plugins
+**Skills** (`.claude/skills/`):
+- Reusable expertise that modifies agent behavior
+- Auto-invoked based on context
+- Uses progressive disclosure for efficiency
+- Example: `codebase-analysis`, `quality-gates`
+
+**Subagents** (`.claude/agents/`):
+- Specialized agents with isolated contexts
+- Delegated execution for specific tasks
+- Can use different models for cost optimization
+- Example: `architect`, `developer`, Plan Subagent
+
+**Plugins** (`.claude/plugins/` - planned):
+- Complete extension packages
+- Bundle agents, skills, commands, hooks
+- Shareable and installable via marketplace
+
+### Progressive Disclosure in Action
+1. Claude loads only skill **metadata** (name + description) at startup
+2. When skill is relevant, loads **full SKILL.md** instructions
+3. If needed, reads **additional resources** (scripts, templates)
+4. Result: Unbounded expertise library with minimal token usage
+
+### Built-in Plan Subagent (v2.0.28+)
+- Fast codebase exploration and planning
+- Limited toolset: Glob, Grep, Read, Bash
+- Isolated context prevents main thread pollution
+- Auto-invoked by Claude or manual via `@agent-plan`
+
+### Model Selection Strategy
+- **Main Agent**: Claude Opus/Sonnet (high-level planning)
+- **Subagents**: Claude Sonnet (cost-efficient execution)
+- Configurable via YAML frontmatter `model: claude-sonnet-4.5`
+
 ## Common Issues & Troubleshooting
 - Tests not implemented yet (`npm test` fails)
 - Agent discovery relies on proper YAML front-matter formatting
+- Skill discovery requires valid SKILL.md with YAML frontmatter
 - CLI requires Node.js 18+ for proper execution
 - Quality gates may trigger frequent fallbacks during development
 - Some agents reference custom tools - refer to `tools/claude-code-tools.json` for mappings
+- Progressive disclosure requires proper skill metadata in core-config.yaml

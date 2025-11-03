@@ -20,9 +20,11 @@ This framework introduces a structured, tool-first approach to AI-assisted devel
 ## ✨ Features
 
 - **🤖 Autonomous AI Agents**: A team of specialized agents for architecture, development, refactoring, debugging, and more.
+- **🎯 Claude Skills (v2.x NEW)**: Reusable expertise packages with progressive disclosure for token efficiency
 - **🔄 Predictable `PLAN -> ACT` Workflow**: Ensures transparency and reliability in all agent operations.
 - **🎼 Multi-Agent Orchestration**: The `Workflow Composer` designs and executes complex development workflows.
 - **🛠️ Tool-Based Execution**: Agents perform all actions through a well-defined set of tools (`shell_exec`, `replace_file_content`, `codebase_search`), eliminating guesswork.
+- **📦 Progressive Disclosure**: Load skills on-demand for unbounded expertise with minimal token usage
 - **🚀 Automated Onboarding**: The `Onboarder` agent automates project setup, from dependency checks to initial tests.
 - **🔬 Scientific Debugging & Refactoring**: Dedicated agents apply systematic, safe, and verifiable methods to improve code quality.
 - **🛡️ Built-in Quality Gates**: The `Quality Monitor` and `RAG Assistant` ensure that all work meets predefined standards.
@@ -37,15 +39,22 @@ This framework is now managed via a powerful command-line interface (CLI). Follo
 - [Node.js](https://nodejs.org/) version 18 or higher.
 - Dependencies installed: `npm install`
 
-### 2. Discover Available Agents
+### 2. Discover Available Agents and Skills
 
-To see the full team of specialized agents available to you, run the `discover` command:
+To see the full team of specialized agents and skills available to you:
 
 ```bash
+# List all agents
 node scripts/avp-init.js discover
+
+# List all Claude Skills (v2.x)
+node scripts/avp-init.js skills:list
+
+# Show system status
+node scripts/avp-init.js system:status
 ```
 
-This will list all agents, their version, description, and capabilities, so you know who to assign to a task.
+**New in v3.0**: Claude Skills provide reusable expertise that loads progressively, minimizing token usage while providing unlimited specialized knowledge.
 
 ### 3. Define a Workflow
 
@@ -102,17 +111,52 @@ Our agents have been upgraded to be active participants in the development proce
 
 ...and many more specialized agents in the `agents` directory.
 
+## 🎯 Claude Skills (v2.x NEW)
+
+Skills are reusable expertise packages that auto-invoke based on context, using **Progressive Disclosure** for token efficiency.
+
+### Core Skills
+- **`codebase-analysis`** (v1.0.0): Systematically analyze project structure, complexity, and dependencies
+- **`quality-gates`** (v1.0.0): Run comprehensive quality checks (lint, test, security) before commits/deploys
+
+### Framework-Specific Skills
+- **`nextjs-optimization`** (v1.0.0): Optimize Next.js 15 for Core Web Vitals and production performance
+
+### Workflow Skills (NEW)
+- **`git-workflow`** (v1.0.0): Git best practices with GitFlow and Conventional Commits
+- **`testing-strategy`** (v1.0.0): Comprehensive testing with Vitest + Playwright
+
+### How Skills Work
+1. **Metadata Loading**: Only name/description loaded initially (lightweight)
+2. **Full Context**: Instructions loaded when skill is relevant
+3. **Deep Resources**: Additional files loaded on-demand
+
+**Result**: Unbounded expertise library with minimal token overhead
+
+**Total**: 5 skills (all with auto-invoke enabled)
+
+See [Skills System Guide](docs/skills-system-guide.md) for details.
+
 ## 📁 Repository Structure
 
 ```
 ai-vibe-prompts/
-├── agents/           # The home of all specialized AI agents
-│   ├── core/         # Core development team (Architect, Developer)
-│   └── helpers/      # Utility agents (Composer, Refactor, Debugger, etc.)
-│   └── ...           # Other specialized agents
-├── docs/             # Project documentation
-├── templates/        # Production-ready project starters
-└── system/           # Low-level system prompts (rarely used directly)
+├── .claude/                    # Claude Code v2.x integration
+│   ├── agents/                # 15 specialized subagents
+│   ├── skills/                # 5 reusable expertise packages (NEW v3.x)
+│   └── plugins/               # Plugin system (NEW v3.x)
+├── agents/                    # Legacy Cursor AI agents (compatibility)
+├── docs/                      # Comprehensive documentation
+│   ├── skills-system-guide.md    # Skills development guide
+│   ├── plugin-system-guide.md    # Plugin architecture
+│   ├── CHANGELOG-v3.0.md         # v3.0 release notes
+│   └── CHANGELOG-v3.1.md         # v3.1 release notes
+├── scripts/                   # CLI tools
+│   └── avp-init.js           # Main CLI with skills support
+├── templates/                 # Production-ready project starters
+├── tools/                     # Tool configurations
+├── core-config.yaml          # Central configuration
+└── CLAUDE.md                 # Claude Code integration guide
 ```
 
 ## 🤝 Contributing
@@ -135,9 +179,9 @@ Fork this repository and modify agents to match your:
 
 ## 🛠️ CLI Commands
 
-The `avp-init.js` script provides the following commands to manage your agent workflows.
+The `avp-init.js` script provides the following commands to manage your agent workflows and skills.
 
-### Discover Agents
+### Agent Commands
 
 Lists all available agents and their capabilities.
 
@@ -145,7 +189,20 @@ Lists all available agents and their capabilities.
 node scripts/avp-init.js discover
 ```
 
-### Run a Workflow
+### Skill Commands (v2.x NEW)
+
+```bash
+# List all available skills
+node scripts/avp-init.js skills:list
+
+# Show detailed info about a specific skill
+node scripts/avp-init.js skills:info codebase-analysis
+
+# Show system status (agents + skills)
+node scripts/avp-init.js system:status
+```
+
+### Workflow Commands
 
 Executes a multi-agent workflow from a JSON definition file.
 
@@ -172,6 +229,24 @@ node scripts/avp-init.js workflow:run <path_to_workflow.json>
 - **Performance First** - Core Web Vitals optimization built-in
 - **Accessibility** - WCAG 2.2 AA compliance by default
 - **Security** - Security best practices and vulnerability detection
+
+## 🆕 What's New in v3.1
+
+### New Workflow Skills
+- **git-workflow** (v1.0.0): Professional Git workflow with GitFlow and Conventional Commits
+- **testing-strategy** (v1.0.0): Comprehensive testing with Vitest and Playwright
+
+### Plugin System
+- Complete Claude Code v2.x plugin architecture
+- Marketplace-ready distribution
+- Multiple installation methods
+
+### Enhanced Documentation
+- Skills System Guide (13 KB)
+- Plugin System Guide (8 KB)  
+- Complete changelogs and implementation report
+
+**See**: [CHANGELOG-v3.1](docs/CHANGELOG-v3.1.md) for full details
 
 ## 🎓 Learning Resources
 

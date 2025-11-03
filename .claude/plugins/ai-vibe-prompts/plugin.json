@@ -1,0 +1,105 @@
+{
+  "name": "ai-vibe-prompts",
+  "displayName": "AI-Vibe-Prompts",
+  "version": "3.0.0",
+  "description": "Autonomous AI-Agent Framework for Modern Web Development with Claude Skills v2.x support",
+  "author": "AI-Vibe-Prompts Contributors",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Atman36/AI-Vibe-Prompts.git"
+  },
+  "homepage": "https://github.com/Atman36/AI-Vibe-Prompts",
+  "keywords": [
+    "ai",
+    "agents",
+    "skills",
+    "development",
+    "workflow",
+    "nextjs",
+    "react",
+    "typescript"
+  ],
+  "claudeCode": {
+    "version": "2.x",
+    "compatibleWith": ["2.0.12", "2.0.28"]
+  },
+  "components": {
+    "agents": [
+      "../../agents/analyst.md",
+      "../../agents/architect.md",
+      "../../agents/codebase-analyzer.md",
+      "../../agents/debugger-assistant.md",
+      "../../agents/deployment-specialist.md",
+      "../../agents/designer.md",
+      "../../agents/developer.md",
+      "../../agents/nextjs-optimizer.md",
+      "../../agents/performance-tester.md",
+      "../../agents/product-strategist.md",
+      "../../agents/quality-monitor.md",
+      "../../agents/react-optimizer.md",
+      "../../agents/refactor-assistant.md",
+      "../../agents/vue-optimizer.md",
+      "../../agents/workflow-composer.md"
+    ],
+    "skills": [
+      "../../skills/core/codebase-analysis/SKILL.md",
+      "../../skills/core/quality-gates/SKILL.md",
+      "../../skills/framework-specific/nextjs-optimization/SKILL.md",
+      "../../skills/workflow/git-workflow/SKILL.md",
+      "../../skills/workflow/testing-strategy/SKILL.md"
+    ]
+  },
+  "categories": [
+    "development",
+    "productivity",
+    "code-quality",
+    "testing",
+    "devops"
+  ],
+  "tags": [
+    "nextjs",
+    "react",
+    "typescript",
+    "testing",
+    "git",
+    "quality",
+    "optimization"
+  ],
+  "features": [
+    "15 specialized AI agents",
+    "5 Claude Skills with progressive disclosure",
+    "GitFlow and Conventional Commits support",
+    "Vitest and Playwright testing strategies",
+    "Next.js 15 optimization patterns",
+    "Comprehensive quality gates",
+    "Codebase analysis and metrics"
+  ],
+  "requirements": {
+    "node": ">=18.0.0",
+    "claudeCode": ">=2.0.12"
+  },
+  "configuration": {
+    "configFile": "../../core-config.yaml",
+    "toolsMapping": "../../tools/tools.json"
+  },
+  "documentation": {
+    "readme": "../../README.md",
+    "guide": "../../CLAUDE.md",
+    "skillsGuide": "../../docs/skills-system-guide.md",
+    "changelog": "../../docs/CHANGELOG-v3.0.md"
+  },
+  "scripts": {
+    "init": "node ../../scripts/avp-init.js init",
+    "discover": "node ../../scripts/avp-init.js discover",
+    "skills:list": "node ../../scripts/avp-init.js skills:list",
+    "system:status": "node ../../scripts/avp-init.js system:status"
+  },
+  "metadata": {
+    "created": "2025-01-03",
+    "updated": "2025-01-03",
+    "downloads": 0,
+    "rating": 0,
+    "verified": false
+  }
+}

@@ -88,12 +88,106 @@ class AVPInitializer {
     }
   }
 
+  async setupSkillsDiscovery(config) {
+    const skillsDir = path.join(this.rootDir, '.claude', 'skills');
+    
+    try {
+      await fs.access(skillsDir);
+    } catch (e) {
+      console.warn('⚠️  .claude/skills directory not found - Skills system not available');
+      return { skills: [], categories: [] };
+    }
+
+    const skills = [];
+    const categories = await fs.readdir(skillsDir);
+    
+    for (const category of categories) {
+      const categoryPath = path.join(skillsDir, category);
+      const stat = await fs.stat(categoryPath);
+      
+      if (!stat.isDirectory()) continue;
+      
+      const skillDirs = await fs.readdir(categoryPath);
+      
+      for (const skillDir of skillDirs) {
+        const skillPath = path.join(categoryPath, skillDir);
+        const skillFilePath = path.join(skillPath, 'SKILL.md');
+        
+        try {
+          const content = await fs.readFile(skillFilePath, 'utf8');
+          const metadata = this.parseSkillMetadata(content);
+          
+          skills.push({
+            name: metadata.name || skillDir,
+            category,
+            path: skillFilePath,
+            description: metadata.description || 'No description',
+            version: metadata.version || '0.0.0',
+            tags: metadata.tags || [],
+            auto_invoke: metadata.auto_invoke || false
+          });
+        } catch (e) {
+          console.warn(`⚠️  Skill ${skillDir} missing SKILL.md file`);
+        }
+      }
+    }
+
+    console.log(`🎯 Found ${skills.length} skills across ${categories.length} categories`);
+    return { skills, categories };
+  }
+
+  parseSkillMetadata(content) {
+    const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---/);
+    if (!frontmatterMatch) return {};
+    
+    try {
+      return yaml.load(frontmatterMatch[1]);
+    } catch (e) {
+      console.warn('⚠️  Failed to parse skill metadata:', e.message);
+      return {};
+    }
+  }
+
+  async listSkills() {
+    const config = await this.loadConfig();
+    const { skills, categories } = await this.setupSkillsDiscovery(config);
+    
+    if (skills.length === 0) {
+      console.log('ℹ️  No skills found. Skills system is not set up yet.');
+      return;
+    }
+
+    console.log('\n🎯 Available Claude Skills:\n');
+    
+    const groupedSkills = skills.reduce((acc, skill) => {
+      if (!acc[skill.category]) acc[skill.category] = [];
+      acc[skill.category].push(skill);
+      return acc;
+    }, {});
+
+    for (const [category, categorySkills] of Object.entries(groupedSkills)) {
+      console.log(`\n📂 ${category.toUpperCase()}`);
+      for (const skill of categorySkills) {
+        const autoInvokeIndicator = skill.auto_invoke ? '🔄' : '  ';
+        console.log(`  ${autoInvokeIndicator} ${skill.name} (v${skill.version})`);
+        console.log(`     ${skill.description}`);
+        if (skill.tags.length > 0) {
+          console.log(`     Tags: ${skill.tags.join(', ')}`);
+        }
+      }
+    }
+
+    console.log('\n🔄 = Auto-invoked when relevant');
+    console.log(`\n💡 Total: ${skills.length} skills available`);
+  }
+
   async validateSetup() {
     const checks = [
-      { name: 'Claude Code agents directory', path: '.claude/agents' },
-      { name: 'Core configuration', path: 'core-config.yaml' },
-      { name: 'Tools configuration', path: 'tools/tools.json' },
-      { name: 'Project documentation', path: 'CLAUDE.md' }
+      { name: 'Claude Code agents directory', path: '.claude/agents', critical: true },
+      { name: 'Claude Code skills directory', path: '.claude/skills', critical: false },
+      { name: 'Core configuration', path: 'core-config.yaml', critical: true },
+      { name: 'Tools configuration', path: 'tools/tools.json', critical: false },
+      { name: 'Project documentation', path: 'CLAUDE.md', critical: false }
     ];
 
     for (const check of checks) {
@@ -105,8 +199,8 @@ class AVPInitializer {
       }
       console.log(`${exists ? '✅' : '❌'} ${check.name}`);
       
-      if (!exists && check.name === 'Claude Code agents directory') {
-        throw new Error('Critical: .claude/agents directory missing');
+      if (!exists && check.critical) {
+        throw new Error(`Critical: ${check.path} missing`);
       }
     }
   }
@@ -115,13 +209,15 @@ class AVPInitializer {
     console.log('\\n📖 Usage Instructions:');
     
     if (this.environment === 'claude-code') {
-      console.log('🤖 Claude Code Environment:');
+      console.log('🤖 Claude Code v2.x Environment:');
       console.log('  • Use "@agent-name task description" for explicit agent calls');
-      console.log('  • Use natural language - agents will be auto-selected');
+      console.log('  • Use natural language - agents and skills are auto-selected');
+      console.log('  • Skills load automatically based on context (progressive disclosure)');
       console.log('  • Examples:');
       console.log('    - "@architect design the user authentication system"');
       console.log('    - "@developer implement the dashboard component"');
-      console.log('    - "Help me debug this API issue" (auto-selects debugger-assistant)');
+      console.log('    - "Analyze the codebase" (auto-invokes codebase-analysis skill)');
+      console.log('    - "Run quality checks" (auto-invokes quality-gates skill)');
     } else if (this.environment === 'cursor') {
       console.log('🔧 Cursor AI Environment:');
       console.log('  • Legacy orchestration system available');
@@ -134,6 +230,11 @@ class AVPInitializer {
     console.log('  Helpers: codebase-analyzer, debugger-assistant, refactor-assistant, quality-monitor');
     console.log('  Specialists: nextjs-optimizer, react-optimizer, vue-optimizer');
     console.log('  Design: designer (UI/UX and design systems)');
+    
+    console.log('\\n🎯 Available Skills (v2.x):');
+    console.log('  Core: codebase-analysis, quality-gates');
+    console.log('  Framework: nextjs-optimization');
+    console.log('  ℹ️  Run "node scripts/avp-init.js skills:list" for detailed skill info');
   }
 }
 
@@ -236,6 +337,75 @@ program.command('init')
   .action(async () => {
     const initializer = new AVPInitializer();
     await initializer.initialize();
+  });
+
+program.command('skills:list')
+  .description('List all available Claude Skills (v2.x).')
+  .action(async () => {
+    const initializer = new AVPInitializer();
+    await initializer.listSkills();
+  });
+
+program.command('skills:info <skill-name>')
+  .description('Show detailed information about a specific skill.')
+  .action(async (skillName) => {
+    const initializer = new AVPInitializer();
+    const config = await initializer.loadConfig();
+    const { skills } = await initializer.setupSkillsDiscovery(config);
+    
+    const skill = skills.find(s => s.name === skillName);
+    if (!skill) {
+      console.error(`❌ Skill "${skillName}" not found.`);
+      console.log(`\nAvailable skills: ${skills.map(s => s.name).join(', ')}`);
+      process.exit(1);
+    }
+    
+    console.log(`\n🎯 Skill: ${skill.name}`);
+    console.log(`📂 Category: ${skill.category}`);
+    console.log(`📦 Version: ${skill.version}`);
+    console.log(`🔄 Auto-invoke: ${skill.auto_invoke ? 'Yes' : 'No'}`);
+    console.log(`📝 Description: ${skill.description}`);
+    if (skill.tags.length > 0) {
+      console.log(`🏷️  Tags: ${skill.tags.join(', ')}`);
+    }
+    console.log(`📄 Path: ${skill.path}`);
+    
+    console.log('\n📖 Full Skill Content:');
+    console.log('─'.repeat(60));
+    try {
+      const content = await fs.readFile(skill.path, 'utf8');
+      const bodyMatch = content.match(/---\n[\s\S]*?\n---\n([\s\S]*)/);
+      if (bodyMatch) {
+        console.log(bodyMatch[1].trim());
+      } else {
+        console.log(content);
+      }
+    } catch (e) {
+      console.error('Failed to read skill content:', e.message);
+    }
+  });
+
+program.command('system:status')
+  .description('Show AI-Vibe-Prompts system status and configuration.')
+  .action(async () => {
+    const initializer = new AVPInitializer();
+    console.log('🔍 AI-Vibe-Prompts System Status\n');
+    console.log(`Environment: ${initializer.environment}`);
+    console.log(`Root Directory: ${initializer.rootDir}`);
+    
+    console.log('\n📊 Component Status:');
+    await initializer.validateSetup();
+    
+    console.log('\n🤖 Agents:');
+    const config = await initializer.loadConfig();
+    await initializer.setupAgentDiscovery(config);
+    
+    console.log('\n🎯 Skills:');
+    const { skills } = await initializer.setupSkillsDiscovery(config);
+    console.log(`  Total: ${skills.length} skills`);
+    
+    const autoInvokeCount = skills.filter(s => s.auto_invoke).length;
+    console.log(`  Auto-invoke: ${autoInvokeCount}/${skills.length}`);
   });
 
 // Run initialization if called directly

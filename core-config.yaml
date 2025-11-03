@@ -2,13 +2,20 @@
 # This file maintains compatibility with both Claude Code and Cursor AI
 
 project_name: "AI-Vibe-Prompts"
-version: "3.0.0"
+version: "3.1.0"
 
 # Claude Code Integration (Primary)
 claude_code:
   agents_directory: ".claude/agents/"
+  skills_directory: ".claude/skills/"
+  plugins_directory: ".claude/plugins/"
   auto_discovery: true
   syntax: "@agent-name"
+  progressive_disclosure: true
+  plugin:
+    name: "ai-vibe-prompts"
+    version: "3.0.0"
+    manifest: ".claude/plugins/ai-vibe-prompts/plugin.json"
 
 # Cursor AI Compatibility (Secondary)
 cursor_compatibility:
@@ -181,6 +188,47 @@ agents:
     - name: "vue-optimizer"
       file: "vue-optimizer.md"
       description: "Vue.js 3+ performance optimization"
+
+# Claude Skills (v2.x Progressive Disclosure System)
+skills:
+  core:
+    - name: "codebase-analysis"
+      path: ".claude/skills/core/codebase-analysis/SKILL.md"
+      description: "Systematically analyze codebase structure, complexity, and dependencies"
+      version: "1.0.0"
+      auto_invoke: true
+      tags: ["analysis", "code-quality", "architecture"]
+      
+    - name: "quality-gates"
+      path: ".claude/skills/core/quality-gates/SKILL.md"
+      description: "Run comprehensive quality checks including linting, tests, and security audits"
+      version: "1.0.0"
+      auto_invoke: true
+      tags: ["quality", "testing", "linting", "security"]
+  
+  framework_specific:
+    - name: "nextjs-optimization"
+      path: ".claude/skills/framework-specific/nextjs-optimization/SKILL.md"
+      description: "Optimize Next.js 15 applications for performance and Core Web Vitals"
+      version: "1.0.0"
+      framework: "nextjs"
+      auto_invoke: true
+      tags: ["nextjs", "performance", "optimization"]
+  
+  workflow:
+    - name: "git-workflow"
+      path: ".claude/skills/workflow/git-workflow/SKILL.md"
+      description: "Git best practices for commits, branches, and PRs with Conventional Commits"
+      version: "1.0.0"
+      auto_invoke: true
+      tags: ["git", "workflow", "version-control"]
+      
+    - name: "testing-strategy"
+      path: ".claude/skills/workflow/testing-strategy/SKILL.md"
+      description: "Comprehensive testing with Vitest and Playwright"
+      version: "1.0.0"
+      auto_invoke: true
+      tags: ["testing", "vitest", "playwright", "quality"]
 
 # Tool Configuration for Cursor Compatibility
 tools:
