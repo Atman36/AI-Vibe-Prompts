@@ -180,14 +180,22 @@ agents:
     - name: "nextjs-optimizer"
       file: "nextjs-optimizer.md"
       description: "Next.js 15 performance optimization"
-      
+
     - name: "react-optimizer"
       file: "react-optimizer.md"
       description: "React 19 optimization patterns"
-      
+
     - name: "vue-optimizer"
       file: "vue-optimizer.md"
       description: "Vue.js 3+ performance optimization"
+
+  # Quality Assurance
+  quality:
+    - name: "code-reviewer"
+      file: "code-reviewer.md"
+      path: ".claude/agents/code-reviewer.md"
+      description: "Automated code review specialist for pull requests with confidence-based filtering"
+      auto_select_keywords: ["review", "pr", "pull request", "code review"]
 
 # Claude Skills (v2.x Progressive Disclosure System)
 skills:
@@ -222,13 +230,21 @@ skills:
       version: "1.0.0"
       auto_invoke: true
       tags: ["git", "workflow", "version-control"]
-      
+
     - name: "testing-strategy"
       path: ".claude/skills/workflow/testing-strategy/SKILL.md"
       description: "Comprehensive testing with Vitest and Playwright"
       version: "1.0.0"
       auto_invoke: true
       tags: ["testing", "vitest", "playwright", "quality"]
+
+  design:
+    - name: "frontend-design"
+      path: ".claude/skills/design/frontend-design/SKILL.md"
+      description: "Create distinctive, production-grade frontend interfaces with high design quality"
+      version: "1.0.0"
+      auto_invoke: false
+      tags: ["design", "frontend", "ui", "aesthetics", "creative"]
 
 # Tool Configuration for Cursor Compatibility
 tools:
