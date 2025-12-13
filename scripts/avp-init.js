@@ -75,7 +75,8 @@ class AVPInitializer {
       .filter(file => file.endsWith('.md'))
       .map(file => file.replace('.md', ''));
 
-    console.log(`📁 Found ${agentFiles.length} agents:`, agentFiles.join(', '));
+    console.log(`📁 Found ${agentFiles.length} agents:`);
+    console.log(`  ${agentFiles.join(', ')}`);
 
     // Validate agent configuration
     for (const agentFile of agentFiles) {
@@ -206,7 +207,7 @@ class AVPInitializer {
   }
 
   printUsageInstructions() {
-    console.log('\\n📖 Usage Instructions:');
+    console.log('\n📖 Usage Instructions:');
     
     if (this.environment === 'claude-code') {
       console.log('🤖 Claude Code v2.x Environment:');
@@ -225,13 +226,13 @@ class AVPInitializer {
       console.log('  • Manual agent invocation through scripts');
     }
     
-    console.log('\\n🔗 Available Agents:');
+    console.log('\n🔗 Available Agents:');
     console.log('  Core: architect, developer, analyst, workflow-composer');
     console.log('  Helpers: codebase-analyzer, debugger-assistant, refactor-assistant, quality-monitor');
     console.log('  Specialists: nextjs-optimizer, react-optimizer, vue-optimizer');
     console.log('  Design: designer (UI/UX and design systems)');
     
-    console.log('\\n🎯 Available Skills (v2.x):');
+    console.log('\n🎯 Available Skills (v2.x):');
     console.log('  Core: codebase-analysis, quality-gates');
     console.log('  Framework: nextjs-optimization');
     console.log('  ℹ️  Run "node scripts/avp-init.js skills:list" for detailed skill info');
