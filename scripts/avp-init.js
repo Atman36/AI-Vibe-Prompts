@@ -53,7 +53,7 @@ class AVPInitializer {
     try {
       await fs.access(this.configPath);
     } catch (e) {
-      throw new Error('core-config.yaml not found');
+      throw new Error('Configuration file (core-config.yaml) not found. Please run this command from the project root.');
     }
     
     const configContent = await fs.readFile(this.configPath, 'utf8');
@@ -66,7 +66,7 @@ class AVPInitializer {
     try {
       await fs.access(agentsDir);
     } catch (e) {
-      throw new Error('.claude/agents directory not found');
+      throw new Error('Agents directory (.claude/agents) not found. Please ensure the .claude directory is properly set up.');
     }
 
     // Scan for available agents
@@ -201,7 +201,7 @@ class AVPInitializer {
       console.log(`${exists ? '✅' : '❌'} ${check.name}`);
       
       if (!exists && check.critical) {
-        throw new Error(`Critical: ${check.path} missing`);
+        throw new Error(`Critical component missing: ${check.path}. Please check the README for setup instructions.`);
       }
     }
   }
