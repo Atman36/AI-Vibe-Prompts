@@ -1,3 +1,3 @@
-## 2025-12-15 - CLI UX Matters
-**Learning:** Error messages in CLI tools are a critical part of User Experience. Actionable error messages (explaining *why* and *how to fix*) significantly improve usability.
-**Action:** Always rewrite generic error messages to include context and potential solutions.
+## 2025-12-16 - Agent Instruction Gaps
+**Learning:** Core developer agents (like `frontend.md`) often lack the explicit accessibility mandates found in specialized design agents (`design-system.md`). This creates a gap where "implementation" deviates from "design intent".
+**Action:** Always cross-reference "Developer" agent prompts with "Design" agent prompts to ensure A11y standards are carried over into execution instructions.
