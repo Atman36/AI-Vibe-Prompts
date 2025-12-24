@@ -4,6 +4,63 @@ This document provides guidance for using Claude Code's native tools effectively
 
 ---
 
+## LSP Integration (Code Intelligence)
+
+> **Config:** `.kiro/settings/lsp.json` | **Enable:** `export ENABLE_LSP_TOOL=1`
+
+LSP tools provide IDE-level code intelligence — type checking, navigation, and diagnostics without scanning entire files.
+
+### LSP Tools Reference
+
+| Tool | Purpose | When to Use |
+|------|---------|-------------|
+| `getDiagnostics` | Get compile/lint/type errors | **ALWAYS** after editing `.ts`/`.tsx`/`.js` files |
+| `goToDefinition` | Jump to symbol definition | Finding where function/type/variable is defined |
+| `findReferences` | Find all symbol usages | Before refactoring to assess impact |
+| `hover` | Get type info & docs | Understanding complex generics or unknown types |
+| `documentSymbol` | Get file structure | Quick overview of exports, functions, classes |
+| `rename` | Rename symbol project-wide | Safe refactoring across files |
+| `codeAction` | Get quick fixes | Auto-fix lint errors, add imports |
+
+### LSP Usage Rules
+
+1. **ALWAYS** run `getDiagnostics` after editing TypeScript/JavaScript files
+2. **PREFER** `goToDefinition` over grep for code navigation
+3. **USE** `findReferences` before any refactoring
+4. **CHECK** `hover` for understanding complex type signatures
+
+### LSP Setup
+
+```bash
+# Initialize LSP in project
+node scripts/lsp-init.js
+
+# With auto-install of servers
+node scripts/lsp-init.js --install
+
+# Check status
+node scripts/lsp-init.js status
+```
+
+### Install LSP Servers Manually
+
+```bash
+# TypeScript/JavaScript (primary)
+npm install -g typescript-language-server typescript
+
+# Python
+pip install pyright
+# or: uv tool install pyright
+
+# Rust
+rustup component add rust-analyzer
+
+# JSON/CSS/HTML
+npm install -g vscode-langservers-extracted
+```
+
+---
+
 ## Claude Code Tool Integration
 
 Claude Code provides a rich set of native tools for file operations, code analysis, and system interaction. This guide maps the original custom tools to Claude Code equivalents.

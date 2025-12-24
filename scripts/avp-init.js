@@ -409,6 +409,26 @@ program.command('system:status')
     console.log(`  Auto-invoke: ${autoInvokeCount}/${skills.length}`);
   });
 
+program.command('lspinit')
+  .alias('lsp:init')
+  .description('Initialize LSP (Language Server Protocol) for code intelligence.')
+  .option('-i, --install', 'Auto-install missing LSP servers')
+  .option('-a, --all', 'Setup all servers, not just detected languages')
+  .action(async (options) => {
+    const { LSPInitializer } = require('./lsp-init.js');
+    const lsp = new LSPInitializer();
+    await lsp.initialize(options);
+  });
+
+program.command('lspstatus')
+  .alias('lsp:status')
+  .description('Show LSP configuration and server status.')
+  .action(async () => {
+    const { LSPInitializer } = require('./lsp-init.js');
+    const lsp = new LSPInitializer();
+    await lsp.status();
+  });
+
 // Run initialization if called directly
 if (require.main === module) {
   program.parse(process.argv);

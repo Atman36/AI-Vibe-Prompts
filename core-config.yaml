@@ -263,6 +263,43 @@ tools:
   system_operations:
     - "shell_exec"
     - "search_web"
+  
+  # LSP (Language Server Protocol) Tools
+  lsp:
+    - "getDiagnostics"
+    - "goToDefinition"
+    - "findReferences"
+    - "hover"
+    - "documentSymbol"
+    - "rename"
+    - "codeAction"
+
+# LSP Configuration
+lsp:
+  config_path: ".kiro/settings/lsp.json"
+  auto_init: true
+  environment:
+    ENABLE_LSP_TOOL: "1"
+  
+  servers:
+    typescript:
+      command: "typescript-language-server"
+      filetypes: ["ts", "tsx", "js", "jsx"]
+      auto_enable: true
+    python:
+      command: "pyright-langserver"
+      filetypes: ["py"]
+      auto_enable: false
+    rust:
+      command: "rust-analyzer"
+      filetypes: ["rs"]
+      auto_enable: false
+  
+  rules:
+    - "ALWAYS use getDiagnostics after editing .ts/.tsx/.js/.jsx files"
+    - "PREFER goToDefinition over grep for code navigation"
+    - "USE findReferences before refactoring"
+    - "CHECK hover for complex type signatures"
 
 # Quality Gates
 quality_gates:

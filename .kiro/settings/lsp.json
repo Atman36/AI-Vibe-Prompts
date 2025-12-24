@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "LSP (Language Server Protocol) configuration for AI-Vibe-Prompts",
+  "servers": {
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+      ],
+      "rootPatterns": [
+        "tsconfig.json",
+        "jsconfig.json",
+        "package.json"
+      ],
+      "enabled": true,
+      "initializationOptions": {
+        "preferences": {
+          "includeInlayParameterNameHints": "all",
+          "includeInlayPropertyDeclarationTypeHints": true,
+          "includeInlayFunctionLikeReturnTypeHints": true
+        }
+      }
+    },
+    "python": {
+      "command": "pyright-langserver",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "python"
+      ],
+      "rootPatterns": [
+        "pyproject.toml",
+        "setup.py",
+        "requirements.txt"
+      ],
+      "enabled": false,
+      "initializationOptions": {}
+    },
+    "rust": {
+      "command": "rust-analyzer",
+      "args": [],
+      "filetypes": [
+        "rust"
+      ],
+      "rootPatterns": [
+        "Cargo.toml"
+      ],
+      "enabled": false,
+      "initializationOptions": {
+        "cargo": {
+          "allFeatures": true
+        }
+      }
+    },
+    "json": {
+      "command": "vscode-json-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "json",
+        "jsonc"
+      ],
+      "rootPatterns": [
+        "package.json"
+      ],
+      "enabled": true,
+      "initializationOptions": {}
+    },
+    "css": {
+      "command": "vscode-css-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "css",
+        "scss",
+        "less"
+      ],
+      "rootPatterns": [
+        "package.json"
+      ],
+      "enabled": true,
+      "initializationOptions": {}
+    },
+    "html": {
+      "command": "vscode-html-language-server",
+      "args": [
+        "--stdio"
+      ],
+      "filetypes": [
+        "html"
+      ],
+      "rootPatterns": [
+        "package.json"
+      ],
+      "enabled": true,
+      "initializationOptions": {}
+    }
+  },
+  "tools": {
+    "getDiagnostics": {
+      "description": "Get compile, lint, type errors for files",
+      "autoRun": true,
+      "triggerOn": [
+        "afterEdit",
+        "onSave"
+      ]
+    },
+    "goToDefinition": {
+      "description": "Navigate to symbol definition",
+      "autoRun": false
+    },
+    "findReferences": {
+      "description": "Find all references to a symbol",
+      "autoRun": false
+    },
+    "hover": {
+      "description": "Get type information and documentation",
+      "autoRun": false
+    },
+    "documentSymbol": {
+      "description": "Get file structure (functions, classes, exports)",
+      "autoRun": false
+    },
+    "rename": {
+      "description": "Rename symbol across project",
+      "autoRun": false
+    },
+    "codeAction": {
+      "description": "Get available code actions (quick fixes)",
+      "autoRun": false
+    }
+  },
+  "settings": {
+    "diagnostics": {
+      "enabled": true,
+      "delay": 500,
+      "maxProblems": 100
+    },
+    "completion": {
+      "enabled": true,
+      "triggerCharacters": [
+        ".",
+        ":",
+        "<",
+        "\"",
+        "'",
+        "/",
+        "@"
+      ]
+    },
+    "formatting": {
+      "enabled": true,
+      "onSave": false
+    }
+  },
+  "environment": {
+    "ENABLE_LSP_TOOL": "1",
+    "LSP_LOG_LEVEL": "error"
+  }
+}
