@@ -34,6 +34,23 @@ This framework introduces a structured, tool-first approach to AI-assisted devel
 
 This framework is now managed via a powerful command-line interface (CLI). Follow these steps to get started.
 
+### 0. Integration with Your Project
+
+**Two approaches:**
+
+1. **Recommended**: Clone AI-Vibe-Prompts in your workspace and use it as a shared framework
+   ```bash
+   git clone https://github.com/Atman36/AI-Vibe-Prompts.git
+   cd your-app
+   # Reference agents via absolute path or as submodule
+   ```
+
+2. **Alternative**: Add as git submodule in your project
+   ```bash
+   git submodule add https://github.com/Atman36/AI-Vibe-Prompts.git .ai-agents
+   npm install  # in submodule directory
+   ```
+
 ### 1. Prerequisites
 
 - [Node.js](https://nodejs.org/) version 18 or higher.
@@ -96,6 +113,24 @@ Interaction with the framework is managed entirely through the CLI, providing a 
 1.  **Discover Agents**: Use `avp discover` to identify the best agent for each part of your task.
 2.  **Compose a Workflow**: Define a series of steps in a `.json` file. Each step assigns a task to a specific agent.
 3.  **Execute with Confidence**: Run your workflow with `avp workflow:run <your-file.json>`. The system orchestrates the agents, and its confidence-gating system ensures each step meets quality standards before proceeding.
+
+## 💬 Using Agents in Claude Code
+
+Once integrated, use agents directly in Claude Code:
+
+```
+@developer implement the authentication system
+@architect design the database schema
+@react-optimizer improve component performance
+@designer create the landing page layout
+```
+
+Or let Claude Code auto-select the best agent:
+```
+Help me build a checkout flow
+Can you refactor this component?
+Debug this authentication issue
+```
 
 ## 🤖 The Agent Team
 
